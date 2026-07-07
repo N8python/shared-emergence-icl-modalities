@@ -1,0 +1,91 @@
+<repo>/.venv_evo2cu128/lib/python3.11/site-packages/huggingface_hub/constants.py:298: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Loading arcinstitute/evo2_40b as Evo2 alias evo2_40b once for 1 runs...
+[07/07/26 19:24:23] INFO     httpx - INFO - HTTP Request: GET    _client.py:1025
+                             https://huggingface.co/api/agent-ha                
+                             rnesses "HTTP/1.1 200 OK"                          
+[07/07/26 19:24:24] INFO     httpx - INFO - HTTP Request: GET    _client.py:1025
+                             https://huggingface.co/api/models/a                
+                             rcinstitute/evo2_40b/revision/main                 
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     httpx - INFO - HTTP Request: GET    _client.py:1025
+                             https://huggingface.co/api/models/a                
+                             rcinstitute/evo2_40b/tree/d529aa57c                
+                             30771814217ad89baaeaf6e2315c7d7?rec                
+                             ursive=true&expand=false "HTTP/1.1                 
+                             200 OK"                                            
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]                    INFO     httpx - INFO - HTTP Request: HEAD   _client.py:1025
+                             https://huggingface.co/arcinstitute                
+                             /evo2_40b/resolve/d529aa57c30771814                
+                             217ad89baaeaf6e2315c7d7/.gitattribu                
+                             tes "HTTP/1.1 307 Temporary                        
+                             Redirect"                                          
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+                    WARNING  huggingface_hub.utils._http - WARNING  _http.py:951
+                             - Warning: You are sending                         
+                             unauthenticated requests to the HF                 
+                             Hub. Please set a HF_TOKEN to enable               
+                             higher rate limits and faster                      
+                             downloads.                                         
+                    INFO     httpx - INFO - HTTP Request: HEAD   _client.py:1025
+                             https://huggingface.co/arcinstitute                
+                             /evo2_40b/resolve/d529aa57c30771814                
+                             217ad89baaeaf6e2315c7d7/config.json                
+                              "HTTP/1.1 307 Temporary Redirect"                 
+[07/07/26 19:24:25] INFO     httpx - INFO - HTTP Request: HEAD   _client.py:1025
+                             https://huggingface.co/arcinstitute                
+                             /evo2_40b/resolve/d529aa57c30771814                
+                             217ad89baaeaf6e2315c7d7/README.md                  
+                             "HTTP/1.1 307 Temporary Redirect"                  
+                    INFO     httpx - INFO - HTTP Request: HEAD   _client.py:1025
+                             https://huggingface.co/api/resolve-                
+                             cache/models/arcinstitute/evo2_40b/                
+                             d529aa57c30771814217ad89baaeaf6e231                
+                             5c7d7/.gitattributes "HTTP/1.1 200                 
+                             OK"                                                
+                    INFO     httpx - INFO - HTTP Request: HEAD   _client.py:1025
+                             https://huggingface.co/api/resolve-                
+                             cache/models/arcinstitute/evo2_40b/                
+                             d529aa57c30771814217ad89baaeaf6e231                
+                             5c7d7/config.json "HTTP/1.1 200 OK"                
+                    INFO     httpx - INFO - HTTP Request: HEAD   _client.py:1025
+                             https://huggingface.co/api/resolve-                
+                             cache/models/arcinstitute/evo2_40b/                
+                             d529aa57c30771814217ad89baaeaf6e231                
+                             5c7d7/README.md "HTTP/1.1 200 OK"                  
+                    INFO     httpx - INFO - HTTP Request: GET    _client.py:1025
+                             https://huggingface.co/api/resolve-                
+                             cache/models/arcinstitute/evo2_40b/                
+                             d529aa57c30771814217ad89baaeaf6e231                
+                             5c7d7/.gitattributes "HTTP/1.1 200                 
+                             OK"                                                
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:02,  1.60it/s]                    INFO     httpx - INFO - HTTP Request: GET    _client.py:1025
+                             https://huggingface.co/api/resolve-                
+                             cache/models/arcinstitute/evo2_40b/                
+                             d529aa57c30771814217ad89baaeaf6e231                
+                             5c7d7/config.json "HTTP/1.1 200 OK"                
+                    INFO     httpx - INFO - HTTP Request: GET    _client.py:1025
+                             https://huggingface.co/api/resolve-                
+                             cache/models/arcinstitute/evo2_40b/                
+                             d529aa57c30771814217ad89baaeaf6e231                
+                             5c7d7/README.md "HTTP/1.1 200 OK"                  
+Fetching 5 files:  80%|████████  | 4/5 [01:56<00:31, 31.46s/it]Fetching 5 files: 100%|██████████| 5/5 [01:56<00:00, 23.32s/it]
+Looking for checkpoint shards for evo2_40b.pt
+Found 2 shards, merging them...
+Merging shard: evo2_40b.pt.part0
+Merging shard: evo2_40b.pt.part1
+Successfully merged all shards into /root/.cache/huggingface/evo2_40b.pt
+Traceback (most recent call last):
+  File "<repo>/src/run_evo2_h100_clean_deranged.py", line 246, in <module>
+    main()
+  File "<repo>/src/run_evo2_h100_clean_deranged.py", line 146, in main
+    model = Evo2(runtime_model)
+            ^^^^^^^^^^^^^^^^^^^
+  File "<repo>/.venv_evo2cu128/lib/python3.11/site-packages/evo2/models.py", line 60, in __init__
+    self.model = self.load_evo2_model(model_name, config_path, use_kernels=use_kernels)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<repo>/.venv_evo2cu128/lib/python3.11/site-packages/evo2/models.py", line 300, in load_evo2_model
+    raise ImportError(
+ImportError: Model 'evo2_40b' requires FP8 via Transformer Engine, which is not installed.
+Install with: pip install transformer_engine
+For inference without TE, use any 7b model: Evo2('evo2_7b')

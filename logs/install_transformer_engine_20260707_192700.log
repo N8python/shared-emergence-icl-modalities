@@ -1,0 +1,50 @@
+Collecting transformer_engine==2.3.0 (from transformer_engine[pytorch]==2.3.0)
+  Downloading transformer_engine-2.3.0-py3-none-any.whl.metadata (19 kB)
+Collecting transformer_engine_cu12==2.3.0 (from transformer_engine==2.3.0->transformer_engine[pytorch]==2.3.0)
+  Downloading transformer_engine_cu12-2.3.0-py3-none-manylinux_2_28_x86_64.whl.metadata (19 kB)
+Collecting pydantic (from transformer_engine_cu12==2.3.0->transformer_engine==2.3.0->transformer_engine[pytorch]==2.3.0)
+  Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+Collecting importlib-metadata>=1.0 (from transformer_engine_cu12==2.3.0->transformer_engine==2.3.0->transformer_engine[pytorch]==2.3.0)
+  Downloading importlib_metadata-9.0.0-py3-none-any.whl.metadata (4.5 kB)
+Requirement already satisfied: packaging in ./.venv_evo2cu128/lib/python3.11/site-packages (from transformer_engine_cu12==2.3.0->transformer_engine==2.3.0->transformer_engine[pytorch]==2.3.0) (26.2)
+Collecting transformer_engine_torch==2.3.0 (from transformer_engine[pytorch]==2.3.0)
+  Downloading transformer_engine_torch-2.3.0.tar.gz (165 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Getting requirements to build wheel did not run successfully.
+  │ exit code: 1
+  ╰─> [26 lines of output]
+      Traceback (most recent call last):
+        File "<string>", line 17, in <module>
+      ModuleNotFoundError: No module named 'torch'
+      
+      The above exception was the direct cause of the following exception:
+      
+      Traceback (most recent call last):
+        File "<repo>/.venv_evo2cu128/lib/python3.11/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+          main()
+        File "<repo>/.venv_evo2cu128/lib/python3.11/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+          json_out["return_val"] = hook(**hook_input["kwargs"])
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "<repo>/.venv_evo2cu128/lib/python3.11/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 143, in get_requires_for_build_wheel
+          return hook(config_settings)
+                 ^^^^^^^^^^^^^^^^^^^^^
+        File "/tmp/pip-build-env-a5kz9l96/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 333, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/tmp/pip-build-env-a5kz9l96/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 301, in _get_build_requires
+          self.run_setup()
+        File "/tmp/pip-build-env-a5kz9l96/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 520, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File "/tmp/pip-build-env-a5kz9l96/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 317, in run_setup
+          exec(code, locals())
+        File "<string>", line 19, in <module>
+      RuntimeError: This package needs Torch to build.
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed to build 'transformer_engine_torch' when getting requirements to build wheel

@@ -1,0 +1,222 @@
+{
+  "program_synth": "src/program_synth.py",
+  "programs": "src/curated_transformations.jsonl",
+  "default_output_root": "results/generated_runs",
+  "runs": {
+    "qwen3": {
+      "label": "Qwen3 14B",
+      "model_env": "QWEN3_14B_MODEL",
+      "default_model": "Qwen/Qwen3-14B-Base",
+      "base_args": [
+        "--backend", "mlx",
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--lmshuffle",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 32, 64],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "output_template": "qwen3/clean/Qwen3-14B-Base_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8, 16, 32, 64],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "extra_args": ["--ablate-labels"],
+          "output_template": "qwen3/deranged/Qwen3-14B-Base_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "evo2": {
+      "label": "Evo2 40B",
+      "runner": "evo2_h100",
+      "script": "src/run_evo2_h100_clean_deranged.py",
+      "model_env": "EVO2_MODEL",
+      "default_model": "arcinstitute/evo2_40b",
+      "base_args": [
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--seed", "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 32, 64],
+          "output_template": "evo2/clean/evo2_40b_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8, 16, 32, 64],
+          "output_template": "evo2/deranged/evo2_40b_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "nextterm": {
+      "label": "NextTerm 440M",
+      "model_env": "NEXTTERM_440M_MODEL",
+      "default_model": "N8Programs/NextTerm-440M",
+      "base_args": [
+        "--backend", "mlx",
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--seed", "42",
+        "--nextterm-digits"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 32, 64],
+          "output_template": "nextterm/clean/NextTerm-440M_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8, 16, 32, 64],
+          "extra_args": ["--ablate-labels"],
+          "output_template": "nextterm/deranged/NextTerm-440M_ic{shot}.json"
+        }
+      }
+    },
+    "imagegpt": {
+      "label": "ImageGPT large",
+      "model_env": "IMAGEGPT_LARGE_BF16_MODEL",
+      "default_model": "N8Programs/imagegpt-large-bf16",
+      "base_args": [
+        "--backend", "imagegpt",
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--seed", "42",
+        "--imagegpt-row-layout", "left-pad"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 31],
+          "output_template": "imagegpt/clean/imagegpt-large-bf16_{shot}shot_leftpad_clean.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8, 16, 31],
+          "extra_args": ["--ablate-labels"],
+          "output_template": "imagegpt/deranged/imagegpt-large-bf16_{shot}shot_leftpad_deranged.json"
+        }
+      }
+    },
+    "timesfm": {
+      "label": "TimesFM 2.5 200M",
+      "model_env": "TIMESFM_2_5_MODEL",
+      "default_model": "google/timesfm-2.5-200m-transformers",
+      "base_args": [
+        "--backend", "timesfm",
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--seed", "42",
+        "--timesfm-dtype", "fp32",
+        "--timesfm-encoding", "sine-lobe-2bit",
+        "--timesfm-layout", "input-zero-output-zero"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 24, 32, 48],
+          "output_template": "timesfm/clean/timesfm2_5_fp32_sine_lobe_2bit_iozero_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8, 16, 24, 32, 48],
+          "extra_args": ["--ablate-labels"],
+          "output_template": "timesfm/deranged/timesfm2_5_fp32_sine_lobe_2bit_iozero_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "progen2": {
+      "label": "ProGen2 base",
+      "model_env": "PROGEN2_BASE_BF16_MODEL",
+      "default_model": "N8Programs/ProGen2-base-bf16",
+      "base_args": [
+        "--backend", "protein",
+        "--protein-format", "progen2",
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--seed", "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 32, 48],
+          "output_template": "progen2/clean/ProGen2-base-bf16_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8, 16, 32, 48],
+          "extra_args": ["--ablate-labels"],
+          "output_template": "progen2/deranged/ProGen2-base-bf16_ic{shot}.json"
+        }
+      }
+    },
+    "chessgpt": {
+      "label": "ChessGPT 50M",
+      "model_env": "CHESSGPT_50M_MODEL",
+      "default_model": "N8Programs/karvonen-chessgpt-50m-mlx-bf16",
+      "base_args": [
+        "--backend", "chess",
+        "--trials-per-program", "8",
+        "--bit-length", "4",
+        "--max-new-tokens", "4",
+        "--seed", "9205",
+        "--chess-encoding", "signal2-wipe",
+        "--chess-layout", "continuous",
+        "--chess-decode", "greedy"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8],
+          "output_template": "chessgpt/clean/Chess-50M-bf16_signal2-wipe_bit4_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [1, 2, 4, 8],
+          "extra_args": ["--ablate-labels"],
+          "output_template": "chessgpt/deranged/Chess-50M-bf16_signal2-wipe_bit4_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "musicroll": {
+      "label": "MusicRoll 50M",
+      "model_env": "MUSICROLL_50M_MODEL",
+      "default_model": "N8Programs/Musicroll-50M",
+      "base_args": [
+        "--backend", "music",
+        "--trials-per-program", "8",
+        "--bit-length", "8",
+        "--max-new-tokens", "8",
+        "--seed", "42",
+        "--music-encoding", "slice-pitch",
+        "--music-decode", "constrained",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [1, 2, 4, 8, 16, 32],
+          "output_template": "musicroll/clean/musicroll-50m_music_slice-pitch_constrained_clean_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [2, 4, 8, 16, 32],
+          "extra_args": ["--ablate-labels"],
+          "output_template": "musicroll/deranged/musicroll-50m_music_slice-pitch_constrained_deranged_ic{shot}.json"
+        }
+      }
+    }
+  }
+}

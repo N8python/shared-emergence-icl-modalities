@@ -1,0 +1,7 @@
+numpy
+requests
+tqdm
+huggingface-hub
+mlx
+mlx-lm
+python-chess

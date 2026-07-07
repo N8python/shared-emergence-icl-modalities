@@ -1,0 +1,100 @@
+{"program": ["identity"], "description": "Return the input bitstring unchanged."}
+{"program": ["rotl1"], "description": "Rotate the bitstring left by one position (circular)."}
+{"program": ["reverse_bits"], "description": "Reverse the order of the bits."}
+{"program": ["flip_bits"], "description": "Flip every bit (0<->1)."}
+{"program": ["swap_halves"], "description": "Swap the left and right 4-bit halves."}
+{"program": ["majority"], "description": "All 1s if ones >= zeros, otherwise all 0s."}
+{"program": ["minority"], "description": "All 1s if zeros > ones, otherwise all 0s."}
+{"program": ["parity_fill"], "description": "All 1s when the input has odd parity, else all 0s."}
+{"program": ["alternating_start_one"], "description": "Mark positions that differ from the 1010... pattern."}
+{"program": ["alternating_start_zero"], "description": "Mark positions that differ from the 0101... pattern."}
+{"program": ["left_half"], "description": "Keep the left 4 bits, zero out the right half."}
+{"program": ["right_half"], "description": "Keep the right 4 bits, zero out the left half."}
+{"program": ["double_rotl"], "description": "Rotate left by two positions."}
+{"program": ["rotr1"], "description": "Rotate right by one position (circular)."}
+{"program": ["double_rotr"], "description": "Rotate right by two positions."}
+{"program": ["ones_if_palindrome"], "description": "All 1s if the input is a palindrome, else all 0s."}
+{"program": ["mirror_half"], "description": "Mirror the left half over the right to form a palindrome."}
+{"program": ["spread_first_bit"], "description": "Fill the string with its first bit."}
+{"program": ["spread_last_bit"], "description": "Fill the string with its last bit."}
+{"program": ["invert_prefix"], "description": "Flip the bits in the first half only."}
+{"program": ["invert_suffix"], "description": "Flip the bits in the second half only."}
+{"program": ["meta_constant"], "description": "Return the external meta-constant s_m1."}
+{"program": ["flip_bits", "reverse_bits"], "description": "Flip every bit, then reverse the string."}
+{"program": ["rotl1", "reverse_bits"], "description": "Rotate left once, then reverse."}
+{"program": ["reverse_bits", "rotl1"], "description": "Reverse first, then rotate left once."}
+{"program": ["rotl1", "flip_bits"], "description": "Rotate left once, then flip all bits."}
+{"program": ["swap_halves", "reverse_bits"], "description": "Swap halves, then reverse the string."}
+{"program": ["swap_halves", "flip_bits"], "description": "Swap halves, then flip all bits."}
+{"program": ["double_rotl", "flip_bits"], "description": "Rotate left twice, then flip all bits."}
+{"program": ["rotr1", "flip_bits"], "description": "Rotate right once, then flip all bits."}
+{"program": ["spread_first_bit", "flip_bits"], "description": "Fill with the first bit and then invert it."}
+{"program": ["spread_last_bit", "flip_bits"], "description": "Fill with the last bit and then invert it."}
+{"program": ["left_half", "flip_bits"], "description": "Keep the left half and zero the right, then flip (right half becomes all 1s)."}
+{"program": ["right_half", "flip_bits"], "description": "Keep the right half and zero the left, then flip (left half becomes all 1s)."}
+{"program": ["flip_bits", "left_half"], "description": "Flip all bits, then keep only the left half."}
+{"program": ["flip_bits", "right_half"], "description": "Flip all bits, then keep only the right half."}
+{"program": ["double_rotl", "reverse_bits"], "description": "Rotate left twice, then reverse."}
+{"program": ["rotl1", "swap_halves"], "description": "Rotate left once, then swap halves."}
+{"program": ["xor_with_s0"], "description": "XOR the string with itself (always yields all 0s)."}
+{"program": ["flip_bits", "xor_with_s0"], "description": "Flip the bits, then XOR with the original (always yields all 1s)."}
+{"program": ["ones_if_palindrome", "flip_bits"], "description": "Report palindrome-ness but flip the indicator (0 if palindrome, else 1)."}
+{"program": ["flip_bits", "mirror_half"], "description": "Flip bits, then mirror the left half across the right."}
+{"program": ["invert_prefix", "reverse_bits"], "description": "Flip the first half, then reverse the string."}
+{"program": ["left_half", "reverse_bits"], "description": "Zero the right half, then reverse (moving zeros to the front)."}
+{"program": ["right_half", "reverse_bits"], "description": "Zero the left half, then reverse (moving zeros to the back)."}
+{"program": ["parity_fill", "flip_bits"], "description": "Fill by parity, then invert (1s for even parity, 0s for odd)."}
+{"program": ["rotl1", "spread_first_bit"], "description": "Rotate left once, then fill with the new first bit (original second bit)."}
+{"program": ["shift_left_zero"], "description": "Shift left by one position and append 0."}
+{"program": ["shift_right_zero"], "description": "Shift right by one position and prepend 0."}
+{"program": ["swap_pairs"], "description": "Swap each adjacent pair of bits (01 becomes 10)."}
+{"program": ["keep_even_positions"], "description": "Keep even-indexed bits (0-based) and zero the odd positions."}
+{"program": ["keep_odd_positions"], "description": "Keep odd-indexed bits and zero the even positions."}
+{"program": ["edge_mask"], "description": "Keep only the first and last bits; zero out the middle."}
+{"program": ["center_mask"], "description": "Zero the outer bits while leaving the middle segment unchanged."}
+{"program": ["shift_left_zero", "flip_bits"], "description": "Shift left with zero fill, then invert every bit."}
+{"program": ["shift_right_zero", "flip_bits"], "description": "Shift right with zero fill, then invert every bit."}
+{"program": ["flip_bits", "shift_left_zero"], "description": "Invert all bits, then shift left with zero fill."}
+{"program": ["flip_bits", "shift_right_zero"], "description": "Invert all bits, then shift right with zero fill."}
+{"program": ["swap_pairs", "flip_bits"], "description": "Swap adjacent pairs and then invert the result."}
+{"program": ["shift_left_zero", "reverse_bits"], "description": "Shift left with zero fill, then reverse the bit order."}
+{"program": ["shift_right_zero", "reverse_bits"], "description": "Shift right with zero fill, then reverse the bit order."}
+{"program": ["swap_halves", "shift_left_zero"], "description": "Swap halves and then shift left with zero fill."}
+{"program": ["swap_halves", "shift_right_zero"], "description": "Swap halves and then shift right with zero fill."}
+{"program": ["shift_left_zero", "swap_halves"], "description": "Shift left with zero fill, then swap halves."}
+{"program": ["shift_right_zero", "swap_halves"], "description": "Shift right with zero fill, then swap halves."}
+{"program": ["keep_even_positions", "flip_bits"], "description": "Keep even positions (odd go to 0) and then invert the whole string."}
+{"program": ["keep_odd_positions", "flip_bits"], "description": "Keep odd positions (even go to 0) and then invert the whole string."}
+{"program": ["flip_bits", "keep_even_positions"], "description": "Invert the bits first, then zero out the odd positions."}
+{"program": ["flip_bits", "keep_odd_positions"], "description": "Invert the bits first, then zero out the even positions."}
+{"program": ["edge_mask", "flip_bits"], "description": "Keep only the edge bits, then invert so edges flip and the middle becomes 1s."}
+{"program": ["center_mask", "flip_bits"], "description": "Zero the edges, keep the middle, then invert everything."}
+{"program": ["shift_left_zero", "keep_even_positions"], "description": "Shift left with zero fill, then keep only even-indexed positions."}
+{"program": ["shift_left_zero", "keep_odd_positions"], "description": "Shift left with zero fill, then keep only odd-indexed positions."}
+{"program": ["shift_right_zero", "keep_even_positions"], "description": "Shift right with zero fill, then keep only even-indexed positions."}
+{"program": ["shift_right_zero", "keep_odd_positions"], "description": "Shift right with zero fill, then keep only odd-indexed positions."}
+{"program": ["keep_even_positions", "reverse_bits"], "description": "Zero out odd positions and then reverse the bitstring."}
+{"program": ["keep_odd_positions", "reverse_bits"], "description": "Zero out even positions and then reverse the bitstring."}
+{"program": ["shift_left_zero", "parity_fill"], "description": "Shift left with zero fill, then fill the string with its parity (all 1s if odd)."}
+{"program": ["shift_right_zero", "parity_fill"], "description": "Shift right with zero fill, then fill the string with its parity."}
+{"program": ["parity_fill", "shift_left_zero"], "description": "Fill by parity (all 0s or 1s) and then shift left with zero fill."}
+{"program": ["parity_fill", "shift_right_zero"], "description": "Fill by parity and then shift right with zero fill."}
+{"program": ["spread_first_bit", "shift_left_zero"], "description": "Copy the first bit across the string, then shift left with zero fill."}
+{"program": ["spread_last_bit", "shift_right_zero"], "description": "Copy the last bit across the string, then shift right with zero fill."}
+{"program": ["spread_first_bit", "keep_even_positions"], "description": "Copy the first bit everywhere, then zero the odd positions."}
+{"program": ["spread_last_bit", "keep_odd_positions"], "description": "Copy the last bit everywhere, then zero the even positions."}
+{"program": ["spread_first_bit", "edge_mask"], "description": "Copy the first bit everywhere, then keep only the edges."}
+{"program": ["spread_last_bit", "edge_mask"], "description": "Copy the last bit everywhere, then keep only the edges."}
+{"program": ["spread_first_bit", "center_mask"], "description": "Copy the first bit everywhere, then zero the edges."}
+{"program": ["spread_last_bit", "center_mask"], "description": "Copy the last bit everywhere, then zero the edges."}
+{"program": ["rotl1", "shift_left_zero"], "description": "Rotate left once, then shift left with zero fill."}
+{"program": ["rotl1", "shift_right_zero"], "description": "Rotate left once, then shift right with zero fill."}
+{"program": ["shift_left_zero", "rotl1"], "description": "Shift left with zero fill, then rotate left once."}
+{"program": ["shift_right_zero", "rotl1"], "description": "Shift right with zero fill, then rotate left once."}
+{"program": ["reverse_bits", "edge_mask"], "description": "Reverse the string, then keep only the edge bits."}
+{"program": ["reverse_bits", "center_mask"], "description": "Reverse the string, then zero the edges."}
+{"program": ["edge_mask", "shift_left_zero"], "description": "Keep only the edge bits, then shift left with zero fill."}
+{"program": ["edge_mask", "shift_right_zero"], "description": "Keep only the edge bits, then shift right with zero fill."}
+{"program": ["shift_left_zero", "shift_left_zero"], "description": "Shift left with zero fill twice."}
+{"program": ["shift_left_zero", "swap_pairs"], "description": "Shift left with zero fill, then swap adjacent pairs."}
+{"program": ["shift_left_zero", "edge_mask"], "description": "Shift left with zero fill, then keep only the edge bits."}

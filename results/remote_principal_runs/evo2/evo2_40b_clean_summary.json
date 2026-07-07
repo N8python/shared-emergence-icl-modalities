@@ -1,0 +1,92 @@
+{
+  "model": "arcinstitute/evo2_40b",
+  "programs_file": "src/curated_transformations.jsonl",
+  "shots": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "conditions": [
+    "clean"
+  ],
+  "trials_per_program": 8,
+  "bit_length": 8,
+  "max_new_tokens": 8,
+  "seed": 42,
+  "runs": [
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 1,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic1.json",
+      "mean_accuracy": 0.13125,
+      "stderr": 0.022358915131521606,
+      "mean_edit_distance": 3.1325,
+      "edit_distance_stderr": 0.09173241443778671
+    },
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 2,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic2.json",
+      "mean_accuracy": 0.1525,
+      "stderr": 0.021874007914011145,
+      "mean_edit_distance": 3.03125,
+      "edit_distance_stderr": 0.1216128850621155
+    },
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 4,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic4.json",
+      "mean_accuracy": 0.175,
+      "stderr": 0.02429563289518875,
+      "mean_edit_distance": 2.70375,
+      "edit_distance_stderr": 0.11282437802965181
+    },
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 8,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic8.json",
+      "mean_accuracy": 0.23,
+      "stderr": 0.027103430771693082,
+      "mean_edit_distance": 2.3725,
+      "edit_distance_stderr": 0.11957917583312445
+    },
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 16,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic16.json",
+      "mean_accuracy": 0.2425,
+      "stderr": 0.027050971341248554,
+      "mean_edit_distance": 2.18625,
+      "edit_distance_stderr": 0.12593708095150474
+    },
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 32,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic32.json",
+      "mean_accuracy": 0.2775,
+      "stderr": 0.029170995349781424,
+      "mean_edit_distance": 1.8075,
+      "edit_distance_stderr": 0.10294618335162634
+    },
+    {
+      "model": "arcinstitute/evo2_40b",
+      "condition": "clean",
+      "in_context_examples": 64,
+      "output_file": "results/remote_principal_runs/evo2/clean/evo2_40b_ic64.json",
+      "mean_accuracy": 0.325,
+      "stderr": 0.03102825366101878,
+      "mean_edit_distance": 1.54,
+      "edit_distance_stderr": 0.1070713205147283
+    }
+  ]
+}
