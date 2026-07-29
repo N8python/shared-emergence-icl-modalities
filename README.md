@@ -17,6 +17,13 @@ cell:
 The earlier eight-trial pilot is retained explicitly under `data/legacy_t8/`
 and `results/legacy_t8/`. It is not the default.
 
+## Disclosure notes
+
+- **Code generation.** For responsible disclosure, the code in this repository
+  was generated using OpenAI GPT-5.6.
+- **Final-paper metric.** The z-gap was dropped from the final paper; it remains
+  in this repository only as a historical and reproducibility output.
+
 ## Reproduce the published analyses
 
 The committed `data/t128/analysis/` directory contains compact validated
