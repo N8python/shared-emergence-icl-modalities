@@ -1,0 +1,22 @@
+% Generated from the validated 128-trial-per-task replication.
+\begin{table}[!htbp]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{1.03}
+    \begin{tabular}{@{}llccccc@{}}
+        \toprule
+        \textbf{Modality} & \textbf{Model} & \textcolor[HTML]{2563EB}{\textbf{Best clean}} & \textcolor[HTML]{DC2626}{\textbf{Best deranged}} & \textbf{Gap} & \textbf{z-gap} & \textbf{$p_{\rm task}$} \\
+        & & \textbf{acc.\%\ ($n$)} & \textbf{acc.\%\ ($n$)} & & & \textbf{at $n_{\max}$} \\
+        \midrule
+        Language & Qwen3-14B & 30.0\% (64) & 16.1\% (64) & 13.9\% & 3.48 & $7.9\times10^{-21}$ \\
+        Genome & Evo2-40B & 33.2\% (64) & 16.2\% (8) & 17.0\% & 4.84 & $1.6\times10^{-22}$ \\
+        Integer seq. & NextTerm-440M & 48.1\% (64) & 16.7\% (64) & 31.4\% & 6.95 & $1.8\times10^{-23}$ \\
+        Image & ImageGPT-large & 43.5\% (31) & 19.2\% (1) & 24.3\% & 5.99 & $1.6\times10^{-19}$ \\
+        Time-series & TimesFM-2.5 & 32.6\% (48) & 15.7\% (4) & 16.9\% & 5.12 & $9.1\times10^{-23}$ \\
+        Protein & ProGen2-base & 26.4\% (48) & 16.5\% (48) & 9.9\% & 2.83 & $3.1\times10^{-22}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Per-modality summary from the 128-trial-per-task replication. Best clean and deranged shot counts are selected independently. Error estimates and z-gap use tasks as the sampling unit. The final column reports the unadjusted $p$-value from an exact one-sided within-task condition-swap randomization test of clean $>$ deranged at each modality's maximum shot count; each value tests a pre-specified, modality-specific hypothesis.}
+    \label{tab:modality-summary-128}
+\end{table}

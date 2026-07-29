@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--shots", type=int, nargs="*", default=list(DEFAULT_SHOTS))
     parser.add_argument("--conditions", nargs="*", default=list(DEFAULT_CONDITIONS))
-    parser.add_argument("--trials-per-program", type=int, default=8)
+    parser.add_argument("--trials-per-program", type=int, default=128)
     parser.add_argument("--bit-length", type=int, default=8)
     parser.add_argument("--max-new-tokens", type=int, default=None)
     parser.add_argument("--seed", type=int, default=42)

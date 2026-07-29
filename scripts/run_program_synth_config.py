@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build or execute principal-run commands from a run config.
+"""Build or execute paper-grid commands from a run config.
 
 Default behavior is a dry run that prints the commands. Pass --execute to run
 them. Model locations are taken from each config's environment variable when it
@@ -19,7 +19,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CONFIG = REPO_ROOT / "configs" / "principal_runs.json"
+DEFAULT_CONFIG = REPO_ROOT / "configs" / "paper_runs_t128.json"
 
 
 def load_config(path: Path) -> dict[str, Any]:
@@ -237,6 +237,52 @@ def validate_required_env(run_key: str, run_config: dict[str, Any], *, execute: 
         )
 
 
+def output_path_for(
+    output_root: Path,
+    run_key: str,
+    condition_name: str,
+    condition: dict[str, Any],
+    shot: int,
+) -> Path:
+    return output_root / condition["output_template"].format(
+        run=run_key,
+        condition=condition_name,
+        shot=shot,
+    )
+
+
+def validate_complete_cell(
+    path: Path,
+    *,
+    shot: int,
+    condition_name: str,
+    expected_trials: int,
+) -> None:
+    try:
+        data = json.loads(path.read_text())
+        cell_config = data["config"]
+        tasks = data["tasks"]
+        if int(cell_config["in_context_examples"]) != shot:
+            raise ValueError("wrong shot count")
+        if int(cell_config["trials_per_program"]) != expected_trials:
+            raise ValueError("wrong trial count")
+        if bool(cell_config["ablate_labels"]) != (condition_name == "deranged"):
+            raise ValueError("wrong clean/deranged condition")
+        if len(tasks) != 100:
+            raise ValueError("expected 100 tasks")
+        if any(
+            int(task["total_trials"]) != expected_trials
+            or len(task["trials"]) != expected_trials
+            for task in tasks
+        ):
+            raise ValueError("incomplete per-task trial records")
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            f"Existing result is not a validated complete cell: {path}: {exc}. "
+            "Move it aside before resuming; it will not be overwritten automatically."
+        ) from exc
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
@@ -258,6 +304,11 @@ def parse_args() -> argparse.Namespace:
         "--execute",
         action="store_true",
         help="Run commands instead of printing them.",
+    )
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Explicitly allow replacing selected output cells.",
     )
     return parser.parse_args()
 
@@ -288,6 +339,33 @@ def main() -> None:
             if args.shots is not None:
                 wanted = set(args.shots)
                 shots = [shot for shot in shots if shot in wanted]
+            if args.execute and not args.overwrite:
+                expected_trials = int(
+                    run_config.get("trials_per_program")
+                    or run_config["base_args"][
+                        run_config["base_args"].index("--trials-per-program") + 1
+                    ]
+                )
+                missing_shots = []
+                for shot in shots:
+                    output_path = output_path_for(
+                        output_root,
+                        run_key,
+                        cond_name,
+                        condition,
+                        shot,
+                    )
+                    if not output_path.exists():
+                        missing_shots.append(shot)
+                        continue
+                    validate_complete_cell(
+                        output_path,
+                        shot=shot,
+                        condition_name=cond_name,
+                        expected_trials=expected_trials,
+                    )
+                    print(f"Skipping validated complete cell: {output_path}", flush=True)
+                shots = missing_shots
             if not shots:
                 continue
             if runner == "evo2_h100":
@@ -336,9 +414,12 @@ def main() -> None:
                 )
 
     if not commands:
-        raise ValueError("No commands selected")
+        print("No commands to run; every selected cell is already complete.")
+        return
 
     for command, output_path in commands:
+        if args.overwrite:
+            command.append("--overwrite")
         if args.execute:
             output_path.parent.mkdir(parents=True, exist_ok=True)
             print("+ " + shlex.join(command), flush=True)

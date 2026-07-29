@@ -1,7 +1,7 @@
 {
   "program_synth": "src/program_synth.py",
   "programs": "src/curated_transformations.jsonl",
-  "default_output_root": "data/t128/results_128",
+  "default_output_root": "results/generated_runs",
   "runs": {
     "qwen3": {
       "label": "Qwen3 14B",
@@ -9,7 +9,7 @@
       "default_model": "Qwen/Qwen3-14B-Base",
       "base_args": [
         "--backend", "mlx",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--lmshuffle",
@@ -52,7 +52,7 @@
       "model_env": "EVO2_MODEL",
       "default_model": "arcinstitute/evo2_40b",
       "base_args": [
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--seed", "42"
@@ -74,7 +74,7 @@
       "default_model": "N8Programs/NextTerm-440M",
       "base_args": [
         "--backend", "mlx",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--seed", "42",
@@ -98,7 +98,7 @@
       "default_model": "N8Programs/imagegpt-large-bf16",
       "base_args": [
         "--backend", "imagegpt",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--seed", "42",
@@ -122,7 +122,7 @@
       "default_model": "google/timesfm-2.5-200m-transformers",
       "base_args": [
         "--backend", "timesfm",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--seed", "42",
@@ -149,7 +149,7 @@
       "base_args": [
         "--backend", "protein",
         "--protein-format", "progen2",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--seed", "42"
@@ -172,7 +172,7 @@
       "default_model": "N8Programs/karvonen-chessgpt-50m-mlx-bf16",
       "base_args": [
         "--backend", "chess",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "4",
         "--max-new-tokens", "4",
         "--seed", "9205",
@@ -198,7 +198,7 @@
       "default_model": "N8Programs/Musicroll-50M",
       "base_args": [
         "--backend", "music",
-        "--trials-per-program", "128",
+        "--trials-per-program", "8",
         "--bit-length", "8",
         "--max-new-tokens", "8",
         "--seed", "42",

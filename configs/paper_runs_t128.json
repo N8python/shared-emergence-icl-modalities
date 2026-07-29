@@ -1,0 +1,1133 @@
+{
+  "program_synth": "src/program_synth.py",
+  "programs": "src/curated_transformations.jsonl",
+  "default_output_root": "data/t128/results_128",
+  "runs": {
+    "qwen3": {
+      "label": "Qwen3 14B",
+      "model_env": "QWEN3_14B_MODEL",
+      "default_model": "Qwen/Qwen3-14B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--lmshuffle",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "output_template": "qwen3/clean/Qwen3-14B-Base_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3/deranged/Qwen3-14B-Base_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "evo2": {
+      "label": "Evo2 40B",
+      "runner": "evo2_h100",
+      "script": "src/run_evo2_h100_clean_deranged.py",
+      "model_env": "EVO2_MODEL",
+      "default_model": "arcinstitute/evo2_40b",
+      "base_args": [
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "evo2/clean/evo2_40b_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "evo2/deranged/evo2_40b_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "nextterm": {
+      "label": "NextTerm 440M",
+      "model_env": "NEXTTERM_440M_MODEL",
+      "default_model": "N8Programs/NextTerm-440M",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--nextterm-digits"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "nextterm/clean/NextTerm-440M_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "nextterm/deranged/NextTerm-440M_ic{shot}.json"
+        }
+      }
+    },
+    "imagegpt": {
+      "label": "ImageGPT large",
+      "model_env": "IMAGEGPT_LARGE_BF16_MODEL",
+      "default_model": "N8Programs/imagegpt-large-bf16",
+      "base_args": [
+        "--backend",
+        "imagegpt",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--imagegpt-row-layout",
+        "left-pad"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            31
+          ],
+          "output_template": "imagegpt/clean/imagegpt-large-bf16_{shot}shot_leftpad_clean.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            31
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "imagegpt/deranged/imagegpt-large-bf16_{shot}shot_leftpad_deranged.json"
+        }
+      }
+    },
+    "timesfm": {
+      "label": "TimesFM 2.5 200M",
+      "model_env": "TIMESFM_2_5_MODEL",
+      "default_model": "google/timesfm-2.5-200m-transformers",
+      "base_args": [
+        "--backend",
+        "timesfm",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--timesfm-dtype",
+        "fp32",
+        "--timesfm-encoding",
+        "sine-lobe-2bit",
+      "--timesfm-layout",
+      "input-zero-output-zero",
+      "--batch-size-completion",
+      "8"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32,
+            48
+          ],
+          "output_template": "timesfm/clean/timesfm2_5_fp32_sine_lobe_2bit_iozero_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32,
+            48
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "timesfm/deranged/timesfm2_5_fp32_sine_lobe_2bit_iozero_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "progen2": {
+      "label": "ProGen2 base",
+      "model_env": "PROGEN2_BASE_BF16_MODEL",
+      "default_model": "N8Programs/ProGen2-base-bf16",
+      "base_args": [
+        "--backend",
+        "protein",
+        "--protein-format",
+        "progen2",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "output_template": "progen2/clean/ProGen2-base-bf16_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "progen2/deranged/ProGen2-base-bf16_ic{shot}.json"
+        }
+      }
+    },
+    "qwen3_0_6b": {
+      "label": "Qwen3 0.6B",
+      "source_model": "Qwen/Qwen3-0.6B-Base",
+      "source_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+      "model_env": "QWEN3_0_6B_MODEL",
+      "default_model": "Qwen/Qwen3-0.6B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--lmshuffle",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "qwen3_family/qwen3_0_6b/clean/Qwen3-0.6B-Base_ic{shot}.json",
+          "seeds": {
+            "1": 28035151,
+            "2": 2087478897,
+            "4": 1893874910,
+            "8": 763767702,
+            "16": 330358427,
+            "32": 204944796,
+            "64": 579850918
+          }
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3_family/qwen3_0_6b/deranged/Qwen3-0.6B-Base_deranged_ic{shot}.json",
+          "seeds": {
+            "1": 28035151,
+            "2": 2087478897,
+            "4": 1893874910,
+            "8": 763767702,
+            "16": 330358427,
+            "32": 204944796,
+            "64": 579850918
+          }
+        }
+      }
+    },
+    "qwen3_1_7b": {
+      "label": "Qwen3 1.7B",
+      "source_model": "Qwen/Qwen3-1.7B-Base",
+      "source_revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+      "model_env": "QWEN3_1_7B_MODEL",
+      "default_model": "Qwen/Qwen3-1.7B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--lmshuffle",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "qwen3_family/qwen3_1_7b/clean/Qwen3-1.7B-Base_ic{shot}.json",
+          "seeds": {
+            "1": 2021149567,
+            "2": 1078148732,
+            "4": 1023954624,
+            "8": 1034216900,
+            "16": 22432727,
+            "32": 488850890,
+            "64": 906902788
+          }
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3_family/qwen3_1_7b/deranged/Qwen3-1.7B-Base_deranged_ic{shot}.json",
+          "seeds": {
+            "1": 2021149567,
+            "2": 1078148732,
+            "4": 1023954624,
+            "8": 1034216900,
+            "16": 22432727,
+            "32": 488850890,
+            "64": 906902788
+          }
+        }
+      }
+    },
+    "qwen3_4b": {
+      "label": "Qwen3 4B",
+      "source_model": "Qwen/Qwen3-4B-Base",
+      "source_revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+      "model_env": "QWEN3_4B_MODEL",
+      "default_model": "Qwen/Qwen3-4B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--lmshuffle",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "qwen3_family/qwen3_4b/clean/Qwen3-4B-Base_ic{shot}.json",
+          "seeds": {
+            "1": 1367458356,
+            "2": 968855281,
+            "4": 746107280,
+            "8": 130000135,
+            "16": 1800816625,
+            "32": 2036131999,
+            "64": 356668454
+          }
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3_family/qwen3_4b/deranged/Qwen3-4B-Base_deranged_ic{shot}.json",
+          "seeds": {
+            "1": 1367458356,
+            "2": 968855281,
+            "4": 746107280,
+            "8": 130000135,
+            "16": 1800816625,
+            "32": 2036131999,
+            "64": 356668454
+          }
+        }
+      }
+    },
+    "qwen3_8b": {
+      "label": "Qwen3 8B",
+      "source_model": "Qwen/Qwen3-8B-Base",
+      "source_revision": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4",
+      "model_env": "QWEN3_8B_MODEL",
+      "default_model": "Qwen/Qwen3-8B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--lmshuffle",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "qwen3_family/qwen3_8b/clean/Qwen3-8B-Base_ic{shot}.json",
+          "seeds": {
+            "1": 1579138366,
+            "2": 1685574146,
+            "4": 479493013,
+            "8": 1779817577,
+            "16": 1427696607,
+            "32": 1351863647,
+            "64": 2010899199
+          }
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3_family/qwen3_8b/deranged/Qwen3-8B-Base_deranged_ic{shot}.json",
+          "seeds": {
+            "1": 1579138366,
+            "2": 1685574146,
+            "4": 479493013,
+            "8": 1779817577,
+            "16": 1427696607,
+            "32": 1351863647,
+            "64": 2010899199
+          }
+        }
+      }
+    },
+    "evo2_1b_base": {
+      "label": "Evo2 1B base",
+      "runner": "evo2_h100",
+      "script": "src/run_evo2_h100_clean_deranged.py",
+      "default_model": "arcinstitute/evo2_1b_base",
+      "base_args": [
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "evo2_family/evo2_1b_base/clean/evo2_1b_base_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "evo2_family/evo2_1b_base/deranged/evo2_1b_base_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "evo2_7b": {
+      "label": "Evo2 7B",
+      "runner": "evo2_h100",
+      "script": "src/run_evo2_h100_clean_deranged.py",
+      "default_model": "arcinstitute/evo2_7b",
+      "base_args": [
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "evo2_family/evo2_7b/clean/evo2_7b_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "evo2_family/evo2_7b/deranged/evo2_7b_deranged_ic{shot}.json"
+        }
+      }
+    },
+    "nextterm_47m": {
+      "label": "NextTerm 47M",
+      "source_model": "N8Programs/NextTerm-47M",
+      "source_revision": "ead794b362061e9012c9a11af5962495ff82b493",
+      "model_env": "NEXTTERM_47M_MODEL",
+      "default_model": "N8Programs/NextTerm-47M",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--nextterm-digits"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "output_template": "nextterm_family/nextterm_47m/clean/NextTerm-47M_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "nextterm_family/nextterm_47m/deranged/NextTerm-47M_ic{shot}.json"
+        }
+      }
+    },
+    "imagegpt_small": {
+      "label": "ImageGPT small",
+      "model_env": "IMAGEGPT_SMALL_BF16_MODEL",
+      "default_model": "models/imagegpt-small-bf16",
+      "source_model": "openai/imagegpt-small",
+      "source_revision": "10c8a8402cf80c0eaaf31fb5bc86012b34169481",
+      "base_args": [
+        "--backend",
+        "imagegpt",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--imagegpt-row-layout",
+        "left-pad"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            31
+          ],
+          "output_template": "imagegpt_family/imagegpt_small/clean/imagegpt-small-bf16_{shot}shot_leftpad_clean.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            31
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "imagegpt_family/imagegpt_small/deranged/imagegpt-small-bf16_{shot}shot_leftpad_deranged.json"
+        }
+      }
+    },
+    "imagegpt_medium": {
+      "label": "ImageGPT medium",
+      "model_env": "IMAGEGPT_MEDIUM_BF16_MODEL",
+      "default_model": "models/imagegpt-medium-bf16",
+      "source_model": "openai/imagegpt-medium",
+      "source_revision": "d0416c58f900f4bf3b3bd089c835a518478139c1",
+      "base_args": [
+        "--backend",
+        "imagegpt",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--imagegpt-row-layout",
+        "left-pad"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            31
+          ],
+          "output_template": "imagegpt_family/imagegpt_medium/clean/imagegpt-medium-bf16_{shot}shot_leftpad_clean.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            31
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "imagegpt_family/imagegpt_medium/deranged/imagegpt-medium-bf16_{shot}shot_leftpad_deranged.json"
+        }
+      }
+    },
+    "progen2_small": {
+      "label": "ProGen2 small",
+      "model_env": "PROGEN2_SMALL_BF16_MODEL",
+      "default_model": "models/ProGen2-small-bf16",
+      "source_model": "hugohrban/progen2-small",
+      "source_revision": "43237a0b733c6629226a079266d2985c9fdce9b7",
+      "base_args": [
+        "--backend",
+        "protein",
+        "--protein-format",
+        "progen2",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "output_template": "progen2_family/progen2_small/clean/ProGen2-small-bf16_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "progen2_family/progen2_small/deranged/ProGen2-small-bf16_ic{shot}.json"
+        }
+      }
+    },
+    "progen2_medium": {
+      "label": "ProGen2 medium",
+      "model_env": "PROGEN2_MEDIUM_BF16_MODEL",
+      "default_model": "models/ProGen2-medium-bf16",
+      "source_model": "hugohrban/progen2-medium",
+      "source_revision": "6f022f76b5db11142dc8f446cfab111fe75422d6",
+      "base_args": [
+        "--backend",
+        "protein",
+        "--protein-format",
+        "progen2",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "output_template": "progen2_family/progen2_medium/clean/ProGen2-medium-bf16_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "progen2_family/progen2_medium/deranged/ProGen2-medium-bf16_ic{shot}.json"
+        }
+      }
+    },
+    "progen2_large": {
+      "label": "ProGen2 large",
+      "model_env": "PROGEN2_LARGE_BF16_MODEL",
+      "default_model": "models/ProGen2-large-bf16",
+      "source_model": "hugohrban/progen2-large",
+      "source_revision": "ac9681ecdc991414dca8ce71fb988c257a2552e8",
+      "base_args": [
+        "--backend",
+        "protein",
+        "--protein-format",
+        "progen2",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "output_template": "progen2_family/progen2_large/clean/ProGen2-large-bf16_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "progen2_family/progen2_large/deranged/ProGen2-large-bf16_ic{shot}.json"
+        }
+      }
+    },
+    "progen2_xlarge": {
+      "label": "ProGen2 xlarge",
+      "model_env": "PROGEN2_XLARGE_BF16_MODEL",
+      "default_model": "models/ProGen2-xlarge-bf16",
+      "source_model": "hugohrban/progen2-xlarge",
+      "source_revision": "0662d4e64360ee385cb8a34f6d5fbc18089ee4d1",
+      "base_args": [
+        "--backend",
+        "protein",
+        "--protein-format",
+        "progen2",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "output_template": "progen2_family/progen2_xlarge/clean/ProGen2-xlarge-bf16_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            48
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "progen2_family/progen2_xlarge/deranged/ProGen2-xlarge-bf16_ic{shot}.json"
+        }
+      }
+    },
+    "chessgpt": {
+      "label": "ChessGPT 50M",
+      "model_env": "CHESSGPT_50M_MODEL",
+      "default_model": "N8Programs/karvonen-chessgpt-50m-mlx-bf16",
+      "base_args": [
+        "--backend",
+        "chess",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "4",
+        "--max-new-tokens",
+        "4",
+        "--seed",
+        "9205",
+        "--chess-encoding",
+        "signal2-wipe",
+        "--chess-layout",
+        "continuous",
+        "--chess-decode",
+        "greedy"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "output_template": "chessgpt/clean/Chess-50M-bf16_signal2-wipe_bit4_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "chessgpt/deranged/Chess-50M-bf16_signal2-wipe_bit4_deranged_ic{shot}.json"
+        }
+      },
+      "source_model": "N8Programs/karvonen-chessgpt-50m-mlx-bf16",
+      "source_revision": "425695f6bd00e4f318500d487a93f682eb003d65"
+    },
+    "musicroll": {
+      "label": "MusicRoll 50M",
+      "model_env": "MUSICROLL_50M_MODEL",
+      "default_model": "N8Programs/Musicroll-50M",
+      "base_args": [
+        "--backend",
+        "music",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--seed",
+        "42",
+        "--music-encoding",
+        "slice-pitch",
+        "--music-decode",
+        "constrained",
+        "--per-trial-random"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
+          "output_template": "musicroll/clean/musicroll-50m_music_slice-pitch_constrained_clean_ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "musicroll/deranged/musicroll-50m_music_slice-pitch_constrained_deranged_ic{shot}.json"
+        }
+      },
+      "source_model": "N8Programs/Musicroll-50M",
+      "source_revision": "34a1ec6437d1354c9cfcf72ba1584ce8822cdb2e"
+    }
+  },
+  "experiment": {
+    "description": "Complete paper model-by-shot grid with 128 trials per task, clean and deranged.",
+    "canonical_run_keys": [
+      "qwen3",
+      "evo2",
+      "nextterm",
+      "imagegpt",
+      "timesfm",
+      "progen2"
+    ],
+    "scale_run_keys": [
+      "qwen3_0_6b",
+      "qwen3_1_7b",
+      "qwen3_4b",
+      "qwen3_8b",
+      "evo2_1b_base",
+      "evo2_7b",
+      "nextterm_47m",
+      "imagegpt_small",
+      "imagegpt_medium",
+      "progen2_small",
+      "progen2_medium",
+      "progen2_large",
+      "progen2_xlarge"
+    ],
+    "paper_control_run_keys": [
+      "chessgpt",
+      "musicroll"
+    ],
+    "trials_per_program": 128
+  }
+}

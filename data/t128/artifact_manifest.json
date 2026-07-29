@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "artifact": "icl_128_results_2026-07-28.tar.gz",
+  "hub_revision": "63a359758e389aee5467cc80d9384c34b1552dfc",
+  "download_url": "https://huggingface.co/datasets/N8Programs/shared-emergence-icl-modalities-128/resolve/63a359758e389aee5467cc80d9384c34b1552dfc/icl_128_results_2026-07-28.tar.gz",
+  "sha256": "aa4c7b5331092582b14ce7cc1c025ef55f4a05a26696299cd69973e8da942931",
+  "size_bytes": 718954210,
+  "archive_root": "results_128",
+  "default_extract_parent": "data/t128",
+  "run_manifest": "configs/paper_runs_t128.json",
+  "run_keys": 21,
+  "expected_experiment_cells": 281,
+  "tasks_per_cell": 100,
+  "trials_per_task": 128,
+  "expected_predictions": 3596800,
+  "raw_file_hashes": "data/t128/raw_results.sha256",
+  "model_revisions": "data/t128/model_revisions.json"
+}

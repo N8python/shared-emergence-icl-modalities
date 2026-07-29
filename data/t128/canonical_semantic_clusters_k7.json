@@ -1,0 +1,3315 @@
+{
+  "schema_version": 1,
+  "name": "canonical_semantic_clusters_k7",
+  "description": "Canonical 7-way semantic clustering of curated bitstring transformations, using semantic direction orbits and adding meta_constant manually to cluster 1.",
+  "source_files": {
+    "curated_transformations": "prog_synth/curated_transformations.jsonl",
+    "semantic_orbits": "function_cluster_exploration/custom_edit_semantic_orbit_kmeans_sigma0p25/semantic_direction_orbits.csv",
+    "k7_assignments": "function_cluster_exploration/custom_edit_semantic_orbit_kmeans_sigma0p25/function_cluster_assignments_k7.csv"
+  },
+  "parameters": {
+    "bit_length": 8,
+    "sigma": 0.25,
+    "custom_bitstring_distance_ops": [
+      "substitute_one_bit",
+      "circular_shift_left_one",
+      "circular_shift_right_one",
+      "complement_whole_string"
+    ],
+    "function_similarity": "mean_b exp(-sigma * custom_bitstring_dist(f(b), g(b))^2)",
+    "function_effective_distance": "sqrt(-log(similarity) / sigma)",
+    "orbit_distance": "min_{a in O(f), b in O(g)} D(a, b)",
+    "embedding": "full positive classical MDS space",
+    "clustering": "k-means",
+    "k": 7,
+    "random_state": 42,
+    "n_init": 100
+  },
+  "directional_primitive_groups": [
+    {
+      "group": "rotation_1",
+      "primitives": [
+        "rotl1",
+        "rotr1"
+      ]
+    },
+    {
+      "group": "rotation_2",
+      "primitives": [
+        "double_rotl",
+        "double_rotr"
+      ]
+    },
+    {
+      "group": "zero_fill_shift",
+      "primitives": [
+        "shift_left_zero",
+        "shift_right_zero"
+      ]
+    },
+    {
+      "group": "half_mask",
+      "primitives": [
+        "left_half",
+        "right_half"
+      ]
+    },
+    {
+      "group": "half_inversion",
+      "primitives": [
+        "invert_prefix",
+        "invert_suffix"
+      ]
+    },
+    {
+      "group": "parity_position_mask",
+      "primitives": [
+        "keep_even_positions",
+        "keep_odd_positions"
+      ]
+    },
+    {
+      "group": "alternating_pattern",
+      "primitives": [
+        "alternating_start_one",
+        "alternating_start_zero"
+      ]
+    },
+    {
+      "group": "endpoint_spread",
+      "primitives": [
+        "spread_first_bit",
+        "spread_last_bit"
+      ]
+    }
+  ],
+  "cluster_selection": {
+    "canonical_k": 7,
+    "note": "Elbow selected k=5, but k=7 was chosen as the canonical division after inspecting k=5 through k=8 because it produced the cleanest semantic taxonomy before the k=8 split introduced an awkward cross-cutting cluster.",
+    "sweep_metrics": [
+      {
+        "k": 5,
+        "inertia": 122.03016023,
+        "silhouette": 0.18609244,
+        "elbow_knee_score": 0.25487846
+      },
+      {
+        "k": 6,
+        "inertia": 114.14131186,
+        "silhouette": 0.19295148,
+        "elbow_knee_score": 0.25261118
+      },
+      {
+        "k": 7,
+        "inertia": 106.9518702,
+        "silhouette": 0.20101029,
+        "elbow_knee_score": 0.24724541
+      },
+      {
+        "k": 8,
+        "inertia": 102.23732326,
+        "silhouette": 0.20272079,
+        "elbow_knee_score": 0.23091547
+      },
+      {
+        "k": 9,
+        "inertia": 96.9288075,
+        "silhouette": 0.14329274,
+        "elbow_knee_score": 0.2172169
+      }
+    ]
+  },
+  "manual_additions": [
+    {
+      "index": 22,
+      "program": [
+        "meta_constant"
+      ],
+      "description": "Return the external meta-constant s_m1.",
+      "cluster_id": 1,
+      "orbit_id": null,
+      "assignment_type": "manual_after_clustering",
+      "manual_reason": "Placed with context-dependent/global readout functions, especially xor_with_s0 and flip_bits+xor_with_s0."
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 1,
+      "label": "Global readouts / masks / edge summaries",
+      "rationale": "Functions whose outputs are dominated by aggregate, external, endpoint, parity, edge, or low-information readout structure rather than preserving most input positions.",
+      "function_count": 30,
+      "semantic_orbit_count": 20,
+      "manual_members": [
+        {
+          "index": 22,
+          "program": [
+            "meta_constant"
+          ],
+          "description": "Return the external meta-constant s_m1.",
+          "cluster_id": 1,
+          "orbit_id": null,
+          "assignment_type": "manual_after_clustering",
+          "manual_reason": "Placed with context-dependent/global readout functions, especially xor_with_s0 and flip_bits+xor_with_s0."
+        }
+      ],
+      "orbits": [
+        {
+          "orbit_id": 6,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "majority"
+            ]
+          ],
+          "members": [
+            {
+              "index": 6,
+              "program": [
+                "majority"
+              ],
+              "description": "All 1s if ones >= zeros, otherwise all 0s.",
+              "cluster_id": 1,
+              "orbit_id": 6,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 7,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "minority"
+            ]
+          ],
+          "members": [
+            {
+              "index": 7,
+              "program": [
+                "minority"
+              ],
+              "description": "All 1s if zeros > ones, otherwise all 0s.",
+              "cluster_id": 1,
+              "orbit_id": 7,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 8,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "parity_fill"
+            ]
+          ],
+          "members": [
+            {
+              "index": 8,
+              "program": [
+                "parity_fill"
+              ],
+              "description": "All 1s when the input has odd parity, else all 0s.",
+              "cluster_id": 1,
+              "orbit_id": 8,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 12,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "ones_if_palindrome"
+            ]
+          ],
+          "members": [
+            {
+              "index": 16,
+              "program": [
+                "ones_if_palindrome"
+              ],
+              "description": "All 1s if the input is a palindrome, else all 0s.",
+              "cluster_id": 1,
+              "orbit_id": 12,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 14,
+          "behavior_variant_count": 4,
+          "variant_programs_generated": [
+            [
+              "rotl1",
+              "spread_first_bit"
+            ],
+            [
+              "rotl1",
+              "spread_last_bit"
+            ],
+            [
+              "rotr1",
+              "spread_first_bit"
+            ],
+            [
+              "rotr1",
+              "spread_last_bit"
+            ],
+            [
+              "spread_first_bit"
+            ],
+            [
+              "spread_last_bit"
+            ]
+          ],
+          "members": [
+            {
+              "index": 18,
+              "program": [
+                "spread_first_bit"
+              ],
+              "description": "Fill the string with its first bit.",
+              "cluster_id": 1,
+              "orbit_id": 14,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 19,
+              "program": [
+                "spread_last_bit"
+              ],
+              "description": "Fill the string with its last bit.",
+              "cluster_id": 1,
+              "orbit_id": 14,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 47,
+              "program": [
+                "rotl1",
+                "spread_first_bit"
+              ],
+              "description": "Rotate left once, then fill with the new first bit (original second bit).",
+              "cluster_id": 1,
+              "orbit_id": 14,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 22,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "spread_first_bit",
+              "flip_bits"
+            ],
+            [
+              "spread_last_bit",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 31,
+              "program": [
+                "spread_first_bit",
+                "flip_bits"
+              ],
+              "description": "Fill with the first bit and then invert it.",
+              "cluster_id": 1,
+              "orbit_id": 22,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 32,
+              "program": [
+                "spread_last_bit",
+                "flip_bits"
+              ],
+              "description": "Fill with the last bit and then invert it.",
+              "cluster_id": 1,
+              "orbit_id": 22,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 27,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "xor_with_s0"
+            ]
+          ],
+          "members": [
+            {
+              "index": 39,
+              "program": [
+                "xor_with_s0"
+              ],
+              "description": "XOR the string with itself (always yields all 0s).",
+              "cluster_id": 1,
+              "orbit_id": 27,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 28,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "flip_bits",
+              "xor_with_s0"
+            ]
+          ],
+          "members": [
+            {
+              "index": 40,
+              "program": [
+                "flip_bits",
+                "xor_with_s0"
+              ],
+              "description": "Flip the bits, then XOR with the original (always yields all 1s).",
+              "cluster_id": 1,
+              "orbit_id": 28,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 29,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "ones_if_palindrome",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 41,
+              "program": [
+                "ones_if_palindrome",
+                "flip_bits"
+              ],
+              "description": "Report palindrome-ness but flip the indicator (0 if palindrome, else 1).",
+              "cluster_id": 1,
+              "orbit_id": 29,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 33,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "parity_fill",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 46,
+              "program": [
+                "parity_fill",
+                "flip_bits"
+              ],
+              "description": "Fill by parity, then invert (1s for even parity, 0s for odd).",
+              "cluster_id": 1,
+              "orbit_id": 33,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 37,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "edge_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 53,
+              "program": [
+                "edge_mask"
+              ],
+              "description": "Keep only the first and last bits; zero out the middle.",
+              "cluster_id": 1,
+              "orbit_id": 37,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 47,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "edge_mask",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 70,
+              "program": [
+                "edge_mask",
+                "flip_bits"
+              ],
+              "description": "Keep only the edge bits, then invert so edges flip and the middle becomes 1s.",
+              "cluster_id": 1,
+              "orbit_id": 47,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 51,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "parity_fill"
+            ],
+            [
+              "shift_right_zero",
+              "parity_fill"
+            ]
+          ],
+          "members": [
+            {
+              "index": 78,
+              "program": [
+                "shift_left_zero",
+                "parity_fill"
+              ],
+              "description": "Shift left with zero fill, then fill the string with its parity (all 1s if odd).",
+              "cluster_id": 1,
+              "orbit_id": 51,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 79,
+              "program": [
+                "shift_right_zero",
+                "parity_fill"
+              ],
+              "description": "Shift right with zero fill, then fill the string with its parity.",
+              "cluster_id": 1,
+              "orbit_id": 51,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 52,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "parity_fill",
+              "shift_left_zero"
+            ],
+            [
+              "parity_fill",
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 80,
+              "program": [
+                "parity_fill",
+                "shift_left_zero"
+              ],
+              "description": "Fill by parity (all 0s or 1s) and then shift left with zero fill.",
+              "cluster_id": 1,
+              "orbit_id": 52,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 81,
+              "program": [
+                "parity_fill",
+                "shift_right_zero"
+              ],
+              "description": "Fill by parity and then shift right with zero fill.",
+              "cluster_id": 1,
+              "orbit_id": 52,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 53,
+          "behavior_variant_count": 4,
+          "variant_programs_generated": [
+            [
+              "spread_first_bit",
+              "shift_left_zero"
+            ],
+            [
+              "spread_first_bit",
+              "shift_right_zero"
+            ],
+            [
+              "spread_last_bit",
+              "shift_left_zero"
+            ],
+            [
+              "spread_last_bit",
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 82,
+              "program": [
+                "spread_first_bit",
+                "shift_left_zero"
+              ],
+              "description": "Copy the first bit across the string, then shift left with zero fill.",
+              "cluster_id": 1,
+              "orbit_id": 53,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 83,
+              "program": [
+                "spread_last_bit",
+                "shift_right_zero"
+              ],
+              "description": "Copy the last bit across the string, then shift right with zero fill.",
+              "cluster_id": 1,
+              "orbit_id": 53,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 55,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "spread_first_bit",
+              "edge_mask"
+            ],
+            [
+              "spread_last_bit",
+              "edge_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 86,
+              "program": [
+                "spread_first_bit",
+                "edge_mask"
+              ],
+              "description": "Copy the first bit everywhere, then keep only the edges.",
+              "cluster_id": 1,
+              "orbit_id": 55,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 87,
+              "program": [
+                "spread_last_bit",
+                "edge_mask"
+              ],
+              "description": "Copy the last bit everywhere, then keep only the edges.",
+              "cluster_id": 1,
+              "orbit_id": 55,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 56,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "spread_first_bit",
+              "center_mask"
+            ],
+            [
+              "spread_last_bit",
+              "center_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 88,
+              "program": [
+                "spread_first_bit",
+                "center_mask"
+              ],
+              "description": "Copy the first bit everywhere, then zero the edges.",
+              "cluster_id": 1,
+              "orbit_id": 56,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 89,
+              "program": [
+                "spread_last_bit",
+                "center_mask"
+              ],
+              "description": "Copy the last bit everywhere, then zero the edges.",
+              "cluster_id": 1,
+              "orbit_id": 56,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 58,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "reverse_bits",
+              "edge_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 94,
+              "program": [
+                "reverse_bits",
+                "edge_mask"
+              ],
+              "description": "Reverse the string, then keep only the edge bits.",
+              "cluster_id": 1,
+              "orbit_id": 58,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 60,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "edge_mask",
+              "shift_left_zero"
+            ],
+            [
+              "edge_mask",
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 96,
+              "program": [
+                "edge_mask",
+                "shift_left_zero"
+              ],
+              "description": "Keep only the edge bits, then shift left with zero fill.",
+              "cluster_id": 1,
+              "orbit_id": 60,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 97,
+              "program": [
+                "edge_mask",
+                "shift_right_zero"
+              ],
+              "description": "Keep only the edge bits, then shift right with zero fill.",
+              "cluster_id": 1,
+              "orbit_id": 60,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 62,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "edge_mask"
+            ],
+            [
+              "shift_right_zero",
+              "edge_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 100,
+              "program": [
+                "shift_left_zero",
+                "edge_mask"
+              ],
+              "description": "Shift left with zero fill, then keep only the edge bits.",
+              "cluster_id": 1,
+              "orbit_id": 62,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 6,
+          "program": [
+            "majority"
+          ],
+          "description": "All 1s if ones >= zeros, otherwise all 0s.",
+          "cluster_id": 1,
+          "orbit_id": 6,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 7,
+          "program": [
+            "minority"
+          ],
+          "description": "All 1s if zeros > ones, otherwise all 0s.",
+          "cluster_id": 1,
+          "orbit_id": 7,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 8,
+          "program": [
+            "parity_fill"
+          ],
+          "description": "All 1s when the input has odd parity, else all 0s.",
+          "cluster_id": 1,
+          "orbit_id": 8,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 16,
+          "program": [
+            "ones_if_palindrome"
+          ],
+          "description": "All 1s if the input is a palindrome, else all 0s.",
+          "cluster_id": 1,
+          "orbit_id": 12,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 18,
+          "program": [
+            "spread_first_bit"
+          ],
+          "description": "Fill the string with its first bit.",
+          "cluster_id": 1,
+          "orbit_id": 14,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 19,
+          "program": [
+            "spread_last_bit"
+          ],
+          "description": "Fill the string with its last bit.",
+          "cluster_id": 1,
+          "orbit_id": 14,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 22,
+          "program": [
+            "meta_constant"
+          ],
+          "description": "Return the external meta-constant s_m1.",
+          "cluster_id": 1,
+          "orbit_id": null,
+          "assignment_type": "manual_after_clustering",
+          "manual_reason": "Placed with context-dependent/global readout functions, especially xor_with_s0 and flip_bits+xor_with_s0."
+        },
+        {
+          "index": 31,
+          "program": [
+            "spread_first_bit",
+            "flip_bits"
+          ],
+          "description": "Fill with the first bit and then invert it.",
+          "cluster_id": 1,
+          "orbit_id": 22,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 32,
+          "program": [
+            "spread_last_bit",
+            "flip_bits"
+          ],
+          "description": "Fill with the last bit and then invert it.",
+          "cluster_id": 1,
+          "orbit_id": 22,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 39,
+          "program": [
+            "xor_with_s0"
+          ],
+          "description": "XOR the string with itself (always yields all 0s).",
+          "cluster_id": 1,
+          "orbit_id": 27,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 40,
+          "program": [
+            "flip_bits",
+            "xor_with_s0"
+          ],
+          "description": "Flip the bits, then XOR with the original (always yields all 1s).",
+          "cluster_id": 1,
+          "orbit_id": 28,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 41,
+          "program": [
+            "ones_if_palindrome",
+            "flip_bits"
+          ],
+          "description": "Report palindrome-ness but flip the indicator (0 if palindrome, else 1).",
+          "cluster_id": 1,
+          "orbit_id": 29,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 46,
+          "program": [
+            "parity_fill",
+            "flip_bits"
+          ],
+          "description": "Fill by parity, then invert (1s for even parity, 0s for odd).",
+          "cluster_id": 1,
+          "orbit_id": 33,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 47,
+          "program": [
+            "rotl1",
+            "spread_first_bit"
+          ],
+          "description": "Rotate left once, then fill with the new first bit (original second bit).",
+          "cluster_id": 1,
+          "orbit_id": 14,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 53,
+          "program": [
+            "edge_mask"
+          ],
+          "description": "Keep only the first and last bits; zero out the middle.",
+          "cluster_id": 1,
+          "orbit_id": 37,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 70,
+          "program": [
+            "edge_mask",
+            "flip_bits"
+          ],
+          "description": "Keep only the edge bits, then invert so edges flip and the middle becomes 1s.",
+          "cluster_id": 1,
+          "orbit_id": 47,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 78,
+          "program": [
+            "shift_left_zero",
+            "parity_fill"
+          ],
+          "description": "Shift left with zero fill, then fill the string with its parity (all 1s if odd).",
+          "cluster_id": 1,
+          "orbit_id": 51,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 79,
+          "program": [
+            "shift_right_zero",
+            "parity_fill"
+          ],
+          "description": "Shift right with zero fill, then fill the string with its parity.",
+          "cluster_id": 1,
+          "orbit_id": 51,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 80,
+          "program": [
+            "parity_fill",
+            "shift_left_zero"
+          ],
+          "description": "Fill by parity (all 0s or 1s) and then shift left with zero fill.",
+          "cluster_id": 1,
+          "orbit_id": 52,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 81,
+          "program": [
+            "parity_fill",
+            "shift_right_zero"
+          ],
+          "description": "Fill by parity and then shift right with zero fill.",
+          "cluster_id": 1,
+          "orbit_id": 52,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 82,
+          "program": [
+            "spread_first_bit",
+            "shift_left_zero"
+          ],
+          "description": "Copy the first bit across the string, then shift left with zero fill.",
+          "cluster_id": 1,
+          "orbit_id": 53,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 83,
+          "program": [
+            "spread_last_bit",
+            "shift_right_zero"
+          ],
+          "description": "Copy the last bit across the string, then shift right with zero fill.",
+          "cluster_id": 1,
+          "orbit_id": 53,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 86,
+          "program": [
+            "spread_first_bit",
+            "edge_mask"
+          ],
+          "description": "Copy the first bit everywhere, then keep only the edges.",
+          "cluster_id": 1,
+          "orbit_id": 55,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 87,
+          "program": [
+            "spread_last_bit",
+            "edge_mask"
+          ],
+          "description": "Copy the last bit everywhere, then keep only the edges.",
+          "cluster_id": 1,
+          "orbit_id": 55,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 88,
+          "program": [
+            "spread_first_bit",
+            "center_mask"
+          ],
+          "description": "Copy the first bit everywhere, then zero the edges.",
+          "cluster_id": 1,
+          "orbit_id": 56,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 89,
+          "program": [
+            "spread_last_bit",
+            "center_mask"
+          ],
+          "description": "Copy the last bit everywhere, then zero the edges.",
+          "cluster_id": 1,
+          "orbit_id": 56,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 94,
+          "program": [
+            "reverse_bits",
+            "edge_mask"
+          ],
+          "description": "Reverse the string, then keep only the edge bits.",
+          "cluster_id": 1,
+          "orbit_id": 58,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 96,
+          "program": [
+            "edge_mask",
+            "shift_left_zero"
+          ],
+          "description": "Keep only the edge bits, then shift left with zero fill.",
+          "cluster_id": 1,
+          "orbit_id": 60,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 97,
+          "program": [
+            "edge_mask",
+            "shift_right_zero"
+          ],
+          "description": "Keep only the edge bits, then shift right with zero fill.",
+          "cluster_id": 1,
+          "orbit_id": 60,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 100,
+          "program": [
+            "shift_left_zero",
+            "edge_mask"
+          ],
+          "description": "Shift left with zero fill, then keep only the edge bits.",
+          "cluster_id": 1,
+          "orbit_id": 62,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    },
+    {
+      "cluster_id": 2,
+      "label": "Half / mirror / prefix-suffix transforms",
+      "rationale": "Functions that keep, mirror, invert, or otherwise privilege contiguous halves or prefix/suffix structure.",
+      "function_count": 13,
+      "semantic_orbit_count": 8,
+      "manual_members": [],
+      "orbits": [
+        {
+          "orbit_id": 10,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "left_half"
+            ],
+            [
+              "right_half"
+            ]
+          ],
+          "members": [
+            {
+              "index": 11,
+              "program": [
+                "left_half"
+              ],
+              "description": "Keep the left 4 bits, zero out the right half.",
+              "cluster_id": 2,
+              "orbit_id": 10,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 12,
+              "program": [
+                "right_half"
+              ],
+              "description": "Keep the right 4 bits, zero out the left half.",
+              "cluster_id": 2,
+              "orbit_id": 10,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 13,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "mirror_half"
+            ]
+          ],
+          "members": [
+            {
+              "index": 17,
+              "program": [
+                "mirror_half"
+              ],
+              "description": "Mirror the left half over the right to form a palindrome.",
+              "cluster_id": 2,
+              "orbit_id": 13,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 15,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "invert_prefix"
+            ],
+            [
+              "invert_suffix"
+            ]
+          ],
+          "members": [
+            {
+              "index": 20,
+              "program": [
+                "invert_prefix"
+              ],
+              "description": "Flip the bits in the first half only.",
+              "cluster_id": 2,
+              "orbit_id": 15,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 21,
+              "program": [
+                "invert_suffix"
+              ],
+              "description": "Flip the bits in the second half only.",
+              "cluster_id": 2,
+              "orbit_id": 15,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 23,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "left_half",
+              "flip_bits"
+            ],
+            [
+              "right_half",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 33,
+              "program": [
+                "left_half",
+                "flip_bits"
+              ],
+              "description": "Keep the left half and zero the right, then flip (right half becomes all 1s).",
+              "cluster_id": 2,
+              "orbit_id": 23,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 34,
+              "program": [
+                "right_half",
+                "flip_bits"
+              ],
+              "description": "Keep the right half and zero the left, then flip (left half becomes all 1s).",
+              "cluster_id": 2,
+              "orbit_id": 23,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 24,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "flip_bits",
+              "left_half"
+            ],
+            [
+              "flip_bits",
+              "right_half"
+            ]
+          ],
+          "members": [
+            {
+              "index": 35,
+              "program": [
+                "flip_bits",
+                "left_half"
+              ],
+              "description": "Flip all bits, then keep only the left half.",
+              "cluster_id": 2,
+              "orbit_id": 24,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 36,
+              "program": [
+                "flip_bits",
+                "right_half"
+              ],
+              "description": "Flip all bits, then keep only the right half.",
+              "cluster_id": 2,
+              "orbit_id": 24,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 30,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "flip_bits",
+              "mirror_half"
+            ]
+          ],
+          "members": [
+            {
+              "index": 42,
+              "program": [
+                "flip_bits",
+                "mirror_half"
+              ],
+              "description": "Flip bits, then mirror the left half across the right.",
+              "cluster_id": 2,
+              "orbit_id": 30,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 31,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "invert_prefix",
+              "reverse_bits"
+            ],
+            [
+              "invert_suffix",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 43,
+              "program": [
+                "invert_prefix",
+                "reverse_bits"
+              ],
+              "description": "Flip the first half, then reverse the string.",
+              "cluster_id": 2,
+              "orbit_id": 31,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 32,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "left_half",
+              "reverse_bits"
+            ],
+            [
+              "right_half",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 44,
+              "program": [
+                "left_half",
+                "reverse_bits"
+              ],
+              "description": "Zero the right half, then reverse (moving zeros to the front).",
+              "cluster_id": 2,
+              "orbit_id": 32,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 45,
+              "program": [
+                "right_half",
+                "reverse_bits"
+              ],
+              "description": "Zero the left half, then reverse (moving zeros to the back).",
+              "cluster_id": 2,
+              "orbit_id": 32,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 11,
+          "program": [
+            "left_half"
+          ],
+          "description": "Keep the left 4 bits, zero out the right half.",
+          "cluster_id": 2,
+          "orbit_id": 10,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 12,
+          "program": [
+            "right_half"
+          ],
+          "description": "Keep the right 4 bits, zero out the left half.",
+          "cluster_id": 2,
+          "orbit_id": 10,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 17,
+          "program": [
+            "mirror_half"
+          ],
+          "description": "Mirror the left half over the right to form a palindrome.",
+          "cluster_id": 2,
+          "orbit_id": 13,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 20,
+          "program": [
+            "invert_prefix"
+          ],
+          "description": "Flip the bits in the first half only.",
+          "cluster_id": 2,
+          "orbit_id": 15,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 21,
+          "program": [
+            "invert_suffix"
+          ],
+          "description": "Flip the bits in the second half only.",
+          "cluster_id": 2,
+          "orbit_id": 15,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 33,
+          "program": [
+            "left_half",
+            "flip_bits"
+          ],
+          "description": "Keep the left half and zero the right, then flip (right half becomes all 1s).",
+          "cluster_id": 2,
+          "orbit_id": 23,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 34,
+          "program": [
+            "right_half",
+            "flip_bits"
+          ],
+          "description": "Keep the right half and zero the left, then flip (left half becomes all 1s).",
+          "cluster_id": 2,
+          "orbit_id": 23,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 35,
+          "program": [
+            "flip_bits",
+            "left_half"
+          ],
+          "description": "Flip all bits, then keep only the left half.",
+          "cluster_id": 2,
+          "orbit_id": 24,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 36,
+          "program": [
+            "flip_bits",
+            "right_half"
+          ],
+          "description": "Flip all bits, then keep only the right half.",
+          "cluster_id": 2,
+          "orbit_id": 24,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 42,
+          "program": [
+            "flip_bits",
+            "mirror_half"
+          ],
+          "description": "Flip bits, then mirror the left half across the right.",
+          "cluster_id": 2,
+          "orbit_id": 30,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 43,
+          "program": [
+            "invert_prefix",
+            "reverse_bits"
+          ],
+          "description": "Flip the first half, then reverse the string.",
+          "cluster_id": 2,
+          "orbit_id": 31,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 44,
+          "program": [
+            "left_half",
+            "reverse_bits"
+          ],
+          "description": "Zero the right half, then reverse (moving zeros to the front).",
+          "cluster_id": 2,
+          "orbit_id": 32,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 45,
+          "program": [
+            "right_half",
+            "reverse_bits"
+          ],
+          "description": "Zero the left half, then reverse (moving zeros to the back).",
+          "cluster_id": 2,
+          "orbit_id": 32,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "label": "Alternating / even-odd position masks",
+      "rationale": "Functions organized around parity of position: alternating masks, even/odd retention, and transformations close to those masks.",
+      "function_count": 17,
+      "semantic_orbit_count": 8,
+      "manual_members": [],
+      "orbits": [
+        {
+          "orbit_id": 9,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "alternating_start_one"
+            ],
+            [
+              "alternating_start_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 9,
+              "program": [
+                "alternating_start_one"
+              ],
+              "description": "Mark positions that differ from the 1010... pattern.",
+              "cluster_id": 3,
+              "orbit_id": 9,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 10,
+              "program": [
+                "alternating_start_zero"
+              ],
+              "description": "Mark positions that differ from the 0101... pattern.",
+              "cluster_id": 3,
+              "orbit_id": 9,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 36,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "keep_even_positions"
+            ],
+            [
+              "keep_odd_positions"
+            ]
+          ],
+          "members": [
+            {
+              "index": 51,
+              "program": [
+                "keep_even_positions"
+              ],
+              "description": "Keep even-indexed bits (0-based) and zero the odd positions.",
+              "cluster_id": 3,
+              "orbit_id": 36,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 52,
+              "program": [
+                "keep_odd_positions"
+              ],
+              "description": "Keep odd-indexed bits and zero the even positions.",
+              "cluster_id": 3,
+              "orbit_id": 36,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 45,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "keep_even_positions",
+              "flip_bits"
+            ],
+            [
+              "keep_odd_positions",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 66,
+              "program": [
+                "keep_even_positions",
+                "flip_bits"
+              ],
+              "description": "Keep even positions (odd go to 0) and then invert the whole string.",
+              "cluster_id": 3,
+              "orbit_id": 45,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 67,
+              "program": [
+                "keep_odd_positions",
+                "flip_bits"
+              ],
+              "description": "Keep odd positions (even go to 0) and then invert the whole string.",
+              "cluster_id": 3,
+              "orbit_id": 45,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 46,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "flip_bits",
+              "keep_even_positions"
+            ],
+            [
+              "flip_bits",
+              "keep_odd_positions"
+            ]
+          ],
+          "members": [
+            {
+              "index": 68,
+              "program": [
+                "flip_bits",
+                "keep_even_positions"
+              ],
+              "description": "Invert the bits first, then zero out the odd positions.",
+              "cluster_id": 3,
+              "orbit_id": 46,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 69,
+              "program": [
+                "flip_bits",
+                "keep_odd_positions"
+              ],
+              "description": "Invert the bits first, then zero out the even positions.",
+              "cluster_id": 3,
+              "orbit_id": 46,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 49,
+          "behavior_variant_count": 4,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "keep_even_positions"
+            ],
+            [
+              "shift_left_zero",
+              "keep_odd_positions"
+            ],
+            [
+              "shift_right_zero",
+              "keep_even_positions"
+            ],
+            [
+              "shift_right_zero",
+              "keep_odd_positions"
+            ]
+          ],
+          "members": [
+            {
+              "index": 72,
+              "program": [
+                "shift_left_zero",
+                "keep_even_positions"
+              ],
+              "description": "Shift left with zero fill, then keep only even-indexed positions.",
+              "cluster_id": 3,
+              "orbit_id": 49,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 73,
+              "program": [
+                "shift_left_zero",
+                "keep_odd_positions"
+              ],
+              "description": "Shift left with zero fill, then keep only odd-indexed positions.",
+              "cluster_id": 3,
+              "orbit_id": 49,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 74,
+              "program": [
+                "shift_right_zero",
+                "keep_even_positions"
+              ],
+              "description": "Shift right with zero fill, then keep only even-indexed positions.",
+              "cluster_id": 3,
+              "orbit_id": 49,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 75,
+              "program": [
+                "shift_right_zero",
+                "keep_odd_positions"
+              ],
+              "description": "Shift right with zero fill, then keep only odd-indexed positions.",
+              "cluster_id": 3,
+              "orbit_id": 49,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 50,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "keep_even_positions",
+              "reverse_bits"
+            ],
+            [
+              "keep_odd_positions",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 76,
+              "program": [
+                "keep_even_positions",
+                "reverse_bits"
+              ],
+              "description": "Zero out odd positions and then reverse the bitstring.",
+              "cluster_id": 3,
+              "orbit_id": 50,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 77,
+              "program": [
+                "keep_odd_positions",
+                "reverse_bits"
+              ],
+              "description": "Zero out even positions and then reverse the bitstring.",
+              "cluster_id": 3,
+              "orbit_id": 50,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 54,
+          "behavior_variant_count": 4,
+          "variant_programs_generated": [
+            [
+              "spread_first_bit",
+              "keep_even_positions"
+            ],
+            [
+              "spread_first_bit",
+              "keep_odd_positions"
+            ],
+            [
+              "spread_last_bit",
+              "keep_even_positions"
+            ],
+            [
+              "spread_last_bit",
+              "keep_odd_positions"
+            ]
+          ],
+          "members": [
+            {
+              "index": 84,
+              "program": [
+                "spread_first_bit",
+                "keep_even_positions"
+              ],
+              "description": "Copy the first bit everywhere, then zero the odd positions.",
+              "cluster_id": 3,
+              "orbit_id": 54,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 85,
+              "program": [
+                "spread_last_bit",
+                "keep_odd_positions"
+              ],
+              "description": "Copy the last bit everywhere, then zero the even positions.",
+              "cluster_id": 3,
+              "orbit_id": 54,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 61,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "swap_pairs"
+            ],
+            [
+              "shift_right_zero",
+              "swap_pairs"
+            ]
+          ],
+          "members": [
+            {
+              "index": 99,
+              "program": [
+                "shift_left_zero",
+                "swap_pairs"
+              ],
+              "description": "Shift left with zero fill, then swap adjacent pairs.",
+              "cluster_id": 3,
+              "orbit_id": 61,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 9,
+          "program": [
+            "alternating_start_one"
+          ],
+          "description": "Mark positions that differ from the 1010... pattern.",
+          "cluster_id": 3,
+          "orbit_id": 9,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 10,
+          "program": [
+            "alternating_start_zero"
+          ],
+          "description": "Mark positions that differ from the 0101... pattern.",
+          "cluster_id": 3,
+          "orbit_id": 9,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 51,
+          "program": [
+            "keep_even_positions"
+          ],
+          "description": "Keep even-indexed bits (0-based) and zero the odd positions.",
+          "cluster_id": 3,
+          "orbit_id": 36,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 52,
+          "program": [
+            "keep_odd_positions"
+          ],
+          "description": "Keep odd-indexed bits and zero the even positions.",
+          "cluster_id": 3,
+          "orbit_id": 36,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 66,
+          "program": [
+            "keep_even_positions",
+            "flip_bits"
+          ],
+          "description": "Keep even positions (odd go to 0) and then invert the whole string.",
+          "cluster_id": 3,
+          "orbit_id": 45,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 67,
+          "program": [
+            "keep_odd_positions",
+            "flip_bits"
+          ],
+          "description": "Keep odd positions (even go to 0) and then invert the whole string.",
+          "cluster_id": 3,
+          "orbit_id": 45,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 68,
+          "program": [
+            "flip_bits",
+            "keep_even_positions"
+          ],
+          "description": "Invert the bits first, then zero out the odd positions.",
+          "cluster_id": 3,
+          "orbit_id": 46,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 69,
+          "program": [
+            "flip_bits",
+            "keep_odd_positions"
+          ],
+          "description": "Invert the bits first, then zero out the even positions.",
+          "cluster_id": 3,
+          "orbit_id": 46,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 72,
+          "program": [
+            "shift_left_zero",
+            "keep_even_positions"
+          ],
+          "description": "Shift left with zero fill, then keep only even-indexed positions.",
+          "cluster_id": 3,
+          "orbit_id": 49,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 73,
+          "program": [
+            "shift_left_zero",
+            "keep_odd_positions"
+          ],
+          "description": "Shift left with zero fill, then keep only odd-indexed positions.",
+          "cluster_id": 3,
+          "orbit_id": 49,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 74,
+          "program": [
+            "shift_right_zero",
+            "keep_even_positions"
+          ],
+          "description": "Shift right with zero fill, then keep only even-indexed positions.",
+          "cluster_id": 3,
+          "orbit_id": 49,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 75,
+          "program": [
+            "shift_right_zero",
+            "keep_odd_positions"
+          ],
+          "description": "Shift right with zero fill, then keep only odd-indexed positions.",
+          "cluster_id": 3,
+          "orbit_id": 49,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 76,
+          "program": [
+            "keep_even_positions",
+            "reverse_bits"
+          ],
+          "description": "Zero out odd positions and then reverse the bitstring.",
+          "cluster_id": 3,
+          "orbit_id": 50,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 77,
+          "program": [
+            "keep_odd_positions",
+            "reverse_bits"
+          ],
+          "description": "Zero out even positions and then reverse the bitstring.",
+          "cluster_id": 3,
+          "orbit_id": 50,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 84,
+          "program": [
+            "spread_first_bit",
+            "keep_even_positions"
+          ],
+          "description": "Copy the first bit everywhere, then zero the odd positions.",
+          "cluster_id": 3,
+          "orbit_id": 54,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 85,
+          "program": [
+            "spread_last_bit",
+            "keep_odd_positions"
+          ],
+          "description": "Copy the last bit everywhere, then zero the even positions.",
+          "cluster_id": 3,
+          "orbit_id": 54,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 99,
+          "program": [
+            "shift_left_zero",
+            "swap_pairs"
+          ],
+          "description": "Shift left with zero fill, then swap adjacent pairs.",
+          "cluster_id": 3,
+          "orbit_id": 61,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    },
+    {
+      "cluster_id": 4,
+      "label": "Swap-halves / half-permutation family",
+      "rationale": "Permutation-heavy half-structure: swap-halves, rotations interacting with halves, and lossy shifts composed with half swaps.",
+      "function_count": 9,
+      "semantic_orbit_count": 7,
+      "manual_members": [],
+      "orbits": [
+        {
+          "orbit_id": 5,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "swap_halves"
+            ]
+          ],
+          "members": [
+            {
+              "index": 5,
+              "program": [
+                "swap_halves"
+              ],
+              "description": "Swap the left and right 4-bit halves.",
+              "cluster_id": 4,
+              "orbit_id": 5,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 19,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "swap_halves",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 27,
+              "program": [
+                "swap_halves",
+                "reverse_bits"
+              ],
+              "description": "Swap halves, then reverse the string.",
+              "cluster_id": 4,
+              "orbit_id": 19,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 20,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "swap_halves",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 28,
+              "program": [
+                "swap_halves",
+                "flip_bits"
+              ],
+              "description": "Swap halves, then flip all bits.",
+              "cluster_id": 4,
+              "orbit_id": 20,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 25,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "double_rotl",
+              "reverse_bits"
+            ],
+            [
+              "double_rotr",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 37,
+              "program": [
+                "double_rotl",
+                "reverse_bits"
+              ],
+              "description": "Rotate left twice, then reverse.",
+              "cluster_id": 4,
+              "orbit_id": 25,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 26,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "rotl1",
+              "swap_halves"
+            ],
+            [
+              "rotr1",
+              "swap_halves"
+            ]
+          ],
+          "members": [
+            {
+              "index": 38,
+              "program": [
+                "rotl1",
+                "swap_halves"
+              ],
+              "description": "Rotate left once, then swap halves.",
+              "cluster_id": 4,
+              "orbit_id": 26,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 43,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "swap_halves",
+              "shift_left_zero"
+            ],
+            [
+              "swap_halves",
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 62,
+              "program": [
+                "swap_halves",
+                "shift_left_zero"
+              ],
+              "description": "Swap halves and then shift left with zero fill.",
+              "cluster_id": 4,
+              "orbit_id": 43,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 63,
+              "program": [
+                "swap_halves",
+                "shift_right_zero"
+              ],
+              "description": "Swap halves and then shift right with zero fill.",
+              "cluster_id": 4,
+              "orbit_id": 43,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 44,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "swap_halves"
+            ],
+            [
+              "shift_right_zero",
+              "swap_halves"
+            ]
+          ],
+          "members": [
+            {
+              "index": 64,
+              "program": [
+                "shift_left_zero",
+                "swap_halves"
+              ],
+              "description": "Shift left with zero fill, then swap halves.",
+              "cluster_id": 4,
+              "orbit_id": 44,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 65,
+              "program": [
+                "shift_right_zero",
+                "swap_halves"
+              ],
+              "description": "Shift right with zero fill, then swap halves.",
+              "cluster_id": 4,
+              "orbit_id": 44,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 5,
+          "program": [
+            "swap_halves"
+          ],
+          "description": "Swap the left and right 4-bit halves.",
+          "cluster_id": 4,
+          "orbit_id": 5,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 27,
+          "program": [
+            "swap_halves",
+            "reverse_bits"
+          ],
+          "description": "Swap halves, then reverse the string.",
+          "cluster_id": 4,
+          "orbit_id": 19,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 28,
+          "program": [
+            "swap_halves",
+            "flip_bits"
+          ],
+          "description": "Swap halves, then flip all bits.",
+          "cluster_id": 4,
+          "orbit_id": 20,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 37,
+          "program": [
+            "double_rotl",
+            "reverse_bits"
+          ],
+          "description": "Rotate left twice, then reverse.",
+          "cluster_id": 4,
+          "orbit_id": 25,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 38,
+          "program": [
+            "rotl1",
+            "swap_halves"
+          ],
+          "description": "Rotate left once, then swap halves.",
+          "cluster_id": 4,
+          "orbit_id": 26,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 62,
+          "program": [
+            "swap_halves",
+            "shift_left_zero"
+          ],
+          "description": "Swap halves and then shift left with zero fill.",
+          "cluster_id": 4,
+          "orbit_id": 43,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 63,
+          "program": [
+            "swap_halves",
+            "shift_right_zero"
+          ],
+          "description": "Swap halves and then shift right with zero fill.",
+          "cluster_id": 4,
+          "orbit_id": 43,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 64,
+          "program": [
+            "shift_left_zero",
+            "swap_halves"
+          ],
+          "description": "Shift left with zero fill, then swap halves.",
+          "cluster_id": 4,
+          "orbit_id": 44,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 65,
+          "program": [
+            "shift_right_zero",
+            "swap_halves"
+          ],
+          "description": "Shift right with zero fill, then swap halves.",
+          "cluster_id": 4,
+          "orbit_id": 44,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    },
+    {
+      "cluster_id": 5,
+      "label": "Flip-heavy local transforms",
+      "rationale": "Bitwise complement is the dominant operation, often combined with small shifts or local rearrangements.",
+      "function_count": 10,
+      "semantic_orbit_count": 7,
+      "manual_members": [],
+      "orbits": [
+        {
+          "orbit_id": 4,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 4,
+              "program": [
+                "flip_bits"
+              ],
+              "description": "Flip every bit (0<->1).",
+              "cluster_id": 5,
+              "orbit_id": 4,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 18,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "rotl1",
+              "flip_bits"
+            ],
+            [
+              "rotr1",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 26,
+              "program": [
+                "rotl1",
+                "flip_bits"
+              ],
+              "description": "Rotate left once, then flip all bits.",
+              "cluster_id": 5,
+              "orbit_id": 18,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 30,
+              "program": [
+                "rotr1",
+                "flip_bits"
+              ],
+              "description": "Rotate right once, then flip all bits.",
+              "cluster_id": 5,
+              "orbit_id": 18,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 21,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "double_rotl",
+              "flip_bits"
+            ],
+            [
+              "double_rotr",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 29,
+              "program": [
+                "double_rotl",
+                "flip_bits"
+              ],
+              "description": "Rotate left twice, then flip all bits.",
+              "cluster_id": 5,
+              "orbit_id": 21,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 39,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "flip_bits"
+            ],
+            [
+              "shift_right_zero",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 55,
+              "program": [
+                "shift_left_zero",
+                "flip_bits"
+              ],
+              "description": "Shift left with zero fill, then invert every bit.",
+              "cluster_id": 5,
+              "orbit_id": 39,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 56,
+              "program": [
+                "shift_right_zero",
+                "flip_bits"
+              ],
+              "description": "Shift right with zero fill, then invert every bit.",
+              "cluster_id": 5,
+              "orbit_id": 39,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 40,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "flip_bits",
+              "shift_left_zero"
+            ],
+            [
+              "flip_bits",
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 57,
+              "program": [
+                "flip_bits",
+                "shift_left_zero"
+              ],
+              "description": "Invert all bits, then shift left with zero fill.",
+              "cluster_id": 5,
+              "orbit_id": 40,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 58,
+              "program": [
+                "flip_bits",
+                "shift_right_zero"
+              ],
+              "description": "Invert all bits, then shift right with zero fill.",
+              "cluster_id": 5,
+              "orbit_id": 40,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 41,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "swap_pairs",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 59,
+              "program": [
+                "swap_pairs",
+                "flip_bits"
+              ],
+              "description": "Swap adjacent pairs and then invert the result.",
+              "cluster_id": 5,
+              "orbit_id": 41,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 48,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "center_mask",
+              "flip_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 71,
+              "program": [
+                "center_mask",
+                "flip_bits"
+              ],
+              "description": "Zero the edges, keep the middle, then invert everything.",
+              "cluster_id": 5,
+              "orbit_id": 48,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 4,
+          "program": [
+            "flip_bits"
+          ],
+          "description": "Flip every bit (0<->1).",
+          "cluster_id": 5,
+          "orbit_id": 4,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 26,
+          "program": [
+            "rotl1",
+            "flip_bits"
+          ],
+          "description": "Rotate left once, then flip all bits.",
+          "cluster_id": 5,
+          "orbit_id": 18,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 29,
+          "program": [
+            "double_rotl",
+            "flip_bits"
+          ],
+          "description": "Rotate left twice, then flip all bits.",
+          "cluster_id": 5,
+          "orbit_id": 21,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 30,
+          "program": [
+            "rotr1",
+            "flip_bits"
+          ],
+          "description": "Rotate right once, then flip all bits.",
+          "cluster_id": 5,
+          "orbit_id": 18,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 55,
+          "program": [
+            "shift_left_zero",
+            "flip_bits"
+          ],
+          "description": "Shift left with zero fill, then invert every bit.",
+          "cluster_id": 5,
+          "orbit_id": 39,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 56,
+          "program": [
+            "shift_right_zero",
+            "flip_bits"
+          ],
+          "description": "Shift right with zero fill, then invert every bit.",
+          "cluster_id": 5,
+          "orbit_id": 39,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 57,
+          "program": [
+            "flip_bits",
+            "shift_left_zero"
+          ],
+          "description": "Invert all bits, then shift left with zero fill.",
+          "cluster_id": 5,
+          "orbit_id": 40,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 58,
+          "program": [
+            "flip_bits",
+            "shift_right_zero"
+          ],
+          "description": "Invert all bits, then shift right with zero fill.",
+          "cluster_id": 5,
+          "orbit_id": 40,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 59,
+          "program": [
+            "swap_pairs",
+            "flip_bits"
+          ],
+          "description": "Swap adjacent pairs and then invert the result.",
+          "cluster_id": 5,
+          "orbit_id": 41,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 71,
+          "program": [
+            "center_mask",
+            "flip_bits"
+          ],
+          "description": "Zero the edges, keep the middle, then invert everything.",
+          "cluster_id": 5,
+          "orbit_id": 48,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    },
+    {
+      "cluster_id": 6,
+      "label": "Reverse-like transforms",
+      "rationale": "Reverse-order structure and transforms that remain closest to reversal under the custom edit-kernel distance.",
+      "function_count": 7,
+      "semantic_orbit_count": 5,
+      "manual_members": [],
+      "orbits": [
+        {
+          "orbit_id": 3,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 3,
+              "program": [
+                "reverse_bits"
+              ],
+              "description": "Reverse the order of the bits.",
+              "cluster_id": 6,
+              "orbit_id": 3,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 16,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "flip_bits",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 23,
+              "program": [
+                "flip_bits",
+                "reverse_bits"
+              ],
+              "description": "Flip every bit, then reverse the string.",
+              "cluster_id": 6,
+              "orbit_id": 16,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 17,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "reverse_bits",
+              "rotl1"
+            ],
+            [
+              "reverse_bits",
+              "rotr1"
+            ],
+            [
+              "rotl1",
+              "reverse_bits"
+            ],
+            [
+              "rotr1",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 24,
+              "program": [
+                "rotl1",
+                "reverse_bits"
+              ],
+              "description": "Rotate left once, then reverse.",
+              "cluster_id": 6,
+              "orbit_id": 17,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 25,
+              "program": [
+                "reverse_bits",
+                "rotl1"
+              ],
+              "description": "Reverse first, then rotate left once.",
+              "cluster_id": 6,
+              "orbit_id": 17,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 42,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero",
+              "reverse_bits"
+            ],
+            [
+              "shift_right_zero",
+              "reverse_bits"
+            ]
+          ],
+          "members": [
+            {
+              "index": 60,
+              "program": [
+                "shift_left_zero",
+                "reverse_bits"
+              ],
+              "description": "Shift left with zero fill, then reverse the bit order.",
+              "cluster_id": 6,
+              "orbit_id": 42,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 61,
+              "program": [
+                "shift_right_zero",
+                "reverse_bits"
+              ],
+              "description": "Shift right with zero fill, then reverse the bit order.",
+              "cluster_id": 6,
+              "orbit_id": 42,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 59,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "reverse_bits",
+              "center_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 95,
+              "program": [
+                "reverse_bits",
+                "center_mask"
+              ],
+              "description": "Reverse the string, then zero the edges.",
+              "cluster_id": 6,
+              "orbit_id": 59,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 3,
+          "program": [
+            "reverse_bits"
+          ],
+          "description": "Reverse the order of the bits.",
+          "cluster_id": 6,
+          "orbit_id": 3,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 23,
+          "program": [
+            "flip_bits",
+            "reverse_bits"
+          ],
+          "description": "Flip every bit, then reverse the string.",
+          "cluster_id": 6,
+          "orbit_id": 16,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 24,
+          "program": [
+            "rotl1",
+            "reverse_bits"
+          ],
+          "description": "Rotate left once, then reverse.",
+          "cluster_id": 6,
+          "orbit_id": 17,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 25,
+          "program": [
+            "reverse_bits",
+            "rotl1"
+          ],
+          "description": "Reverse first, then rotate left once.",
+          "cluster_id": 6,
+          "orbit_id": 17,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 60,
+          "program": [
+            "shift_left_zero",
+            "reverse_bits"
+          ],
+          "description": "Shift left with zero fill, then reverse the bit order.",
+          "cluster_id": 6,
+          "orbit_id": 42,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 61,
+          "program": [
+            "shift_right_zero",
+            "reverse_bits"
+          ],
+          "description": "Shift right with zero fill, then reverse the bit order.",
+          "cluster_id": 6,
+          "orbit_id": 42,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 95,
+          "program": [
+            "reverse_bits",
+            "center_mask"
+          ],
+          "description": "Reverse the string, then zero the edges.",
+          "cluster_id": 6,
+          "orbit_id": 59,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    },
+    {
+      "cluster_id": 7,
+      "label": "Identity / rotations / zero-fill shifts / local alignment",
+      "rationale": "Near-identity local alignment changes: rotations, zero-fill shifts, pair swaps, center masks, and the semantic rotation/shift orbit.",
+      "function_count": 14,
+      "semantic_orbit_count": 7,
+      "manual_members": [],
+      "orbits": [
+        {
+          "orbit_id": 1,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "identity"
+            ]
+          ],
+          "members": [
+            {
+              "index": 1,
+              "program": [
+                "identity"
+              ],
+              "description": "Return the input bitstring unchanged.",
+              "cluster_id": 7,
+              "orbit_id": 1,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 2,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "rotl1"
+            ],
+            [
+              "rotr1"
+            ]
+          ],
+          "members": [
+            {
+              "index": 2,
+              "program": [
+                "rotl1"
+              ],
+              "description": "Rotate the bitstring left by one position (circular).",
+              "cluster_id": 7,
+              "orbit_id": 2,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 14,
+              "program": [
+                "rotr1"
+              ],
+              "description": "Rotate right by one position (circular).",
+              "cluster_id": 7,
+              "orbit_id": 2,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 11,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "double_rotl"
+            ],
+            [
+              "double_rotr"
+            ]
+          ],
+          "members": [
+            {
+              "index": 13,
+              "program": [
+                "double_rotl"
+              ],
+              "description": "Rotate left by two positions.",
+              "cluster_id": 7,
+              "orbit_id": 11,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 15,
+              "program": [
+                "double_rotr"
+              ],
+              "description": "Rotate right by two positions.",
+              "cluster_id": 7,
+              "orbit_id": 11,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 34,
+          "behavior_variant_count": 2,
+          "variant_programs_generated": [
+            [
+              "shift_left_zero"
+            ],
+            [
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 48,
+              "program": [
+                "shift_left_zero"
+              ],
+              "description": "Shift left by one position and append 0.",
+              "cluster_id": 7,
+              "orbit_id": 34,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 49,
+              "program": [
+                "shift_right_zero"
+              ],
+              "description": "Shift right by one position and prepend 0.",
+              "cluster_id": 7,
+              "orbit_id": 34,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 35,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "swap_pairs"
+            ]
+          ],
+          "members": [
+            {
+              "index": 50,
+              "program": [
+                "swap_pairs"
+              ],
+              "description": "Swap each adjacent pair of bits (01 becomes 10).",
+              "cluster_id": 7,
+              "orbit_id": 35,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 38,
+          "behavior_variant_count": 1,
+          "variant_programs_generated": [
+            [
+              "center_mask"
+            ]
+          ],
+          "members": [
+            {
+              "index": 54,
+              "program": [
+                "center_mask"
+              ],
+              "description": "Zero the outer bits while leaving the middle segment unchanged.",
+              "cluster_id": 7,
+              "orbit_id": 38,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        },
+        {
+          "orbit_id": 57,
+          "behavior_variant_count": 8,
+          "variant_programs_generated": [
+            [
+              "rotl1",
+              "shift_left_zero"
+            ],
+            [
+              "rotl1",
+              "shift_right_zero"
+            ],
+            [
+              "rotr1",
+              "shift_left_zero"
+            ],
+            [
+              "rotr1",
+              "shift_right_zero"
+            ],
+            [
+              "shift_left_zero",
+              "rotl1"
+            ],
+            [
+              "shift_left_zero",
+              "rotr1"
+            ],
+            [
+              "shift_left_zero",
+              "shift_left_zero"
+            ],
+            [
+              "shift_left_zero",
+              "shift_right_zero"
+            ],
+            [
+              "shift_right_zero",
+              "rotl1"
+            ],
+            [
+              "shift_right_zero",
+              "rotr1"
+            ],
+            [
+              "shift_right_zero",
+              "shift_left_zero"
+            ],
+            [
+              "shift_right_zero",
+              "shift_right_zero"
+            ]
+          ],
+          "members": [
+            {
+              "index": 90,
+              "program": [
+                "rotl1",
+                "shift_left_zero"
+              ],
+              "description": "Rotate left once, then shift left with zero fill.",
+              "cluster_id": 7,
+              "orbit_id": 57,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 91,
+              "program": [
+                "rotl1",
+                "shift_right_zero"
+              ],
+              "description": "Rotate left once, then shift right with zero fill.",
+              "cluster_id": 7,
+              "orbit_id": 57,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 92,
+              "program": [
+                "shift_left_zero",
+                "rotl1"
+              ],
+              "description": "Shift left with zero fill, then rotate left once.",
+              "cluster_id": 7,
+              "orbit_id": 57,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 93,
+              "program": [
+                "shift_right_zero",
+                "rotl1"
+              ],
+              "description": "Shift right with zero fill, then rotate left once.",
+              "cluster_id": 7,
+              "orbit_id": 57,
+              "assignment_type": "semantic_orbit_kmeans"
+            },
+            {
+              "index": 98,
+              "program": [
+                "shift_left_zero",
+                "shift_left_zero"
+              ],
+              "description": "Shift left with zero fill twice.",
+              "cluster_id": 7,
+              "orbit_id": 57,
+              "assignment_type": "semantic_orbit_kmeans"
+            }
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "index": 1,
+          "program": [
+            "identity"
+          ],
+          "description": "Return the input bitstring unchanged.",
+          "cluster_id": 7,
+          "orbit_id": 1,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 2,
+          "program": [
+            "rotl1"
+          ],
+          "description": "Rotate the bitstring left by one position (circular).",
+          "cluster_id": 7,
+          "orbit_id": 2,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 13,
+          "program": [
+            "double_rotl"
+          ],
+          "description": "Rotate left by two positions.",
+          "cluster_id": 7,
+          "orbit_id": 11,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 14,
+          "program": [
+            "rotr1"
+          ],
+          "description": "Rotate right by one position (circular).",
+          "cluster_id": 7,
+          "orbit_id": 2,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 15,
+          "program": [
+            "double_rotr"
+          ],
+          "description": "Rotate right by two positions.",
+          "cluster_id": 7,
+          "orbit_id": 11,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 48,
+          "program": [
+            "shift_left_zero"
+          ],
+          "description": "Shift left by one position and append 0.",
+          "cluster_id": 7,
+          "orbit_id": 34,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 49,
+          "program": [
+            "shift_right_zero"
+          ],
+          "description": "Shift right by one position and prepend 0.",
+          "cluster_id": 7,
+          "orbit_id": 34,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 50,
+          "program": [
+            "swap_pairs"
+          ],
+          "description": "Swap each adjacent pair of bits (01 becomes 10).",
+          "cluster_id": 7,
+          "orbit_id": 35,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 54,
+          "program": [
+            "center_mask"
+          ],
+          "description": "Zero the outer bits while leaving the middle segment unchanged.",
+          "cluster_id": 7,
+          "orbit_id": 38,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 90,
+          "program": [
+            "rotl1",
+            "shift_left_zero"
+          ],
+          "description": "Rotate left once, then shift left with zero fill.",
+          "cluster_id": 7,
+          "orbit_id": 57,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 91,
+          "program": [
+            "rotl1",
+            "shift_right_zero"
+          ],
+          "description": "Rotate left once, then shift right with zero fill.",
+          "cluster_id": 7,
+          "orbit_id": 57,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 92,
+          "program": [
+            "shift_left_zero",
+            "rotl1"
+          ],
+          "description": "Shift left with zero fill, then rotate left once.",
+          "cluster_id": 7,
+          "orbit_id": 57,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 93,
+          "program": [
+            "shift_right_zero",
+            "rotl1"
+          ],
+          "description": "Shift right with zero fill, then rotate left once.",
+          "cluster_id": 7,
+          "orbit_id": 57,
+          "assignment_type": "semantic_orbit_kmeans"
+        },
+        {
+          "index": 98,
+          "program": [
+            "shift_left_zero",
+            "shift_left_zero"
+          ],
+          "description": "Shift left with zero fill twice.",
+          "cluster_id": 7,
+          "orbit_id": 57,
+          "assignment_type": "semantic_orbit_kmeans"
+        }
+      ]
+    }
+  ]
+}

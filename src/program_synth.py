@@ -33,7 +33,7 @@ import mlx.nn as nn
 from mlx_lm import batch_generate, load
 from mlx_lm.generate import BatchGenerator
 from mlx_lm.models import cache as kv_cache
-from mlx_lm.utils import load_model
+from mlx_lm.utils import load_model, load_tokenizer
 from dsl import few_shot
 from music_backend import generate_music_completions, make_music_trial_spec
 from timemoe_mlx import DEFAULT_TIMEMOE_200M_PATH, KVCache, TimeMoeMLX
@@ -802,16 +802,21 @@ def parse_args() -> argparse.Namespace:
         help="Path to write JSON results (default: program_eval_results.json).",
     )
     parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Allow replacing an existing output JSON (default: refuse).",
+    )
+    parser.add_argument(
         "--in-context-examples",
         type=int,
         default=8,
-        help="Number of few-shot examples to include per prompt (default: 7).",
+        help="Number of few-shot examples to include per prompt (default: 8).",
     )
     parser.add_argument(
         "--trials-per-program",
         type=int,
-        default=8,
-        help="How many prompts to sample per program (default: 8).",
+        default=128,
+        help="How many prompts to sample per program (default: 128).",
     )
     parser.add_argument(
         "--bit-length",
@@ -1513,9 +1518,12 @@ def generate_imagegpt_completions(
     trial_specs: List[Dict[str, Any]],
     *,
     max_tokens: int,
+    batch_size: int = 32,
 ) -> List[str]:
     if not trial_specs:
         return []
+    if batch_size <= 0:
+        raise ValueError("ImageGPT batch size must be positive")
 
     outputs: List[Optional[str]] = [None] * len(trial_specs)
     by_prompt_len: Dict[int, List[int]] = {}
@@ -1523,41 +1531,43 @@ def generate_imagegpt_completions(
         by_prompt_len.setdefault(len(spec["imagegpt_prompt_tokens"]), []).append(idx)
 
     for indices in by_prompt_len.values():
-        grouped_specs = [trial_specs[idx] for idx in indices]
-        prompts = [spec["imagegpt_prompt_tokens"] for spec in grouped_specs]
-        prompt_array = mx.array(prompts, dtype=mx.int32)
+        for offset in range(0, len(indices), batch_size):
+            batch_indices = indices[offset : offset + batch_size]
+            grouped_specs = [trial_specs[idx] for idx in batch_indices]
+            prompts = [spec["imagegpt_prompt_tokens"] for spec in grouped_specs]
+            prompt_array = mx.array(prompts, dtype=mx.int32)
 
-        allowed_bias_np = np.full(
-            (len(grouped_specs), IMAGEGPT_COLOR_VOCAB_SIZE),
-            -1.0e9,
-            dtype=np.float32,
-        )
-        for row_idx, spec in enumerate(grouped_specs):
-            allowed_bias_np[row_idx, int(spec["imagegpt_zero_token"])] = 0.0
-            allowed_bias_np[row_idx, int(spec["imagegpt_one_token"])] = 0.0
-        allowed_bias = mx.array(allowed_bias_np)
-
-        cache = kv_cache.make_prompt_cache(model)
-        logits = model(prompt_array, cache=cache)[:, -1, :]
-        generated: List[List[int]] = [[] for _ in grouped_specs]
-
-        for step_idx in range(max_tokens):
-            constrained_logits = logits.astype(mx.float32) + allowed_bias
-            next_tokens = mx.argmax(constrained_logits, axis=-1).astype(mx.int32)
-            mx.eval(next_tokens)
-            next_token_list = [int(token) for token in next_tokens.tolist()]
-            for row_idx, token in enumerate(next_token_list):
-                generated[row_idx].append(token)
-
-            if step_idx + 1 < max_tokens:
-                logits = model(next_tokens.reshape(-1, 1), cache=cache)[:, -1, :]
-
-        for row_idx, spec in enumerate(grouped_specs):
-            outputs[indices[row_idx]] = decode_imagegpt_tokens(
-                generated[row_idx],
-                zero_token=spec["imagegpt_zero_token"],
-                one_token=spec["imagegpt_one_token"],
+            allowed_bias_np = np.full(
+                (len(grouped_specs), IMAGEGPT_COLOR_VOCAB_SIZE),
+                -1.0e9,
+                dtype=np.float32,
             )
+            for row_idx, spec in enumerate(grouped_specs):
+                allowed_bias_np[row_idx, int(spec["imagegpt_zero_token"])] = 0.0
+                allowed_bias_np[row_idx, int(spec["imagegpt_one_token"])] = 0.0
+            allowed_bias = mx.array(allowed_bias_np)
+
+            cache = kv_cache.make_prompt_cache(model)
+            logits = model(prompt_array, cache=cache)[:, -1, :]
+            generated: List[List[int]] = [[] for _ in grouped_specs]
+
+            for step_idx in range(max_tokens):
+                constrained_logits = logits.astype(mx.float32) + allowed_bias
+                next_tokens = mx.argmax(constrained_logits, axis=-1).astype(mx.int32)
+                mx.eval(next_tokens)
+                next_token_list = [int(token) for token in next_tokens.tolist()]
+                for row_idx, token in enumerate(next_token_list):
+                    generated[row_idx].append(token)
+
+                if step_idx + 1 < max_tokens:
+                    logits = model(next_tokens.reshape(-1, 1), cache=cache)[:, -1, :]
+
+            for row_idx, spec in enumerate(grouped_specs):
+                outputs[batch_indices[row_idx]] = decode_imagegpt_tokens(
+                    generated[row_idx],
+                    zero_token=spec["imagegpt_zero_token"],
+                    one_token=spec["imagegpt_one_token"],
+                )
 
     if any(output is None for output in outputs):
         raise RuntimeError("Internal error: incomplete ImageGPT generation outputs")
@@ -2389,6 +2399,27 @@ def make_timesfm_trial_spec(
 
 
 def generate_timesfm_completions(
+    model: TimesFm2_5MLX,
+    trial_specs: List[Dict[str, Any]],
+    *,
+    max_tokens: int,
+    batch_size: int = 32,
+) -> List[str]:
+    if batch_size <= 0:
+        raise ValueError("TimesFM batch size must be positive")
+    outputs: List[str] = []
+    for offset in range(0, len(trial_specs), batch_size):
+        outputs.extend(
+            _generate_timesfm_completion_batch(
+                model,
+                trial_specs[offset : offset + batch_size],
+                max_tokens=max_tokens,
+            )
+        )
+    return outputs
+
+
+def _generate_timesfm_completion_batch(
     model: TimesFm2_5MLX,
     trial_specs: List[Dict[str, Any]],
     *,
@@ -3505,66 +3536,136 @@ def generate_chess_greedy_completions(
     return outputs
 
 
-def batch_generate_with_logits_processors(
+class PerPromptConstrainedBatchGenerator(BatchGenerator):
+    """BatchGenerator variant with a distinct allowed-token set per request."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.allowed_token_ids_by_uid: Dict[int, Tuple[int, ...]] = {}
+        self._prefill_uids: List[int] = []
+        self._in_prefill_step = False
+
+    def insert(
+        self,
+        prompts,
+        max_tokens: Optional[List[int] | int] = None,
+        caches=None,
+        *,
+        allowed_token_ids: List[List[int]],
+    ):
+        if len(prompts) != len(allowed_token_ids):
+            raise ValueError("Each prompt must have one allowed-token set")
+        uids = super().insert(prompts, max_tokens=max_tokens, caches=caches)
+        for uid, token_ids in zip(uids, allowed_token_ids):
+            signature = tuple(sorted(set(int(token_id) for token_id in token_ids)))
+            if not signature:
+                raise ValueError(
+                    "Constrained generation requires at least one allowed token"
+                )
+            self.allowed_token_ids_by_uid[uid] = signature
+        return uids
+
+    def _process_prompts(self, prompts):
+        self._prefill_uids = [int(item[0]) for item in prompts]
+        self._in_prefill_step = True
+        try:
+            return super()._process_prompts(prompts)
+        finally:
+            self._in_prefill_step = False
+
+    def _step(self, input_tokens: mx.array, prompt_cache, *_batch_state):
+        # mlx-lm 0.30 added sampler/logits-processor/token arguments to this
+        # private hook. The campaign used 0.29.1, but accepting trailing state
+        # keeps the constrained path fail-safe under later compatible releases.
+        logits = self.model(input_tokens, cache=prompt_cache)
+        logits = logits[:, -1, :]
+        logprobs = logits - mx.logsumexp(logits, axis=-1, keepdims=True)
+
+        if self._in_prefill_step:
+            uids = self._prefill_uids
+        elif self.active_batch is not None:
+            uids = list(self.active_batch.uids)
+        else:
+            raise RuntimeError("Constrained generator has no active request batch")
+        if len(uids) != int(logprobs.shape[0]):
+            raise RuntimeError(
+                "Constrained generator request/logit batch mismatch: "
+                f"{len(uids)} requests versus {logprobs.shape[0]} rows"
+            )
+
+        live_vocab_size = int(logprobs.shape[-1])
+        allowed_bias = mx.full(
+            (len(uids), live_vocab_size),
+            -1e9,
+            dtype=mx.float32,
+        )
+        for row, uid in enumerate(uids):
+            token_ids = self.allowed_token_ids_by_uid[uid]
+            if max(token_ids) >= live_vocab_size:
+                raise ValueError(
+                    "Allowed token id is outside the live logits vocabulary: "
+                    f"allowed={token_ids}, logits_vocab={live_vocab_size}"
+                )
+            allowed_bias[row, list(token_ids)] = 0.0
+        sampled = mx.argmax(logprobs + allowed_bias, axis=-1)
+        return sampled, list(logprobs)
+
+
+def batch_generate_with_allowed_token_ids(
     model,
     tokenizer,
     prompts: List[List[int]],
     *,
     max_tokens: int,
     verbose: bool = False,
-    logits_processors: Optional[
-        List[List[Callable[[mx.array, mx.array], mx.array]]]
-    ] = None,
+    allowed_token_ids: List[List[int]],
     **kwargs,
 ):
-    gen = BatchGenerator(
-        model,
-        stop_tokens=[[t] for t in tokenizer.eos_token_ids],
-        **kwargs,
-    )
+    if len(prompts) != len(allowed_token_ids):
+        raise ValueError("Each prompt must have one allowed-token set")
+
     num_samples = len(prompts)
     fin = 0
     if verbose:
         print(f"[batch_generate] Finished processing 0/{num_samples} ...", end="\r")
 
+    gen = PerPromptConstrainedBatchGenerator(
+        model,
+        stop_tokens=set(tokenizer.eos_token_ids),
+        **kwargs,
+    )
     uids = gen.insert(
         prompts,
         [max_tokens] * len(prompts),
-        logits_processors=logits_processors,
+        allowed_token_ids=allowed_token_ids,
     )
     results = {uid: [] for uid in uids}
 
-    def drain_generator() -> None:
-        nonlocal fin
-        next_generated = getattr(gen, "next_generated", gen.next)
-        while responses := next_generated():
-            for response in responses:
-                if response.finish_reason is not None and verbose:
-                    fin += 1
-                    print(
-                        f"[batch_generate] Finished processing {fin}/{num_samples} ...",
-                        end="\r",
-                    )
-                if response.finish_reason != "stop":
-                    results[response.uid].append(response.token)
+    next_generated = getattr(gen, "next_generated", gen.next)
+    while responses := next_generated():
+        for response in responses:
+            if response.finish_reason is not None and verbose:
+                fin += 1
+                print(
+                    f"[batch_generate] Finished processing {fin}/{num_samples} ...",
+                    end="\r",
+                )
+            if response.finish_reason != "stop":
+                results[response.uid].append(response.token)
 
     if verbose:
-        with gen.stats() as stats:
-            drain_generator()
-    else:
-        stats = None
-        drain_generator()
-    gen.close()
-    if verbose:
+        stats = gen.stats()
         print(f"[batch_generate] Finished processing {fin}/{num_samples}")
         print(
-            f"[batch_generate] Prompt: {stats.prompt_tokens} tokens, {stats.prompt_tps:.3f} tokens-per-sec"
+            f"[batch_generate] Prompt: {stats.prompt_tokens} tokens, "
+            f"{stats.prompt_tps:.3f} tokens-per-sec"
         )
         print(
             f"[batch_generate] Generation: {stats.generation_tokens} tokens, "
             f"{stats.generation_tps:.3f} tokens-per-sec"
         )
         print(f"[batch_generate] Peak memory: {stats.peak_memory:.3f} GB")
+    gen.close()
     return [tokenizer.decode(results[uid]) for uid in uids]
 
 
@@ -4005,6 +4106,7 @@ def evaluate_task(
             model,
             trial_specs,
             max_tokens=max_new_tokens,
+            batch_size=completion_batch_size,
         )
     elif backend == "mnist":
         outputs = generate_mnist_completions(
@@ -4049,6 +4151,7 @@ def evaluate_task(
             model,
             trial_specs,
             max_tokens=max_new_tokens,
+            batch_size=completion_batch_size,
         )
     elif backend == "naive":
         outputs = [predictor(spec["query"], spec.get("context_examples", [])) for spec in trial_specs]
@@ -4057,26 +4160,23 @@ def evaluate_task(
         if prompts:
             logits_processors = None
             if force_binary_tokens or backend in {"rita", "protein"}:
-                logits_processors = [
-                    [
-                        make_allowed_token_logits_processor(
-                            spec.get("allowed_token_ids")
-                            or resolve_allowed_generation_token_ids(
-                                tokenizer,
-                                spec.get("decode_map"),
-                            ),
-                            tokenizer.vocab_size,
+                allowed_token_ids = [
+                    (
+                        spec.get("allowed_token_ids")
+                        or resolve_allowed_generation_token_ids(
+                            tokenizer,
+                            spec.get("decode_map"),
                         )
-                    ]
+                    )
                     for spec in trial_specs
                 ]
-                outputs = batch_generate_with_logits_processors(
+                outputs = batch_generate_with_allowed_token_ids(
                     model,
                     tokenizer,
                     prompts,
                     verbose=False,
                     max_tokens=max_new_tokens,
-                    logits_processors=logits_processors,
+                    allowed_token_ids=allowed_token_ids,
                     completion_batch_size=completion_batch_size,
                     prefill_batch_size=prefill_batch_size,
                 )
@@ -4206,6 +4306,11 @@ def _run_once(args) -> None:
 
     programs_path = Path(args.programs)
     output_path = Path(args.output)
+    if output_path.exists() and not args.overwrite:
+        raise FileExistsError(
+            f"Refusing to overwrite existing result {output_path}; "
+            "pass --overwrite only after inspecting it."
+        )
 
     program_entries = load_programs(programs_path)
 
@@ -4248,7 +4353,17 @@ def _run_once(args) -> None:
     elif backend == "chess":
         if not args.model:
             raise ValueError("--model is required when using the chess backend")
-        model, tokenizer = load(args.model)
+        model_path = resolve_mlx_model_path(args.model)
+        model, model_config = load_model(
+            model_path,
+            lazy=False,
+            get_model_classes=make_model_file_class_loader(model_path),
+        )
+        tokenizer = load_tokenizer(
+            model_path,
+            {"trust_remote_code": True},
+            eos_token_ids=model_config.get("eos_token_id"),
+        )
     elif backend == "music":
         if not args.model:
             raise ValueError("--model is required when using the music backend")
@@ -4257,12 +4372,24 @@ def _run_once(args) -> None:
     elif backend in {"rita", "protein"}:
         if not args.model:
             raise ValueError("--model is required when using the protein backend")
-        model, tokenizer = load(
-            args.model,
-            tokenizer_config={"trust_remote_code": True},
-        )
         if backend == "protein" and args.protein_format == "progen2":
+            model_path = resolve_mlx_model_path(args.model)
+            model, model_config = load_model(
+                model_path,
+                lazy=False,
+                get_model_classes=make_model_file_class_loader(model_path),
+            )
+            tokenizer = load_tokenizer(
+                model_path,
+                {"trust_remote_code": True},
+                eos_token_ids=model_config.get("eos_token_id"),
+            )
             validate_progen2_amino_acid_tokens(tokenizer)
+        else:
+            model, tokenizer = load(
+                args.model,
+                tokenizer_config={"trust_remote_code": True},
+            )
     elif backend == "timemoe":
         requested_model = args.model if args.model else DEFAULT_TIMEMOE_200M_PATH
         timemoe_model_path = resolve_mlx_model_path(requested_model)
@@ -4717,25 +4844,20 @@ def _run_once(args) -> None:
             if not prompts:
                 outputs_all: List[str] = []
             elif args.force_binary_tokens:
-                logits_processors = [
-                    [
-                        make_allowed_token_logits_processor(
-                            spec.get("allowed_token_ids")
-                            or resolve_allowed_generation_token_ids(
-                                tokenizer, spec.get("decode_map")
-                            ),
-                            tokenizer.vocab_size,
-                        )
-                    ]
+                allowed_token_ids = [
+                    spec.get("allowed_token_ids")
+                    or resolve_allowed_generation_token_ids(
+                        tokenizer, spec.get("decode_map")
+                    )
                     for spec in flat_specs
                 ]
-                outputs_all = batch_generate_with_logits_processors(
+                outputs_all = batch_generate_with_allowed_token_ids(
                     model,
                     tokenizer,
                     prompts,
                     verbose=False,
                     max_tokens=max_tokens,
-                    logits_processors=logits_processors,
+                    allowed_token_ids=allowed_token_ids,
                     completion_batch_size=args.batch_size_completion,
                     prefill_batch_size=args.batch_size_prefill,
                 )

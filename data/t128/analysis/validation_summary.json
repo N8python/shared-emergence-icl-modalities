@@ -1,0 +1,11 @@
+{
+  "config": "configs/paper_runs_t128.json",
+  "results_root": "results_128",
+  "expected_cells": 281,
+  "validated_cells": 281,
+  "missing_cells": 0,
+  "predictions_per_complete_cell": 12800,
+  "validated_predictions": 3596800,
+  "bootstrap_draws": 10000,
+  "seed": 20260728
+}

@@ -1,0 +1,7 @@
+# Install requirements.txt first. These are the additional CUDA packages from
+# the completed H100 campaign environment.
+mlx-cuda==0.29.4
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cuda-nvrtc-cu12==12.8.93
+nvidia-cudnn-cu12==9.8.0.87
+nvidia-nccl-cu12==2.27.7

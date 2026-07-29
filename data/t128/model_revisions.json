@@ -1,0 +1,180 @@
+{
+  "models": [
+    {
+      "id": "Qwen/Qwen3-0.6B-Base",
+      "sha": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-07-26T03:45:42+00:00",
+      "parameter_count": 596049920
+    },
+    {
+      "id": "Qwen/Qwen3-1.7B-Base",
+      "sha": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-07-26T03:50:48+00:00",
+      "parameter_count": 1720574976
+    },
+    {
+      "id": "Qwen/Qwen3-4B-Base",
+      "sha": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-07-26T03:45:37+00:00",
+      "parameter_count": 4022468096
+    },
+    {
+      "id": "Qwen/Qwen3-8B-Base",
+      "sha": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-05-21T05:59:01+00:00",
+      "parameter_count": 8190735360
+    },
+    {
+      "id": "Qwen/Qwen3-14B-Base",
+      "sha": "0b0bd3732e2c374d483664439ea334928b65f304",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-07-26T03:45:33+00:00",
+      "parameter_count": 14768307200
+    },
+    {
+      "id": "arcinstitute/evo2_1b_base",
+      "sha": "2279e1df422c991037470302360edd40d0d2ea1e",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-09-20T05:01:04+00:00",
+      "parameter_count": null
+    },
+    {
+      "id": "arcinstitute/evo2_7b",
+      "sha": "bda0089f92582d5baabf0f22d9fc85f3588f6b58",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-02-06T22:40:29+00:00",
+      "parameter_count": null
+    },
+    {
+      "id": "arcinstitute/evo2_40b",
+      "sha": "d529aa57c30771814217ad89baaeaf6e2315c7d7",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-09-20T04:59:19+00:00",
+      "parameter_count": null
+    },
+    {
+      "id": "N8Programs/NextTerm-47M",
+      "sha": "ead794b362061e9012c9a11af5962495ff82b493",
+      "private": false,
+      "gated": false,
+      "last_modified": "2025-11-27T04:26:38+00:00",
+      "parameter_count": 47215616
+    },
+    {
+      "id": "N8Programs/NextTerm-440M",
+      "sha": "a46649b0168b01a276a0fae5f86b11b91a24dd91",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-05-28T16:09:09+00:00",
+      "parameter_count": 440500224
+    },
+    {
+      "id": "openai/imagegpt-small",
+      "sha": "10c8a8402cf80c0eaaf31fb5bc86012b34169481",
+      "private": false,
+      "gated": false,
+      "last_modified": "2023-06-12T11:16:21+00:00",
+      "parameter_count": null,
+      "revision_used_for_conversion": "10c8a8402cf80c0eaaf31fb5bc86012b34169481",
+      "converted_path": "models/imagegpt-small-bf16"
+    },
+    {
+      "id": "openai/imagegpt-medium",
+      "sha": "d0416c58f900f4bf3b3bd089c835a518478139c1",
+      "private": false,
+      "gated": false,
+      "last_modified": "2023-06-12T11:16:08+00:00",
+      "parameter_count": null,
+      "revision_used_for_conversion": "d0416c58f900f4bf3b3bd089c835a518478139c1",
+      "converted_path": "models/imagegpt-medium-bf16"
+    },
+    {
+      "id": "N8Programs/imagegpt-large-bf16",
+      "sha": "77ae39bd03eac5f75a5901d6b30831651333b8d0",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-07-07T18:04:33+00:00",
+      "parameter_count": 1362914304
+    },
+    {
+      "id": "google/timesfm-2.5-200m-transformers",
+      "sha": "5a9806b9b291fad9233b5249d88263f1846304d3",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-04-10T23:15:28+00:00",
+      "parameter_count": 231289280
+    },
+    {
+      "id": "hugohrban/progen2-small",
+      "sha": "43237a0b733c6629226a079266d2985c9fdce9b7",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-03-06T12:39:58+00:00",
+      "parameter_count": 151148576,
+      "converted_path": "models/ProGen2-small-bf16"
+    },
+    {
+      "id": "hugohrban/progen2-medium",
+      "sha": "6f022f76b5db11142dc8f446cfab111fe75422d6",
+      "private": false,
+      "gated": false,
+      "last_modified": "2024-06-08T12:21:47+00:00",
+      "parameter_count": 764803616,
+      "converted_path": "models/ProGen2-medium-bf16"
+    },
+    {
+      "id": "N8Programs/ProGen2-base-bf16",
+      "sha": "35150954af1b89ef99ac1b430e8d69a923de14ad",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-07-07T18:15:43+00:00",
+      "parameter_count": 764803616
+    },
+    {
+      "id": "hugohrban/progen2-large",
+      "sha": "ac9681ecdc991414dca8ce71fb988c257a2552e8",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-04-20T17:11:37+00:00",
+      "parameter_count": 2779356160,
+      "converted_path": "models/ProGen2-large-bf16"
+    },
+    {
+      "id": "hugohrban/progen2-xlarge",
+      "sha": "0662d4e64360ee385cb8a34f6d5fbc18089ee4d1",
+      "private": false,
+      "gated": false,
+      "last_modified": "2024-06-09T07:27:49+00:00",
+      "parameter_count": 6443638816,
+      "converted_path": "models/ProGen2-xlarge-bf16"
+    },
+    {
+      "id": "N8Programs/karvonen-chessgpt-50m-mlx-bf16",
+      "sha": "425695f6bd00e4f318500d487a93f682eb003d65",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-07-07T18:04:34+00:00",
+      "parameter_count": 50888704
+    },
+    {
+      "id": "N8Programs/Musicroll-50M",
+      "sha": "34a1ec6437d1354c9cfcf72ba1584ce8822cdb2e",
+      "private": false,
+      "gated": false,
+      "last_modified": "2026-07-07T17:46:44+00:00",
+      "parameter_count": 50617856
+    }
+  ]
+}

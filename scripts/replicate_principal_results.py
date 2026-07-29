@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Recompute the principal clean-vs-deranged result summaries.
+"""Recompute the representative clean-vs-deranged result summaries.
 
-This script is the first minimal artifact layer: it consumes the bundled
-per-run JSON outputs and recomputes the headline numeric table without
-importing the experiment harness or plotting machinery.
+It consumes the downloaded per-run JSON outputs and recomputes the headline
+numeric table without importing the experiment harness or plotting machinery.
 """
 
 from __future__ import annotations
@@ -21,8 +20,8 @@ from typing import Any, Iterable
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_DATA_ROOT = REPO_ROOT / "data" / "principal_results"
-DEFAULT_OUTPUT_DIR = REPO_ROOT / "results" / "principal_results"
+DEFAULT_DATA_ROOT = REPO_ROOT / "data" / "t128" / "results_128"
+DEFAULT_OUTPUT_DIR = REPO_ROOT / "results" / "t128" / "principal_results"
 
 
 @dataclass(frozen=True)

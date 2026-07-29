@@ -1,0 +1,71 @@
+{
+  "source_trials_per_task": 128,
+  "fits": {
+    "Language": {
+      "mean": 0.299609375,
+      "observed_variance": 0.09601061271898674,
+      "estimated_measurement_noise_variance": 0.0009038826048843503,
+      "estimated_latent_variance": 0.0951067301141024,
+      "alpha": 0.3614490905046532,
+      "beta": 0.8449520459906691,
+      "concentration": 1.2064011364953222
+    },
+    "Genome": {
+      "mean": 0.33234375,
+      "observed_variance": 0.06832906703756313,
+      "estimated_measurement_noise_variance": 0.0012145323265255906,
+      "estimated_latent_variance": 0.06711453471103754,
+      "alpha": 0.7664378216751071,
+      "beta": 1.539722055485535,
+      "concentration": 2.306159877160642
+    },
+    "Integer": {
+      "mean": 0.48125,
+      "observed_variance": 0.13944375394570704,
+      "estimated_measurement_noise_variance": 0.0008787332369586615,
+      "estimated_latent_variance": 0.13856502070874838,
+      "alpha": 0.3858036758292397,
+      "beta": 0.4158662999198298,
+      "concentration": 0.8016699757490695
+    },
+    "Image": {
+      "mean": 0.435,
+      "observed_variance": 0.1177804411300505,
+      "estimated_measurement_noise_variance": 0.0010171052226870079,
+      "estimated_latent_variance": 0.11676333590736349,
+      "alpha": 0.48063095700538083,
+      "beta": 0.6242677947311268,
+      "concentration": 1.1048987517365076
+    },
+    "Time": {
+      "mean": 0.325703125,
+      "observed_variance": 0.059782018179845325,
+      "estimated_measurement_noise_variance": 0.0012632787509227364,
+      "estimated_latent_variance": 0.05851873942892259,
+      "alpha": 0.89665942459853,
+      "beta": 1.856336649966398,
+      "concentration": 2.752996074564928
+    },
+    "Protein": {
+      "mean": 0.26421875,
+      "observed_variance": 0.06313054865056819,
+      "estimated_measurement_noise_variance": 0.0010386453463336613,
+      "estimated_latent_variance": 0.06209190330423453,
+      "alpha": 0.563039317625613,
+      "beta": 1.5679196609692558,
+      "concentration": 2.130958978594869
+    },
+    "Pooled": {
+      "mean": 0.3563541666666667,
+      "observed_variance": 0.0958331730183987,
+      "estimated_measurement_noise_variance": 0.0010526962480520011,
+      "estimated_latent_variance": 0.0947804767703467,
+      "alpha": 0.5060120914264792,
+      "beta": 0.913957530816783,
+      "concentration": 1.4199696222432623
+    }
+  },
+  "simulation_draws": 20000,
+  "tasks_per_draw": 100,
+  "seed": 20260728
+}

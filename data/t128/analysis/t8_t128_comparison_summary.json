@@ -1,0 +1,12 @@
+{
+  "new_root": "results_128",
+  "reference_root": "data/legacy_t8/principal_results",
+  "canonical_cells": 84,
+  "canonical_gap_cells": 42,
+  "mean_absolute_cell_accuracy_delta": 0.00964657738095238,
+  "max_absolute_cell_accuracy_delta": 0.026484375,
+  "mean_absolute_gap_delta": 0.011436011904761904,
+  "max_absolute_gap_delta": 0.037109375,
+  "mean_absolute_z_gap_delta": 0.7398374683669381,
+  "max_absolute_z_gap_delta": 1.2340563272078882
+}

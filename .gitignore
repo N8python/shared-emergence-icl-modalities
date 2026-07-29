@@ -1,1 +1,7 @@
 models
+__pycache__/
+*.py[cod]
+data/t128/results_128/
+data/t128/*.tar.gz
+data/t128/*.part
+results/t128/

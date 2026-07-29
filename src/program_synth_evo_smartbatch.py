@@ -481,13 +481,13 @@ def parse_args() -> argparse.Namespace:
         "--in-context-examples",
         type=int,
         default=8,
-        help="Number of few-shot examples to include per prompt (default: 7).",
+        help="Number of few-shot examples to include per prompt (default: 8).",
     )
     parser.add_argument(
         "--trials-per-program",
         type=int,
-        default=8,
-        help="How many prompts to sample per program (default: 8).",
+        default=128,
+        help="How many prompts to sample per program (default: 128).",
     )
     parser.add_argument(
         "--bit-length",
