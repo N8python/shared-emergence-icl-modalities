@@ -17,8 +17,9 @@ SHA-256, expected layout, and evaluation counts. Fetch and verify it with:
 python scripts/fetch_t128_results.py
 ```
 
-Extraction creates `data/t128/results_128/`. The default validation and
-analysis commands read from that directory.
+Extraction selects the archive's `results_128/` subtree and creates
+`data/t128/results_128/`, skipping the other bundled analysis directories and
+scripts. The default validation and analysis commands read from that directory.
 
 The small files committed here are sufficient to audit the campaign structure
 and reported summaries without downloading the raw trial records:

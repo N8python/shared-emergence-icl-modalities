@@ -43,8 +43,9 @@ The fetcher downloads
 [`N8Programs/shared-emergence-icl-modalities-128`](https://huggingface.co/datasets/N8Programs/shared-emergence-icl-modalities-128),
 verifies the 718,954,210-byte archive against SHA-256
 `aa4c7b5331092582b14ce7cc1c025ef55f4a05a26696299cd69973e8da942931`,
-checks every archive member before extraction, and creates
-`data/t128/results_128/`.
+checks every archive member before extraction, and extracts only the
+`results_128/` subtree into `data/t128/results_128/`. Other top-level analysis
+directories and scripts bundled in the archive are skipped.
 
 For a faster code-path smoke test with reduced Monte Carlo counts:
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download, verify, and safely extract the complete T=128 raw result archive."""
+"""Download and verify the T=128 archive, then safely extract its raw results."""
 
 from __future__ import annotations
 
@@ -116,13 +116,29 @@ def extract_archive(path: Path, destination: Path, archive_root: str) -> None:
         members = archive.getmembers()
         for member in members:
             validate_member(member, destination)
-        roots = {Path(member.name).parts[0] for member in members if member.name}
-        if roots != {archive_root}:
-            raise ValueError(
-                f"Archive roots {sorted(roots)} do not match {archive_root!r}"
-            )
-        print(f"extracting {len(members):,} files/directories", flush=True)
-        archive.extractall(destination, members=members)
+        result_members = [
+            member for member in members
+            if Path(member.name).parts
+            and Path(member.name).parts[0] == archive_root
+        ]
+        if not result_members:
+            raise ValueError(f"Archive has no {archive_root!r} subtree")
+        for member in result_members:
+            resolved = (destination / member.name).resolve()
+            try:
+                resolved.relative_to(expected_root.resolve())
+            except ValueError as exc:
+                raise ValueError(
+                    f"Archive path escapes result subtree: {member.name}"
+                ) from exc
+            if resolved == expected_root.resolve() and not member.isdir():
+                raise ValueError(f"Archive result root is not a directory: {member.name}")
+        print(
+            f"extracting {len(result_members):,} files/directories under {archive_root}; "
+            f"skipping {len(members) - len(result_members):,} unrelated archive members",
+            flush=True,
+        )
+        archive.extractall(destination, members=result_members)
     print(f"extracted {expected_root}", flush=True)
 
 
