@@ -188,6 +188,14 @@ PROGEN2_CANONICAL_AMINO_ACID_TOKEN_IDS = {
     "Y": 28,
 }
 DIGIT_TOKENS = tuple(str(i) for i in range(10))
+# Set by --lm-token-pool digits: multi-digit ids the model may not generate.
+LM_BANNED_GENERATION_TOKEN_IDS: Optional[List[int]] = None
+# When set (--paired-ablation), label derangement draws from this generator instead
+# of the trial stream, so deranged prompts are exact twins of the clean prompts.
+ABLATION_RNG: Optional[random.Random] = None
+# When a list (--dump-hidden-states outside --batch-programs), generation is skipped and
+# each task's token-id prompts are collected here for a hidden-state readout instead.
+PROMPT_SINK: Optional[List[List[List[int]]]] = None
 IMAGEGPT_ROW_WIDTH = 32
 IMAGEGPT_COLOR_VOCAB_SIZE = 512
 IMAGEGPT_SOS_TOKEN_ID = 512
@@ -345,6 +353,137 @@ def make_lm_shuffle_prompt_config(rng: random.Random) -> PromptConfig:
         decode_map=decode_map,
         token_size=1,
     )
+
+
+def make_lm_two_separator_prompt_config(rng: random.Random) -> PromptConfig:
+    """Digit encoding with distinct input-output and between-example separators."""
+    zero_code, one_code, apply_sep, newline_sep = rng.sample(DIGIT_TOKENS, 4)
+
+    encode_map = {"0": zero_code, "1": one_code}
+    decode_map = {value: key for key, value in encode_map.items()}
+
+    def map_fn(bits: str, *, _encode=encode_map) -> str:
+        try:
+            return "".join(_encode[char] for char in bits)
+        except KeyError as exc:
+            raise ValueError("map_fn can only encode bitstrings containing '0' and '1'") from exc
+
+    return PromptConfig(
+        newline_sep=newline_sep,
+        apply_sep=apply_sep,
+        map_fn=map_fn,
+        decode_map=decode_map,
+        token_size=1,
+    )
+
+
+def build_lm_token_pool(tokenizer, pool_name: str) -> List[int]:
+    """Token ids eligible as arbitrary symbols for --lm-token-pool."""
+    hf_tokenizer = getattr(tokenizer, "_tokenizer", tokenizer)
+    excluded = {int(token_id) for token_id in hf_tokenizer.all_special_ids}
+    excluded.update(int(token_id) for token_id in hf_tokenizer.get_added_vocab().values())
+    excluded.update(int(token_id) for token_id in tokenizer.eos_token_ids)
+    if pool_name == "digits":
+        # The paper's digit encoding, fed as ids: one single-digit token per
+        # symbol, for tokenizers that would otherwise merge adjacent digits.
+        pool = []
+        for digit in DIGIT_TOKENS:
+            ids = hf_tokenizer.encode(digit, add_special_tokens=False)
+            if len(ids) != 1 or hf_tokenizer.decode(ids) != digit:
+                raise ValueError(f"Digit {digit!r} is not a single token")
+            pool.append(int(ids[0]))
+        return pool
+    if pool_name == "vocab-nondigit":
+        candidates: List[int] = list(range(len(hf_tokenizer)))
+    else:
+        # A JSON file listing {"tokens": [{"token_id": ...}, ...]}, e.g. a
+        # frequency-ranked pool; digit-bearing and special ids are still dropped.
+        pool_path = Path(pool_name)
+        if not pool_path.is_file():
+            raise ValueError(f"Unsupported --lm-token-pool: {pool_name}")
+        candidates = [
+            int(row["token_id"])
+            for row in json.loads(pool_path.read_text(encoding="utf-8"))["tokens"]
+        ]
+    pool: List[int] = []
+    for token_id in candidates:
+        if token_id in excluded:
+            continue
+        text = hf_tokenizer.decode([token_id])
+        if any(char.isdigit() for char in text):
+            continue
+        pool.append(token_id)
+    if len(pool) < 4:
+        raise ValueError("Token pool is too small")
+    return pool
+
+
+def apply_lm_token_pool(
+    spec: Dict[str, Any],
+    *,
+    prompt_config: PromptConfig,
+    token_pool: Sequence[int],
+    rng,
+) -> None:
+    """Re-express a single-character-symbol prompt as arbitrary vocabulary ids.
+
+    The placeholder prompt is built and label-ablated by the ordinary string
+    path; each distinct role character (zero, one, separators) is then mapped to
+    a distinct token id sampled for this trial, and the model sees ids only.
+    """
+    if prompt_config.decode_map is None or prompt_config.token_size != 1:
+        raise ValueError("--lm-token-pool requires a single-character symbol encoding")
+    role_chars: List[str] = list(prompt_config.decode_map.keys())
+    for separator in (prompt_config.apply_sep, prompt_config.newline_sep):
+        if separator:
+            if len(separator) != 1 or separator in role_chars:
+                raise ValueError("--lm-token-pool requires distinct one-character separators")
+            role_chars.append(separator)
+    token_ids = rng.sample(list(token_pool), len(role_chars))
+    char_to_id = dict(zip(role_chars, token_ids))
+    placeholder_prompt = spec["prompt"]
+    try:
+        prompt_token_ids = [int(char_to_id[char]) for char in placeholder_prompt]
+    except KeyError as exc:
+        raise ValueError(f"Prompt contains an unmapped character: {exc}") from exc
+    roles = {"zero": None, "one": None}
+    for char, bit in prompt_config.decode_map.items():
+        roles["one" if bit == "1" else "zero"] = int(char_to_id[char])
+    if prompt_config.apply_sep:
+        roles["apply_sep"] = int(char_to_id[prompt_config.apply_sep])
+    if prompt_config.newline_sep:
+        roles["example_sep"] = int(char_to_id[prompt_config.newline_sep])
+    spec["prompt_token_ids"] = prompt_token_ids
+    spec["token_id_to_char"] = {int(tid): char for char, tid in char_to_id.items()}
+    spec["prompt"] = (
+        "<lm-token-pool "
+        + " ".join(f"{name}={token_id}" for name, token_id in roles.items())
+        + " "
+        + " ".join(f"{char}:{int(tid)}" for char, tid in char_to_id.items())
+        + ">\n"
+        + placeholder_prompt
+    )
+
+
+def multi_digit_token_ids(tokenizer) -> List[int]:
+    """Every vocabulary id whose text contains a digit but is not one bare digit."""
+    hf_tokenizer = getattr(tokenizer, "_tokenizer", tokenizer)
+    banned: List[int] = []
+    for token_id in range(len(hf_tokenizer)):
+        text = hf_tokenizer.decode([token_id])
+        if any(char.isdigit() for char in text) and text not in DIGIT_TOKENS:
+            banned.append(token_id)
+    return banned
+
+
+def encode_spec_prompt(tokenizer, spec: Dict[str, Any]) -> List[int]:
+    token_ids = spec.get("prompt_token_ids")
+    if token_ids is not None:
+        # Keep whatever prefix the tokenizer adds to ordinary text (a BOS token
+        # for Llama; nothing for Qwen3), so id prompts match string prompts.
+        probe = list(tokenizer.encode("0"))
+        return probe[:-1] + list(token_ids)
+    return tokenizer.encode(spec["prompt"])
 
 
 def make_nextterm_digit_prompt_config(rng: random.Random) -> PromptConfig:
@@ -636,6 +775,8 @@ def permute_labels_for_ablation(outputs: Sequence[str], rng: random.Random) -> L
     outputs = list(outputs)
     if len(outputs) <= 1:
         return outputs
+    if ABLATION_RNG is not None:
+        rng = ABLATION_RNG
 
     best_outputs = list(outputs)
     best_matches = len(outputs)
@@ -930,12 +1071,22 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--imagegpt-row-layout",
-        choices=("left-pad", "middle-pad", "dense"),
+        choices=(
+            "left-pad",
+            "middle-pad",
+            "dense",
+            "right-pad",
+            "left-two-sep",
+            "right-two-sep",
+        ),
         default="left-pad",
         help=(
             "ImageGPT bitstring row format: left-pad uses [pad][input][output]; "
             "middle-pad uses [input][pad][output]; dense packs two "
-            "[input][output] pairs per 32-token row (default: left-pad)."
+            "[input][output] pairs per 32-token row; right-pad uses "
+            "[input][output][pad]; left-two-sep uses [padA][input][padB][output] "
+            "and right-two-sep uses [input][padB][output][padA], each with two "
+            "distinct half-width separator colors (default: left-pad)."
         ),
     )
     parser.add_argument(
@@ -1011,6 +1162,26 @@ def parse_args() -> argparse.Namespace:
         "--lmshuffle",
         action="store_true",
         help="Randomize digit encodings for 0/1/newline when using the mlx backend.",
+    )
+    parser.add_argument(
+        "--lm-two-separators",
+        action="store_true",
+        help=(
+            "With --lmshuffle: also sample a distinct digit placed between each "
+            "input and output, in addition to the between-example separator."
+        ),
+    )
+    parser.add_argument(
+        "--lm-token-pool",
+        default="none",
+        help=(
+            "mlx backend: replace each trial's symbol characters with distinct "
+            "token ids sampled from this pool and feed ids directly. "
+            "vocab-nondigit is every non-special vocabulary token whose text "
+            "contains no digit; a path to a JSON token list (for example "
+            "configs/rebuttal/qwen3_top1000_tokens.json) restricts sampling to "
+            "that list, again minus digit-bearing tokens (default: none)."
+        ),
     )
     parser.add_argument(
         "--nucleotide-bits",
@@ -1125,6 +1296,26 @@ def parse_args() -> argparse.Namespace:
         "--verbose",
         action="store_true",
         help="Include the few-shot examples for each trial in the JSON output.",
+    )
+    parser.add_argument(
+        "--dump-hidden-states",
+        type=Path,
+        default=None,
+        help=(
+            "With --batch-programs on the mlx backend: instead of generating, run one "
+            "forward pass per prompt and write per-task mean last-position hidden states "
+            "(all layers, even/odd trial halves) to this .npz file."
+        ),
+    )
+    parser.add_argument("--dump-hidden-states-batch-size", type=int, default=16)
+    parser.add_argument(
+        "--paired-ablation",
+        action="store_true",
+        help=(
+            "With --ablate-labels: draw the label derangement from a separate generator "
+            "so every deranged prompt has the same examples, symbols and query as the "
+            "clean prompt of the same seed. Not used for the published runs."
+        ),
     )
     return parser.parse_args()
 
@@ -1380,12 +1571,30 @@ def make_imagegpt_trial_spec(
         )
 
     row_pad = IMAGEGPT_ROW_WIDTH - (2 * bit_length)
-    if imagegpt_row_layout not in {"left-pad", "middle-pad", "dense"}:
+    if imagegpt_row_layout not in {
+        "left-pad",
+        "middle-pad",
+        "dense",
+        "right-pad",
+        "left-two-sep",
+        "right-two-sep",
+    }:
         raise ValueError(f"Unsupported ImageGPT row layout: {imagegpt_row_layout}")
-    zero_token, one_token, pad_token = random.sample(
-        range(IMAGEGPT_COLOR_VOCAB_SIZE),
-        3,
-    )
+    two_sep_layout = imagegpt_row_layout in {"left-two-sep", "right-two-sep"}
+    pad2_token: Optional[int] = None
+    half_pad = row_pad // 2
+    if two_sep_layout:
+        if row_pad % 2 != 0 or half_pad <= 0:
+            raise ValueError("Two-separator ImageGPT layouts require an even positive row pad")
+        zero_token, one_token, pad_token, pad2_token = random.sample(
+            range(IMAGEGPT_COLOR_VOCAB_SIZE),
+            4,
+        )
+    else:
+        zero_token, one_token, pad_token = random.sample(
+            range(IMAGEGPT_COLOR_VOCAB_SIZE),
+            3,
+        )
 
     bit_prompt, query_input, expected_output, _, query_input_raw = few_shot(
         program,
@@ -1447,6 +1656,8 @@ def make_imagegpt_trial_spec(
         for input_bits, output_bits in context_examples:
             if imagegpt_row_layout == "left-pad":
                 prompt_tokens.extend([pad_token] * row_pad)
+            elif imagegpt_row_layout == "left-two-sep":
+                prompt_tokens.extend([pad_token] * half_pad)
             prompt_tokens.extend(
                 bits_to_imagegpt_tokens(
                     input_bits,
@@ -1456,6 +1667,8 @@ def make_imagegpt_trial_spec(
             )
             if imagegpt_row_layout == "middle-pad":
                 prompt_tokens.extend([pad_token] * row_pad)
+            elif two_sep_layout:
+                prompt_tokens.extend([pad2_token] * half_pad)
             prompt_tokens.extend(
                 bits_to_imagegpt_tokens(
                     output_bits,
@@ -1463,10 +1676,17 @@ def make_imagegpt_trial_spec(
                     one_token=one_token,
                 )
             )
+            if imagegpt_row_layout == "right-pad":
+                prompt_tokens.extend([pad_token] * row_pad)
+            elif imagegpt_row_layout == "right-two-sep":
+                prompt_tokens.extend([pad_token] * half_pad)
 
         if imagegpt_row_layout == "left-pad":
             prompt_tokens.extend([pad_token] * row_pad)
             query_left_pad = row_pad
+        elif imagegpt_row_layout == "left-two-sep":
+            prompt_tokens.extend([pad_token] * half_pad)
+            query_left_pad = half_pad
     prompt_tokens.extend(
         bits_to_imagegpt_tokens(
             query_input,
@@ -1476,6 +1696,8 @@ def make_imagegpt_trial_spec(
     )
     if imagegpt_row_layout == "middle-pad":
         prompt_tokens.extend([pad_token] * row_pad)
+    elif two_sep_layout:
+        prompt_tokens.extend([pad2_token] * half_pad)
 
     if len(prompt_tokens) + max_new_tokens - 1 > 1024:
         raise ValueError(
@@ -1487,7 +1709,8 @@ def make_imagegpt_trial_spec(
     display_lines.append(f"{query_input}->")
     prompt_display = (
         f"<imagegpt zero={zero_token} one={one_token} pad={pad_token} "
-        f"row_layout={imagegpt_row_layout} row_pad={row_pad}>\n"
+        + (f"pad2={pad2_token} " if pad2_token is not None else "")
+        + f"row_layout={imagegpt_row_layout} row_pad={row_pad}>\n"
         + "\n".join(display_lines)
     )
 
@@ -1497,6 +1720,7 @@ def make_imagegpt_trial_spec(
         "imagegpt_zero_token": zero_token,
         "imagegpt_one_token": one_token,
         "imagegpt_pad_token": pad_token,
+        "imagegpt_pad2_token": pad2_token,
         "imagegpt_row_layout": imagegpt_row_layout,
         "imagegpt_row_pad": row_pad,
         "imagegpt_row_left_pad": query_left_pad,
@@ -1524,6 +1748,11 @@ def generate_imagegpt_completions(
         return []
     if batch_size <= 0:
         raise ValueError("ImageGPT batch size must be positive")
+    if PROMPT_SINK is not None:
+        PROMPT_SINK.append(
+            [[int(token) for token in spec["imagegpt_prompt_tokens"]] for spec in trial_specs]
+        )
+        return ["0" * max_tokens] * len(trial_specs)
 
     outputs: List[Optional[str]] = [None] * len(trial_specs)
     by_prompt_len: Dict[int, List[int]] = {}
@@ -2407,6 +2636,9 @@ def generate_timesfm_completions(
 ) -> List[str]:
     if batch_size <= 0:
         raise ValueError("TimesFM batch size must be positive")
+    if PROMPT_SINK is not None:
+        PROMPT_SINK.append([[float(v) for v in spec["timesfm_prompt_values"]] for spec in trial_specs])
+        return ["0" * max_tokens] * len(trial_specs)
     outputs: List[str] = []
     for offset in range(0, len(trial_specs), batch_size):
         outputs.extend(
@@ -3669,6 +3901,148 @@ def batch_generate_with_allowed_token_ids(
     return [tokenizer.decode(results[uid]) for uid in uids]
 
 
+def batch_generate_token_id_outputs(
+    model,
+    tokenizer,
+    prompts: List[List[int]],
+    *,
+    max_tokens: int,
+    token_id_to_char: List[Dict[int, str]],
+    banned_token_ids: Optional[Sequence[int]] = None,
+    **kwargs,
+) -> List[str]:
+    """Unconstrained greedy batch generation that reports role characters.
+
+    Mirrors mlx_lm.batch_generate, but maps every generated id through the
+    trial's id-to-character table instead of detokenizing; ids outside the
+    table become "?" and are then ignored by the ordinary decoder exactly as
+    stray text is on the string path.
+    """
+    if len(prompts) != len(token_id_to_char):
+        raise ValueError("Each prompt must have one id-to-character table")
+    gen = BatchGenerator(
+        model,
+        stop_tokens=set(tokenizer.eos_token_ids),
+        **kwargs,
+    )
+    if banned_token_ids:
+        banned_index = mx.array([int(token_id) for token_id in banned_token_ids])
+
+        def ban(_, logits):
+            logits[:, banned_index] = -1e9
+            return logits
+
+        uids = gen.insert(
+            prompts, [max_tokens] * len(prompts), logits_processors=[[ban]] * len(prompts)
+        )
+    else:
+        uids = gen.insert(prompts, [max_tokens] * len(prompts))
+    results: Dict[int, List[int]] = {uid: [] for uid in uids}
+    next_generated = getattr(gen, "next_generated", gen.next)
+    while responses := next_generated():
+        for response in responses:
+            if response.finish_reason != "stop":
+                results[response.uid].append(int(response.token))
+    gen.close()
+    if banned_token_ids:
+        banned_set = set(int(token_id) for token_id in banned_token_ids)
+        if any(banned_set.intersection(results[uid]) for uid in uids):
+            raise RuntimeError("A banned multi-digit token was generated")
+    return [
+        "".join(table.get(token_id, "?") for token_id in results[uid])
+        for uid, table in zip(uids, token_id_to_char)
+    ]
+
+
+def _make_light_allowed_processor(token_ids: Sequence[int]):
+    """Per-request constraint that keeps no full-vocabulary state between calls."""
+    index = mx.array([int(token_id) for token_id in token_ids])
+
+    def processor(_, logits):
+        masked = mx.full(logits.shape, -1e9, dtype=mx.float32)
+        masked[:, index] = logits[:, index].astype(mx.float32)
+        return masked
+
+    return processor
+
+
+def generate_mlx_text_outputs(
+    model,
+    tokenizer,
+    specs: List[Dict[str, Any]],
+    *,
+    max_tokens: int,
+    force_binary_tokens: bool,
+    completion_batch_size: int,
+    prefill_batch_size: int,
+    banned_token_ids: Optional[Sequence[int]] = None,
+) -> List[str]:
+    """Token-id-prompt generation for --lm-token-pool specs."""
+    prompts = [encode_spec_prompt(tokenizer, spec) for spec in specs]
+    tables = [spec["token_id_to_char"] for spec in specs]
+    if force_binary_tokens:
+        allowed = [
+            [tid for tid, char in table.items() if char in spec["decode_map"]]
+            for spec, table in zip(specs, tables)
+        ]
+        import inspect
+
+        native = "logits_processors" in inspect.signature(BatchGenerator.insert).parameters
+        if native:
+            # mlx-lm >= 0.30 applies per-request logits processors itself and no
+            # longer routes sampling through the _step hook overridden above.
+            gen = BatchGenerator(
+                model,
+                stop_tokens=set(tokenizer.eos_token_ids),
+                completion_batch_size=completion_batch_size,
+                prefill_batch_size=prefill_batch_size,
+            )
+            uids = gen.insert(
+                prompts,
+                [max_tokens] * len(prompts),
+                logits_processors=[
+                    [_make_light_allowed_processor(token_ids)] for token_ids in allowed
+                ],
+            )
+        else:
+            gen = PerPromptConstrainedBatchGenerator(
+                model,
+                stop_tokens=set(tokenizer.eos_token_ids),
+                completion_batch_size=completion_batch_size,
+                prefill_batch_size=prefill_batch_size,
+            )
+            uids = gen.insert(
+                prompts, [max_tokens] * len(prompts), allowed_token_ids=allowed
+            )
+        results: Dict[int, List[int]] = {uid: [] for uid in uids}
+        next_generated = getattr(gen, "next_generated", gen.next)
+        while responses := next_generated():
+            for response in responses:
+                if response.finish_reason != "stop":
+                    results[response.uid].append(int(response.token))
+        gen.close()
+        for uid, token_ids in zip(uids, allowed):
+            if len(results[uid]) != max_tokens or not set(results[uid]) <= set(token_ids):
+                raise RuntimeError(
+                    "Constrained generation produced a token outside the allowed set "
+                    f"or the wrong length: {results[uid]} versus allowed {token_ids}"
+                )
+        return [
+            "".join(table.get(token_id, "?") for token_id in results[uid])
+            for uid, table in zip(uids, tables)
+        ]
+    return batch_generate_token_id_outputs(
+        model,
+        tokenizer,
+        prompts,
+        max_tokens=max_tokens,
+        token_id_to_char=tables,
+        banned_token_ids=banned_token_ids,
+        completion_batch_size=completion_batch_size,
+        prefill_batch_size=prefill_batch_size,
+    )
+
+
 def compute_mlx_perplexities(
     model,
     tokenizer,
@@ -3809,6 +4183,8 @@ def evaluate_task(
     invert_binary_logits_flag: bool,
     uniform_binary_logits_flag: bool,
     ppl_select: bool,
+    lm_two_separators: bool = False,
+    lm_token_pool: Optional[Sequence[int]] = None,
     completion_batch_size: int = 32,
     prefill_batch_size: int = 8,
     precomputed_specs: Optional[List[Dict[str, Any]]] = None,
@@ -3846,6 +4222,8 @@ def evaluate_task(
             return config
         if backend == "mlx" and symbol_bits:
             return make_symbol_prompt_config(random, symbol_bits)
+        if backend == "mlx" and shuffle_lm and lm_two_separators:
+            return make_lm_two_separator_prompt_config(random)
         if backend == "mlx" and shuffle_lm:
             return make_lm_shuffle_prompt_config(random)
         return default_prompt_config()
@@ -4012,6 +4390,15 @@ def evaluate_task(
                 prompt_config=prompt_config,
                 bit_length=bit_length,
             )
+        if lm_token_pool is not None:
+            if backend != "mlx":
+                raise ValueError("--lm-token-pool is only supported with the mlx backend")
+            apply_lm_token_pool(
+                spec,
+                prompt_config=prompt_config,
+                token_pool=lm_token_pool,
+                rng=random,
+            )
         trial_specs.append(spec)
 
     if precomputed_specs is not None:
@@ -4155,9 +4542,27 @@ def evaluate_task(
         )
     elif backend == "naive":
         outputs = [predictor(spec["query"], spec.get("context_examples", [])) for spec in trial_specs]
+    elif lm_token_pool is not None:
+        outputs = (
+            generate_mlx_text_outputs(
+                model,
+                tokenizer,
+                trial_specs,
+                max_tokens=max_new_tokens,
+                force_binary_tokens=force_binary_tokens,
+                completion_batch_size=completion_batch_size,
+                prefill_batch_size=prefill_batch_size,
+                banned_token_ids=LM_BANNED_GENERATION_TOKEN_IDS,
+            )
+            if trial_specs
+            else []
+        )
     else:
         prompts = [tokenizer.encode(spec["prompt"]) for spec in trial_specs]
-        if prompts:
+        if PROMPT_SINK is not None:
+            PROMPT_SINK.append([[int(token) for token in prompt] for prompt in prompts])
+            outputs = ["0" * max_new_tokens] * len(prompts)
+        elif prompts:
             logits_processors = None
             if force_binary_tokens or backend in {"rita", "protein"}:
                 allowed_token_ids = [
@@ -4302,6 +4707,15 @@ def main() -> None:
 
 
 def _run_once(args) -> None:
+    if getattr(args, "paired_ablation", False):
+        global ABLATION_RNG
+        ABLATION_RNG = random.Random((args.seed or 0) + 1_000_003)
+    global PROMPT_SINK
+    PROMPT_SINK = (
+        [] if args.dump_hidden_states is not None and not args.batch_programs else None
+    )
+    if PROMPT_SINK is not None and args.backend not in {"imagegpt", "protein", "mlx", "timesfm"}:
+        raise ValueError("--dump-hidden-states is not implemented for this backend")
     random.seed(args.seed)
 
     programs_path = Path(args.programs)
@@ -4775,6 +5189,19 @@ def _run_once(args) -> None:
 
     total_predictions = len(program_entries) * args.trials_per_program
 
+    lm_token_pool: Optional[List[int]] = None
+    if args.lm_token_pool != "none":
+        if backend != "mlx":
+            raise ValueError("--lm-token-pool is only supported with the mlx backend")
+        lm_token_pool = build_lm_token_pool(tokenizer, args.lm_token_pool)
+        print(f"[lm-token-pool] {args.lm_token_pool}: {len(lm_token_pool)} eligible token ids")
+        if args.lm_token_pool == "digits":
+            global LM_BANNED_GENERATION_TOKEN_IDS
+            LM_BANNED_GENERATION_TOKEN_IDS = multi_digit_token_ids(tokenizer)
+            print(f"[lm-token-pool] banning {len(LM_BANNED_GENERATION_TOKEN_IDS)} multi-digit ids from generation")
+    if args.lm_two_separators and not args.lmshuffle:
+        raise ValueError("--lm-two-separators requires --lmshuffle")
+
     def _eval(program, description, *, progress=None, **extra):
         return evaluate_task(
             model,
@@ -4814,6 +5241,8 @@ def _run_once(args) -> None:
             invert_binary_logits_flag=args.invert_binary_logits,
             uniform_binary_logits_flag=args.uniform_binary_logits,
             ppl_select=args.ppl_select,
+            lm_two_separators=args.lm_two_separators,
+            lm_token_pool=lm_token_pool,
             completion_batch_size=args.batch_size_completion,
             prefill_batch_size=args.batch_size_prefill,
             progress=progress,
@@ -4840,9 +5269,32 @@ def _run_once(args) -> None:
                 built.append((entry, specs))
             # Phase 2: a single batched generation over every program's prompts.
             flat_specs = [spec for _, specs in built for spec in specs]
-            prompts = [tokenizer.encode(spec["prompt"]) for spec in flat_specs]
+            prompts = [encode_spec_prompt(tokenizer, spec) for spec in flat_specs]
+            if args.dump_hidden_states is not None:
+                from task_vector_extraction import dump_task_hidden_states
+
+                dump_task_hidden_states(
+                    model,
+                    [list(prompt) for prompt in prompts],
+                    [len(specs) for _, specs in built],
+                    args.dump_hidden_states,
+                    batch_size=args.dump_hidden_states_batch_size,
+                    progress=progress,
+                )
+                return
             if not prompts:
                 outputs_all: List[str] = []
+            elif lm_token_pool is not None:
+                outputs_all = generate_mlx_text_outputs(
+                    model,
+                    tokenizer,
+                    flat_specs,
+                    max_tokens=max_tokens,
+                    force_binary_tokens=args.force_binary_tokens,
+                    completion_batch_size=args.batch_size_completion,
+                    prefill_batch_size=args.batch_size_prefill,
+                    banned_token_ids=LM_BANNED_GENERATION_TOKEN_IDS,
+                )
             elif args.force_binary_tokens:
                 allowed_token_ids = [
                     spec.get("allowed_token_ids")
@@ -4895,6 +5347,19 @@ def _run_once(args) -> None:
                 )
                 task.index = idx
                 task_results.append(task)
+
+    if PROMPT_SINK is not None:
+        from task_vector_extraction import dump_task_hidden_states
+
+        dump_task_hidden_states(
+            model,
+            [prompt for task_prompts in PROMPT_SINK for prompt in task_prompts],
+            [len(task_prompts) for task_prompts in PROMPT_SINK],
+            args.dump_hidden_states,
+            batch_size=args.dump_hidden_states_batch_size,
+            timesfm_context_limit=TIMESFM_CONTEXT_LIMIT if backend == "timesfm" else None,
+        )
+        return
 
     accuracies: List[float] = []
     for task in task_results:
@@ -5103,6 +5568,9 @@ def _run_once(args) -> None:
             "bit_length": args.bit_length,
             "max_new_tokens": max_tokens,
             "seed": args.seed,
+            "lm_two_separators": args.lm_two_separators,
+            "lm_token_pool": args.lm_token_pool,
+            "lm_token_pool_size": len(lm_token_pool) if lm_token_pool is not None else None,
             "verbose": args.verbose,
             "ablate_labels": args.ablate_labels,
             "invert_binary_logits": args.invert_binary_logits,

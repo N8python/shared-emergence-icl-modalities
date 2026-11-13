@@ -1,0 +1,6033 @@
+{
+  "source": "https://huggingface.co/datasets/Skylion007/openwebtext",
+  "dataset_revision": "433fe0f44ed7894fea29c08b3202aa348ccc6369",
+  "source_file": "plain_text/train/0000.parquet",
+  "source_file_sha256": "caed9f4b7053d7cd4d1a13ce9ec9224d84a3bba1f11579193562a7e31ebe656e",
+  "sample": "first 50000 documents in pinned shard 0000",
+  "documents": 50000,
+  "text_sequence_sha256": "2aca4e0c9f9184bdf968bc727f30c5289d8b9239364e28c40dfbbcc1bb4fbf71",
+  "total_tokens": 54744747,
+  "non_special_tokens": 54744747,
+  "excluded_special_ids": [
+    151643,
+    151644,
+    151645,
+    151646,
+    151647,
+    151648,
+    151649,
+    151650,
+    151651,
+    151652,
+    151653,
+    151654,
+    151655,
+    151656
+  ],
+  "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+  "frequency_basis": "empirical Qwen-tokenized OpenWebText sample; not private model training frequencies",
+  "ranking": "descending empirical count; ascending token ID for ties",
+  "pool_size": 1000,
+  "tokens": [
+    {
+      "rank": 1,
+      "token_id": 279,
+      "count": 2078942,
+      "text": " the"
+    },
+    {
+      "rank": 2,
+      "token_id": 11,
+      "count": 2021159,
+      "text": ","
+    },
+    {
+      "rank": 3,
+      "token_id": 13,
+      "count": 1257413,
+      "text": "."
+    },
+    {
+      "rank": 4,
+      "token_id": 311,
+      "count": 1105017,
+      "text": " to"
+    },
+    {
+      "rank": 5,
+      "token_id": 315,
+      "count": 1063101,
+      "text": " of"
+    },
+    {
+      "rank": 6,
+      "token_id": 323,
+      "count": 973854,
+      "text": " and"
+    },
+    {
+      "rank": 7,
+      "token_id": 264,
+      "count": 891651,
+      "text": " a"
+    },
+    {
+      "rank": 8,
+      "token_id": 304,
+      "count": 720215,
+      "text": " in"
+    },
+    {
+      "rank": 9,
+      "token_id": 220,
+      "count": 680493,
+      "text": " "
+    },
+    {
+      "rank": 10,
+      "token_id": 15,
+      "count": 557106,
+      "text": "0"
+    },
+    {
+      "rank": 11,
+      "token_id": 382,
+      "count": 553187,
+      "text": ".\n\n"
+    },
+    {
+      "rank": 12,
+      "token_id": 16,
+      "count": 510547,
+      "text": "1"
+    },
+    {
+      "rank": 13,
+      "token_id": 429,
+      "count": 484958,
+      "text": " that"
+    },
+    {
+      "rank": 14,
+      "token_id": 374,
+      "count": 425391,
+      "text": " is"
+    },
+    {
+      "rank": 15,
+      "token_id": 17,
+      "count": 381889,
+      "text": "2"
+    },
+    {
+      "rank": 16,
+      "token_id": 369,
+      "count": 366942,
+      "text": " for"
+    },
+    {
+      "rank": 17,
+      "token_id": 389,
+      "count": 307492,
+      "text": " on"
+    },
+    {
+      "rank": 18,
+      "token_id": 432,
+      "count": 286440,
+      "text": " it"
+    },
+    {
+      "rank": 19,
+      "token_id": 448,
+      "count": 273154,
+      "text": " with"
+    },
+    {
+      "rank": 20,
+      "token_id": 572,
+      "count": 256430,
+      "text": " was"
+    },
+    {
+      "rank": 21,
+      "token_id": 438,
+      "count": 236811,
+      "text": " as"
+    },
+    {
+      "rank": 22,
+      "token_id": 748,
+      "count": 235519,
+      "text": "\u2019s"
+    },
+    {
+      "rank": 23,
+      "token_id": 358,
+      "count": 220457,
+      "text": " I"
+    },
+    {
+      "rank": 24,
+      "token_id": 387,
+      "count": 212847,
+      "text": " be"
+    },
+    {
+      "rank": 25,
+      "token_id": 18,
+      "count": 196014,
+      "text": "3"
+    },
+    {
+      "rank": 26,
+      "token_id": 525,
+      "count": 195795,
+      "text": " are"
+    },
+    {
+      "rank": 27,
+      "token_id": 20,
+      "count": 192694,
+      "text": "5"
+    },
+    {
+      "rank": 28,
+      "token_id": 320,
+      "count": 189809,
+      "text": " ("
+    },
+    {
+      "rank": 29,
+      "token_id": 271,
+      "count": 188857,
+      "text": "\n\n"
+    },
+    {
+      "rank": 30,
+      "token_id": 24,
+      "count": 187133,
+      "text": "9"
+    },
+    {
+      "rank": 31,
+      "token_id": 614,
+      "count": 181515,
+      "text": " have"
+    },
+    {
+      "rank": 32,
+      "token_id": 498,
+      "count": 180578,
+      "text": " you"
+    },
+    {
+      "rank": 33,
+      "token_id": 518,
+      "count": 177656,
+      "text": " at"
+    },
+    {
+      "rank": 34,
+      "token_id": 25,
+      "count": 177234,
+      "text": ":"
+    },
+    {
+      "rank": 35,
+      "token_id": 553,
+      "count": 176381,
+      "text": " by"
+    },
+    {
+      "rank": 36,
+      "token_id": 19,
+      "count": 172270,
+      "text": "4"
+    },
+    {
+      "rank": 37,
+      "token_id": 504,
+      "count": 172182,
+      "text": " from"
+    },
+    {
+      "rank": 38,
+      "token_id": 594,
+      "count": 169008,
+      "text": "'s"
+    },
+    {
+      "rank": 39,
+      "token_id": 419,
+      "count": 161614,
+      "text": " this"
+    },
+    {
+      "rank": 40,
+      "token_id": 566,
+      "count": 155671,
+      "text": " he"
+    },
+    {
+      "rank": 41,
+      "token_id": 537,
+      "count": 154362,
+      "text": " not"
+    },
+    {
+      "rank": 42,
+      "token_id": 576,
+      "count": 152771,
+      "text": " The"
+    },
+    {
+      "rank": 43,
+      "token_id": 21,
+      "count": 146199,
+      "text": "6"
+    },
+    {
+      "rank": 44,
+      "token_id": 458,
+      "count": 144834,
+      "text": " an"
+    },
+    {
+      "rank": 45,
+      "token_id": 1036,
+      "count": 142081,
+      "text": " \u201c"
+    },
+    {
+      "rank": 46,
+      "token_id": 702,
+      "count": 137733,
+      "text": " has"
+    },
+    {
+      "rank": 47,
+      "token_id": 806,
+      "count": 136324,
+      "text": " his"
+    },
+    {
+      "rank": 48,
+      "token_id": 23,
+      "count": 135902,
+      "text": "8"
+    },
+    {
+      "rank": 49,
+      "token_id": 22,
+      "count": 133735,
+      "text": "7"
+    },
+    {
+      "rank": 50,
+      "token_id": 476,
+      "count": 131883,
+      "text": " or"
+    },
+    {
+      "rank": 51,
+      "token_id": 807,
+      "count": 124050,
+      "text": " they"
+    },
+    {
+      "rank": 52,
+      "token_id": 1053,
+      "count": 119266,
+      "text": " said"
+    },
+    {
+      "rank": 53,
+      "token_id": 714,
+      "count": 118791,
+      "text": " but"
+    },
+    {
+      "rank": 54,
+      "token_id": 582,
+      "count": 117842,
+      "text": " we"
+    },
+    {
+      "rank": 55,
+      "token_id": 686,
+      "count": 115644,
+      "text": " will"
+    },
+    {
+      "rank": 56,
+      "token_id": 330,
+      "count": 114795,
+      "text": " \""
+    },
+    {
+      "rank": 57,
+      "token_id": 785,
+      "count": 113721,
+      "text": "The"
+    },
+    {
+      "rank": 58,
+      "token_id": 862,
+      "count": 107031,
+      "text": " their"
+    },
+    {
+      "rank": 59,
+      "token_id": 646,
+      "count": 104913,
+      "text": " can"
+    },
+    {
+      "rank": 60,
+      "token_id": 803,
+      "count": 101744,
+      "text": " more"
+    },
+    {
+      "rank": 61,
+      "token_id": 8,
+      "count": 101097,
+      "text": ")"
+    },
+    {
+      "rank": 62,
+      "token_id": 879,
+      "count": 98822,
+      "text": " who"
+    },
+    {
+      "rank": 63,
+      "token_id": 911,
+      "count": 95394,
+      "text": " about"
+    },
+    {
+      "rank": 64,
+      "token_id": 825,
+      "count": 92789,
+      "text": " one"
+    },
+    {
+      "rank": 65,
+      "token_id": 1030,
+      "count": 90839,
+      "text": " had"
+    },
+    {
+      "rank": 66,
+      "token_id": 1033,
+      "count": 90814,
+      "text": " were"
+    },
+    {
+      "rank": 67,
+      "token_id": 678,
+      "count": 90335,
+      "text": " all"
+    },
+    {
+      "rank": 68,
+      "token_id": 892,
+      "count": 88495,
+      "text": " which"
+    },
+    {
+      "rank": 69,
+      "token_id": 1035,
+      "count": 85530,
+      "text": " would"
+    },
+    {
+      "rank": 70,
+      "token_id": 1012,
+      "count": 84455,
+      "text": " been"
+    },
+    {
+      "rank": 71,
+      "token_id": 700,
+      "count": 83438,
+      "text": " out"
+    },
+    {
+      "rank": 72,
+      "token_id": 12,
+      "count": 82936,
+      "text": "-"
+    },
+    {
+      "rank": 73,
+      "token_id": 705,
+      "count": 79869,
+      "text": " up"
+    },
+    {
+      "rank": 74,
+      "token_id": 1405,
+      "count": 79148,
+      "text": "\u2019t"
+    },
+    {
+      "rank": 75,
+      "token_id": 1083,
+      "count": 68945,
+      "text": " also"
+    },
+    {
+      "rank": 76,
+      "token_id": 1128,
+      "count": 67421,
+      "text": " what"
+    },
+    {
+      "rank": 77,
+      "token_id": 1052,
+      "count": 67311,
+      "text": " there"
+    },
+    {
+      "rank": 78,
+      "token_id": 1251,
+      "count": 66838,
+      "text": " people"
+    },
+    {
+      "rank": 79,
+      "token_id": 1075,
+      "count": 66514,
+      "text": " like"
+    },
+    {
+      "rank": 80,
+      "token_id": 979,
+      "count": 66281,
+      "text": " when"
+    },
+    {
+      "rank": 81,
+      "token_id": 773,
+      "count": 66250,
+      "text": " so"
+    },
+    {
+      "rank": 82,
+      "token_id": 1091,
+      "count": 65254,
+      "text": " than"
+    },
+    {
+      "rank": 83,
+      "token_id": 1181,
+      "count": 63780,
+      "text": " its"
+    },
+    {
+      "rank": 84,
+      "token_id": 882,
+      "count": 62971,
+      "text": " time"
+    },
+    {
+      "rank": 85,
+      "token_id": 697,
+      "count": 62026,
+      "text": " your"
+    },
+    {
+      "rank": 86,
+      "token_id": 421,
+      "count": 61443,
+      "text": " if"
+    },
+    {
+      "rank": 87,
+      "token_id": 1008,
+      "count": 61201,
+      "text": " other"
+    },
+    {
+      "rank": 88,
+      "token_id": 1119,
+      "count": 60484,
+      "text": " into"
+    },
+    {
+      "rank": 89,
+      "token_id": 1101,
+      "count": 59597,
+      "text": " just"
+    },
+    {
+      "rank": 90,
+      "token_id": 1059,
+      "count": 59579,
+      "text": " her"
+    },
+    {
+      "rank": 91,
+      "token_id": 653,
+      "count": 58120,
+      "text": " do"
+    },
+    {
+      "rank": 92,
+      "token_id": 1084,
+      "count": 57989,
+      "text": " It"
+    },
+    {
+      "rank": 93,
+      "token_id": 1105,
+      "count": 57917,
+      "text": " them"
+    },
+    {
+      "rank": 94,
+      "token_id": 1045,
+      "count": 57727,
+      "text": " some"
+    },
+    {
+      "rank": 95,
+      "token_id": 1039,
+      "count": 54665,
+      "text": " our"
+    },
+    {
+      "rank": 96,
+      "token_id": 847,
+      "count": 53686,
+      "text": " my"
+    },
+    {
+      "rank": 97,
+      "token_id": 916,
+      "count": 53539,
+      "text": " over"
+    },
+    {
+      "rank": 98,
+      "token_id": 902,
+      "count": 52453,
+      "text": " no"
+    },
+    {
+      "rank": 99,
+      "token_id": 1,
+      "count": 52328,
+      "text": "\""
+    },
+    {
+      "rank": 100,
+      "token_id": 1156,
+      "count": 52014,
+      "text": " first"
+    },
+    {
+      "rank": 101,
+      "token_id": 2419,
+      "count": 51949,
+      "text": ",\u201d"
+    },
+    {
+      "rank": 102,
+      "token_id": 501,
+      "count": 51260,
+      "text": " new"
+    },
+    {
+      "rank": 103,
+      "token_id": 944,
+      "count": 50186,
+      "text": "'t"
+    },
+    {
+      "rank": 104,
+      "token_id": 1172,
+      "count": 50176,
+      "text": " only"
+    },
+    {
+      "rank": 105,
+      "token_id": 854,
+      "count": 49995,
+      "text": "\u201d"
+    },
+    {
+      "rank": 106,
+      "token_id": 1283,
+      "count": 49400,
+      "text": " after"
+    },
+    {
+      "rank": 107,
+      "token_id": 1378,
+      "count": 48727,
+      "text": " two"
+    },
+    {
+      "rank": 108,
+      "token_id": 1410,
+      "count": 47860,
+      "text": " could"
+    },
+    {
+      "rank": 109,
+      "token_id": 1340,
+      "count": 46929,
+      "text": " she"
+    },
+    {
+      "rank": 110,
+      "token_id": 30,
+      "count": 45788,
+      "text": "?"
+    },
+    {
+      "rank": 111,
+      "token_id": 633,
+      "count": 45364,
+      "text": " get"
+    },
+    {
+      "rank": 112,
+      "token_id": 82,
+      "count": 45115,
+      "text": "s"
+    },
+    {
+      "rank": 113,
+      "token_id": 1365,
+      "count": 44225,
+      "text": " \u2013"
+    },
+    {
+      "rank": 114,
+      "token_id": 1435,
+      "count": 43445,
+      "text": " him"
+    },
+    {
+      "rank": 115,
+      "token_id": 1246,
+      "count": 42790,
+      "text": " how"
+    },
+    {
+      "rank": 116,
+      "token_id": 26,
+      "count": 42675,
+      "text": ";"
+    },
+    {
+      "rank": 117,
+      "token_id": 758,
+      "count": 42332,
+      "text": " In"
+    },
+    {
+      "rank": 118,
+      "token_id": 1429,
+      "count": 42258,
+      "text": " most"
+    },
+    {
+      "rank": 119,
+      "token_id": 400,
+      "count": 41942,
+      "text": " $"
+    },
+    {
+      "rank": 120,
+      "token_id": 1635,
+      "count": 41840,
+      "text": " years"
+    },
+    {
+      "rank": 121,
+      "token_id": 1576,
+      "count": 41726,
+      "text": " because"
+    },
+    {
+      "rank": 122,
+      "token_id": 287,
+      "count": 41710,
+      "text": "ing"
+    },
+    {
+      "rank": 123,
+      "token_id": 894,
+      "count": 41623,
+      "text": " any"
+    },
+    {
+      "rank": 124,
+      "token_id": 1431,
+      "count": 41150,
+      "text": " now"
+    },
+    {
+      "rank": 125,
+      "token_id": 1260,
+      "count": 41043,
+      "text": " He"
+    },
+    {
+      "rank": 126,
+      "token_id": 752,
+      "count": 40840,
+      "text": " me"
+    },
+    {
+      "rank": 127,
+      "token_id": 1959,
+      "count": 40558,
+      "text": " \u2014"
+    },
+    {
+      "rank": 128,
+      "token_id": 1335,
+      "count": 39667,
+      "text": ",\""
+    },
+    {
+      "rank": 129,
+      "token_id": 2879,
+      "count": 39460,
+      "text": ".\u201d\n\n"
+    },
+    {
+      "rank": 130,
+      "token_id": 362,
+      "count": 39411,
+      "text": " A"
+    },
+    {
+      "rank": 131,
+      "token_id": 1496,
+      "count": 39247,
+      "text": " even"
+    },
+    {
+      "rank": 132,
+      "token_id": 60,
+      "count": 38757,
+      "text": "]"
+    },
+    {
+      "rank": 133,
+      "token_id": 1493,
+      "count": 38586,
+      "text": " these"
+    },
+    {
+      "rank": 134,
+      "token_id": 1281,
+      "count": 38340,
+      "text": " make"
+    },
+    {
+      "rank": 135,
+      "token_id": 1042,
+      "count": 38267,
+      "text": " year"
+    },
+    {
+      "rank": 136,
+      "token_id": 481,
+      "count": 37513,
+      "text": " -"
+    },
+    {
+      "rank": 137,
+      "token_id": 40,
+      "count": 37025,
+      "text": "I"
+    },
+    {
+      "rank": 138,
+      "token_id": 1616,
+      "count": 36687,
+      "text": " way"
+    },
+    {
+      "rank": 139,
+      "token_id": 1660,
+      "count": 36571,
+      "text": " being"
+    },
+    {
+      "rank": 140,
+      "token_id": 1182,
+      "count": 36558,
+      "text": " back"
+    },
+    {
+      "rank": 141,
+      "token_id": 1221,
+      "count": 36233,
+      "text": " then"
+    },
+    {
+      "rank": 142,
+      "token_id": 1657,
+      "count": 36039,
+      "text": " many"
+    },
+    {
+      "rank": 143,
+      "token_id": 1380,
+      "count": 35564,
+      "text": " where"
+    },
+    {
+      "rank": 144,
+      "token_id": 291,
+      "count": 35374,
+      "text": "ed"
+    },
+    {
+      "rank": 145,
+      "token_id": 14,
+      "count": 35351,
+      "text": "/"
+    },
+    {
+      "rank": 146,
+      "token_id": 1602,
+      "count": 34363,
+      "text": " very"
+    },
+    {
+      "rank": 147,
+      "token_id": 1753,
+      "count": 34327,
+      "text": " much"
+    },
+    {
+      "rank": 148,
+      "token_id": 1846,
+      "count": 34320,
+      "text": " those"
+    },
+    {
+      "rank": 149,
+      "token_id": 1988,
+      "count": 34143,
+      "text": " But"
+    },
+    {
+      "rank": 150,
+      "token_id": 1096,
+      "count": 33551,
+      "text": " This"
+    },
+    {
+      "rank": 151,
+      "token_id": 1537,
+      "count": 32688,
+      "text": " last"
+    },
+    {
+      "rank": 152,
+      "token_id": 1632,
+      "count": 32396,
+      "text": " well"
+    },
+    {
+      "rank": 153,
+      "token_id": 1513,
+      "count": 32274,
+      "text": " don"
+    },
+    {
+      "rank": 154,
+      "token_id": 508,
+      "count": 32228,
+      "text": " ["
+    },
+    {
+      "rank": 155,
+      "token_id": 1414,
+      "count": 32020,
+      "text": " know"
+    },
+    {
+      "rank": 156,
+      "token_id": 1573,
+      "count": 31623,
+      "text": " before"
+    },
+    {
+      "rank": 157,
+      "token_id": 1490,
+      "count": 31195,
+      "text": " see"
+    },
+    {
+      "rank": 158,
+      "token_id": 1265,
+      "count": 30943,
+      "text": " should"
+    },
+    {
+      "rank": 159,
+      "token_id": 1231,
+      "count": 30889,
+      "text": " may"
+    },
+    {
+      "rank": 160,
+      "token_id": 1865,
+      "count": 30619,
+      "text": " made"
+    },
+    {
+      "rank": 161,
+      "token_id": 641,
+      "count": 30495,
+      "text": "In"
+    },
+    {
+      "rank": 162,
+      "token_id": 975,
+      "count": 30435,
+      "text": " work"
+    },
+    {
+      "rank": 163,
+      "token_id": 1741,
+      "count": 30423,
+      "text": " such"
+    },
+    {
+      "rank": 164,
+      "token_id": 1744,
+      "count": 30273,
+      "text": " think"
+    },
+    {
+      "rank": 165,
+      "token_id": 1526,
+      "count": 30067,
+      "text": " through"
+    },
+    {
+      "rank": 166,
+      "token_id": 2087,
+      "count": 29957,
+      "text": " going"
+    },
+    {
+      "rank": 167,
+      "token_id": 2217,
+      "count": 29945,
+      "text": ".\"\n\n"
+    },
+    {
+      "rank": 168,
+      "token_id": 990,
+      "count": 29529,
+      "text": " use"
+    },
+    {
+      "rank": 169,
+      "token_id": 32,
+      "count": 29430,
+      "text": "A"
+    },
+    {
+      "rank": 170,
+      "token_id": 1447,
+      "count": 29357,
+      "text": ":\n\n"
+    },
+    {
+      "rank": 171,
+      "token_id": 1205,
+      "count": 29014,
+      "text": " We"
+    },
+    {
+      "rank": 172,
+      "token_id": 1597,
+      "count": 28973,
+      "text": " And"
+    },
+    {
+      "rank": 173,
+      "token_id": 2348,
+      "count": 28790,
+      "text": " against"
+    },
+    {
+      "rank": 174,
+      "token_id": 601,
+      "count": 28765,
+      "text": " us"
+    },
+    {
+      "rank": 175,
+      "token_id": 1521,
+      "count": 28247,
+      "text": " did"
+    },
+    {
+      "rank": 176,
+      "token_id": 527,
+      "count": 28063,
+      "text": "\u2019"
+    },
+    {
+      "rank": 177,
+      "token_id": 2727,
+      "count": 27982,
+      "text": " says"
+    },
+    {
+      "rank": 178,
+      "token_id": 1495,
+      "count": 27932,
+      "text": " down"
+    },
+    {
+      "rank": 179,
+      "token_id": 2058,
+      "count": 27884,
+      "text": " still"
+    },
+    {
+      "rank": 180,
+      "token_id": 1393,
+      "count": 27743,
+      "text": " while"
+    },
+    {
+      "rank": 181,
+      "token_id": 701,
+      "count": 27714,
+      "text": "),"
+    },
+    {
+      "rank": 182,
+      "token_id": 1290,
+      "count": 27541,
+      "text": " right"
+    },
+    {
+      "rank": 183,
+      "token_id": 1809,
+      "count": 27395,
+      "text": " game"
+    },
+    {
+      "rank": 184,
+      "token_id": 1879,
+      "count": 27199,
+      "text": " world"
+    },
+    {
+      "rank": 185,
+      "token_id": 1366,
+      "count": 27102,
+      "text": " want"
+    },
+    {
+      "rank": 186,
+      "token_id": 1661,
+      "count": 26997,
+      "text": " good"
+    },
+    {
+      "rank": 187,
+      "token_id": 1896,
+      "count": 26788,
+      "text": " take"
+    },
+    {
+      "rank": 188,
+      "token_id": 1948,
+      "count": 26688,
+      "text": " between"
+    },
+    {
+      "rank": 189,
+      "token_id": 1852,
+      "count": 26519,
+      "text": " same"
+    },
+    {
+      "rank": 190,
+      "token_id": 3033,
+      "count": 26504,
+      "text": " government"
+    },
+    {
+      "rank": 191,
+      "token_id": 1007,
+      "count": 26386,
+      "text": " off"
+    },
+    {
+      "rank": 192,
+      "token_id": 4,
+      "count": 26203,
+      "text": "%"
+    },
+    {
+      "rank": 193,
+      "token_id": 2163,
+      "count": 25534,
+      "text": " around"
+    },
+    {
+      "rank": 194,
+      "token_id": 7873,
+      "count": 25438,
+      "text": ".["
+    },
+    {
+      "rank": 195,
+      "token_id": 547,
+      "count": 25339,
+      "text": " U"
+    },
+    {
+      "rank": 196,
+      "token_id": 728,
+      "count": 25336,
+      "text": " go"
+    },
+    {
+      "rank": 197,
+      "token_id": 1977,
+      "count": 25149,
+      "text": " say"
+    },
+    {
+      "rank": 198,
+      "token_id": 2326,
+      "count": 25064,
+      "text": " three"
+    },
+    {
+      "rank": 199,
+      "token_id": 1184,
+      "count": 24701,
+      "text": " need"
+    },
+    {
+      "rank": 200,
+      "token_id": 1483,
+      "count": 24628,
+      "text": " used"
+    },
+    {
+      "rank": 201,
+      "token_id": 2167,
+      "count": 24344,
+      "text": " really"
+    },
+    {
+      "rank": 202,
+      "token_id": 64,
+      "count": 24298,
+      "text": "a"
+    },
+    {
+      "rank": 203,
+      "token_id": 1588,
+      "count": 24146,
+      "text": " here"
+    },
+    {
+      "rank": 204,
+      "token_id": 3129,
+      "count": 24113,
+      "text": "\u2019re"
+    },
+    {
+      "rank": 205,
+      "token_id": 6,
+      "count": 23701,
+      "text": "'"
+    },
+    {
+      "rank": 206,
+      "token_id": 1939,
+      "count": 23686,
+      "text": "?\n\n"
+    },
+    {
+      "rank": 207,
+      "token_id": 1828,
+      "count": 23599,
+      "text": " own"
+    },
+    {
+      "rank": 208,
+      "token_id": 1584,
+      "count": 23364,
+      "text": " state"
+    },
+    {
+      "rank": 209,
+      "token_id": 1293,
+      "count": 23280,
+      "text": " long"
+    },
+    {
+      "rank": 210,
+      "token_id": 949,
+      "count": 22983,
+      "text": " part"
+    },
+    {
+      "rank": 211,
+      "token_id": 2379,
+      "count": 22923,
+      "text": " They"
+    },
+    {
+      "rank": 212,
+      "token_id": 2176,
+      "count": 22911,
+      "text": " both"
+    },
+    {
+      "rank": 213,
+      "token_id": 388,
+      "count": 22781,
+      "text": "ers"
+    },
+    {
+      "rank": 214,
+      "token_id": 2083,
+      "count": 22697,
+      "text": " team"
+    },
+    {
+      "rank": 215,
+      "token_id": 3229,
+      "count": 22561,
+      "text": " told"
+    },
+    {
+      "rank": 216,
+      "token_id": 2337,
+      "count": 22539,
+      "text": " during"
+    },
+    {
+      "rank": 217,
+      "token_id": 1899,
+      "count": 22441,
+      "text": " day"
+    },
+    {
+      "rank": 218,
+      "token_id": 1532,
+      "count": 22369,
+      "text": " New"
+    },
+    {
+      "rank": 219,
+      "token_id": 2132,
+      "count": 22277,
+      "text": "It"
+    },
+    {
+      "rank": 220,
+      "token_id": 1212,
+      "count": 22109,
+      "text": " under"
+    },
+    {
+      "rank": 221,
+      "token_id": 3339,
+      "count": 21753,
+      "text": " Trump"
+    },
+    {
+      "rank": 222,
+      "token_id": 425,
+      "count": 21654,
+      "text": " B"
+    },
+    {
+      "rank": 223,
+      "token_id": 2474,
+      "count": 21599,
+      "text": " since"
+    },
+    {
+      "rank": 224,
+      "token_id": 1446,
+      "count": 21550,
+      "text": " You"
+    },
+    {
+      "rank": 225,
+      "token_id": 328,
+      "count": 21414,
+      "text": " S"
+    },
+    {
+      "rank": 226,
+      "token_id": 568,
+      "count": 21344,
+      "text": ")."
+    },
+    {
+      "rank": 227,
+      "token_id": 0,
+      "count": 21332,
+      "text": "!"
+    },
+    {
+      "rank": 228,
+      "token_id": 692,
+      "count": 21096,
+      "text": ")\n\n"
+    },
+    {
+      "rank": 229,
+      "token_id": 1987,
+      "count": 20914,
+      "text": ".\u201d"
+    },
+    {
+      "rank": 230,
+      "token_id": 2238,
+      "count": 20908,
+      "text": " too"
+    },
+    {
+      "rank": 231,
+      "token_id": 1416,
+      "count": 20335,
+      "text": " If"
+    },
+    {
+      "rank": 232,
+      "token_id": 2441,
+      "count": 20318,
+      "text": " another"
+    },
+    {
+      "rank": 233,
+      "token_id": 2494,
+      "count": 20300,
+      "text": " something"
+    },
+    {
+      "rank": 234,
+      "token_id": 422,
+      "count": 20295,
+      "text": " D"
+    },
+    {
+      "rank": 235,
+      "token_id": 835,
+      "count": 20230,
+      "text": " end"
+    },
+    {
+      "rank": 236,
+      "token_id": 584,
+      "count": 20153,
+      "text": " public"
+    },
+    {
+      "rank": 237,
+      "token_id": 2272,
+      "count": 20137,
+      "text": " life"
+    },
+    {
+      "rank": 238,
+      "token_id": 2513,
+      "count": 19909,
+      "text": " things"
+    },
+    {
+      "rank": 239,
+      "token_id": 2421,
+      "count": 19865,
+      "text": " few"
+    },
+    {
+      "rank": 240,
+      "token_id": 808,
+      "count": 19847,
+      "text": ".S"
+    },
+    {
+      "rank": 241,
+      "token_id": 1730,
+      "count": 19823,
+      "text": " found"
+    },
+    {
+      "rank": 242,
+      "token_id": 1449,
+      "count": 19399,
+      "text": " every"
+    },
+    {
+      "rank": 243,
+      "token_id": 2578,
+      "count": 19325,
+      "text": " might"
+    },
+    {
+      "rank": 244,
+      "token_id": 1817,
+      "count": 19299,
+      "text": " each"
+    },
+    {
+      "rank": 245,
+      "token_id": 356,
+      "count": 19289,
+      "text": " C"
+    },
+    {
+      "rank": 246,
+      "token_id": 1790,
+      "count": 19231,
+      "text": " next"
+    },
+    {
+      "rank": 247,
+      "token_id": 2581,
+      "count": 19226,
+      "text": " never"
+    },
+    {
+      "rank": 248,
+      "token_id": 3369,
+      "count": 19025,
+      "text": " \u2018"
+    },
+    {
+      "rank": 249,
+      "token_id": 261,
+      "count": 19014,
+      "text": "er"
+    },
+    {
+      "rank": 250,
+      "token_id": 1849,
+      "count": 19012,
+      "text": " system"
+    },
+    {
+      "rank": 251,
+      "token_id": 2525,
+      "count": 18971,
+      "text": " come"
+    },
+    {
+      "rank": 252,
+      "token_id": 1550,
+      "count": 18959,
+      "text": " high"
+    },
+    {
+      "rank": 253,
+      "token_id": 258,
+      "count": 18868,
+      "text": "in"
+    },
+    {
+      "rank": 254,
+      "token_id": 2696,
+      "count": 18806,
+      "text": " lot"
+    },
+    {
+      "rank": 255,
+      "token_id": 88,
+      "count": 18761,
+      "text": "y"
+    },
+    {
+      "rank": 256,
+      "token_id": 339,
+      "count": 18599,
+      "text": "th"
+    },
+    {
+      "rank": 257,
+      "token_id": 2155,
+      "count": 18537,
+      "text": " different"
+    },
+    {
+      "rank": 258,
+      "token_id": 1850,
+      "count": 18534,
+      "text": " best"
+    },
+    {
+      "rank": 259,
+      "token_id": 2938,
+      "count": 18534,
+      "text": " That"
+    },
+    {
+      "rank": 260,
+      "token_id": 1558,
+      "count": 18509,
+      "text": " does"
+    },
+    {
+      "rank": 261,
+      "token_id": 350,
+      "count": 18376,
+      "text": " T"
+    },
+    {
+      "rank": 262,
+      "token_id": 364,
+      "count": 18197,
+      "text": " '"
+    },
+    {
+      "rank": 263,
+      "token_id": 386,
+      "count": 18083,
+      "text": " M"
+    },
+    {
+      "rank": 264,
+      "token_id": 2670,
+      "count": 18001,
+      "text": " including"
+    },
+    {
+      "rank": 265,
+      "token_id": 2114,
+      "count": 17939,
+      "text": " home"
+    },
+    {
+      "rank": 266,
+      "token_id": 72,
+      "count": 17932,
+      "text": "i"
+    },
+    {
+      "rank": 267,
+      "token_id": 2041,
+      "count": 17885,
+      "text": " without"
+    },
+    {
+      "rank": 268,
+      "token_id": 1372,
+      "count": 17870,
+      "text": " number"
+    },
+    {
+      "rank": 269,
+      "token_id": 479,
+      "count": 17845,
+      "text": " G"
+    },
+    {
+      "rank": 270,
+      "token_id": 730,
+      "count": 17802,
+      "text": " K"
+    },
+    {
+      "rank": 271,
+      "token_id": 398,
+      "count": 17767,
+      "text": "ly"
+    },
+    {
+      "rank": 272,
+      "token_id": 1492,
+      "count": 17742,
+      "text": " help"
+    },
+    {
+      "rank": 273,
+      "token_id": 2598,
+      "count": 17491,
+      "text": " called"
+    },
+    {
+      "rank": 274,
+      "token_id": 3146,
+      "count": 17480,
+      "text": " country"
+    },
+    {
+      "rank": 275,
+      "token_id": 3526,
+      "count": 17469,
+      "text": " million"
+    },
+    {
+      "rank": 276,
+      "token_id": 1142,
+      "count": 17385,
+      "text": " case"
+    },
+    {
+      "rank": 277,
+      "token_id": 431,
+      "count": 17219,
+      "text": " R"
+    },
+    {
+      "rank": 278,
+      "token_id": 2684,
+      "count": 17176,
+      "text": " got"
+    },
+    {
+      "rank": 279,
+      "token_id": 738,
+      "count": 17135,
+      "text": " set"
+    },
+    {
+      "rank": 280,
+      "token_id": 2664,
+      "count": 17113,
+      "text": " better"
+    },
+    {
+      "rank": 281,
+      "token_id": 1401,
+      "count": 17072,
+      "text": " look"
+    },
+    {
+      "rank": 282,
+      "token_id": 1992,
+      "count": 17031,
+      "text": " place"
+    },
+    {
+      "rank": 283,
+      "token_id": 659,
+      "count": 16975,
+      "text": " ."
+    },
+    {
+      "rank": 284,
+      "token_id": 2632,
+      "count": 16967,
+      "text": " little"
+    },
+    {
+      "rank": 285,
+      "token_id": 1824,
+      "count": 16953,
+      "text": " support"
+    },
+    {
+      "rank": 286,
+      "token_id": 472,
+      "count": 16851,
+      "text": " H"
+    },
+    {
+      "rank": 287,
+      "token_id": 2244,
+      "count": 16797,
+      "text": " great"
+    },
+    {
+      "rank": 288,
+      "token_id": 2533,
+      "count": 16742,
+      "text": "]\n\n"
+    },
+    {
+      "rank": 289,
+      "token_id": 883,
+      "count": 16678,
+      "text": " man"
+    },
+    {
+      "rank": 290,
+      "token_id": 1473,
+      "count": 16618,
+      "text": " show"
+    },
+    {
+      "rank": 291,
+      "token_id": 1874,
+      "count": 16594,
+      "text": " group"
+    },
+    {
+      "rank": 292,
+      "token_id": 1459,
+      "count": 16531,
+      "text": " point"
+    },
+    {
+      "rank": 293,
+      "token_id": 3266,
+      "count": 16522,
+      "text": " percent"
+    },
+    {
+      "rank": 294,
+      "token_id": 1986,
+      "count": 16503,
+      "text": "This"
+    },
+    {
+      "rank": 295,
+      "token_id": 3982,
+      "count": 16494,
+      "text": "\u2019ve"
+    },
+    {
+      "rank": 296,
+      "token_id": 4282,
+      "count": 16486,
+      "text": " police"
+    },
+    {
+      "rank": 297,
+      "token_id": 1477,
+      "count": 16468,
+      "text": " find"
+    },
+    {
+      "rank": 298,
+      "token_id": 2003,
+      "count": 16455,
+      "text": " week"
+    },
+    {
+      "rank": 299,
+      "token_id": 3207,
+      "count": 16376,
+      "text": " didn"
+    },
+    {
+      "rank": 300,
+      "token_id": 3200,
+      "count": 16227,
+      "text": " season"
+    },
+    {
+      "rank": 301,
+      "token_id": 393,
+      "count": 16123,
+      "text": " P"
+    },
+    {
+      "rank": 302,
+      "token_id": 2115,
+      "count": 16020,
+      "text": " left"
+    },
+    {
+      "rank": 303,
+      "token_id": 1486,
+      "count": 15995,
+      "text": " play"
+    },
+    {
+      "rank": 304,
+      "token_id": 1654,
+      "count": 15966,
+      "text": "We"
+    },
+    {
+      "rank": 305,
+      "token_id": 2182,
+      "count": 15954,
+      "text": " put"
+    },
+    {
+      "rank": 306,
+      "token_id": 3983,
+      "count": 15952,
+      "text": "But"
+    },
+    {
+      "rank": 307,
+      "token_id": 2355,
+      "count": 15942,
+      "text": " power"
+    },
+    {
+      "rank": 308,
+      "token_id": 434,
+      "count": 15785,
+      "text": " F"
+    },
+    {
+      "rank": 309,
+      "token_id": 2086,
+      "count": 15728,
+      "text": " second"
+    },
+    {
+      "rank": 310,
+      "token_id": 1667,
+      "count": 15675,
+      "text": " using"
+    },
+    {
+      "rank": 311,
+      "token_id": 1189,
+      "count": 15655,
+      "text": ".\""
+    },
+    {
+      "rank": 312,
+      "token_id": 3041,
+      "count": 15652,
+      "text": " far"
+    },
+    {
+      "rank": 313,
+      "token_id": 3693,
+      "count": 15642,
+      "text": " American"
+    },
+    {
+      "rank": 314,
+      "token_id": 2619,
+      "count": 15625,
+      "text": " There"
+    },
+    {
+      "rank": 315,
+      "token_id": 2813,
+      "count": 15435,
+      "text": " company"
+    },
+    {
+      "rank": 316,
+      "token_id": 821,
+      "count": 15419,
+      "text": " data"
+    },
+    {
+      "rank": 317,
+      "token_id": 2329,
+      "count": 15279,
+      "text": " law"
+    },
+    {
+      "rank": 318,
+      "token_id": 2299,
+      "count": 15200,
+      "text": "'re"
+    },
+    {
+      "rank": 319,
+      "token_id": 444,
+      "count": 15194,
+      "text": " L"
+    },
+    {
+      "rank": 320,
+      "token_id": 2297,
+      "count": 15164,
+      "text": " change"
+    },
+    {
+      "rank": 321,
+      "token_id": 276,
+      "count": 15119,
+      "text": "an"
+    },
+    {
+      "rank": 322,
+      "token_id": 3198,
+      "count": 15074,
+      "text": " women"
+    },
+    {
+      "rank": 323,
+      "token_id": 3639,
+      "count": 15050,
+      "text": " United"
+    },
+    {
+      "rank": 324,
+      "token_id": 2669,
+      "count": 15005,
+      "text": " already"
+    },
+    {
+      "rank": 325,
+      "token_id": 1909,
+      "count": 14950,
+      "text": " top"
+    },
+    {
+      "rank": 326,
+      "token_id": 3220,
+      "count": 14945,
+      "text": " money"
+    },
+    {
+      "rank": 327,
+      "token_id": 278,
+      "count": 14940,
+      "text": "al"
+    },
+    {
+      "rank": 328,
+      "token_id": 2686,
+      "count": 14883,
+      "text": " less"
+    },
+    {
+      "rank": 329,
+      "token_id": 2937,
+      "count": 14795,
+      "text": " later"
+    },
+    {
+      "rank": 330,
+      "token_id": 3170,
+      "count": 14789,
+      "text": " why"
+    },
+    {
+      "rank": 331,
+      "token_id": 1634,
+      "count": 14699,
+      "text": " As"
+    },
+    {
+      "rank": 332,
+      "token_id": 3166,
+      "count": 14642,
+      "text": " thing"
+    },
+    {
+      "rank": 333,
+      "token_id": 817,
+      "count": 14630,
+      "text": " per"
+    },
+    {
+      "rank": 334,
+      "token_id": 2677,
+      "count": 14598,
+      "text": " always"
+    },
+    {
+      "rank": 335,
+      "token_id": 451,
+      "count": 14586,
+      "text": " N"
+    },
+    {
+      "rank": 336,
+      "token_id": 2073,
+      "count": 14553,
+      "text": "\u201c"
+    },
+    {
+      "rank": 337,
+      "token_id": 905,
+      "count": 14509,
+      "text": ".com"
+    },
+    {
+      "rank": 338,
+      "token_id": 35,
+      "count": 14505,
+      "text": "D"
+    },
+    {
+      "rank": 339,
+      "token_id": 1549,
+      "count": 14442,
+      "text": " again"
+    },
+    {
+      "rank": 340,
+      "token_id": 3040,
+      "count": 14441,
+      "text": " four"
+    },
+    {
+      "rank": 341,
+      "token_id": 2409,
+      "count": 14378,
+      "text": " big"
+    },
+    {
+      "rank": 342,
+      "token_id": 2952,
+      "count": 14213,
+      "text": " able"
+    },
+    {
+      "rank": 343,
+      "token_id": 1752,
+      "count": 14211,
+      "text": " For"
+    },
+    {
+      "rank": 344,
+      "token_id": 3283,
+      "count": 14171,
+      "text": " city"
+    },
+    {
+      "rank": 345,
+      "token_id": 2097,
+      "count": 14169,
+      "text": " fact"
+    },
+    {
+      "rank": 346,
+      "token_id": 3123,
+      "count": 14162,
+      "text": " away"
+    },
+    {
+      "rank": 347,
+      "token_id": 2849,
+      "count": 14135,
+      "text": " days"
+    },
+    {
+      "rank": 348,
+      "token_id": 1995,
+      "count": 14116,
+      "text": " information"
+    },
+    {
+      "rank": 349,
+      "token_id": 1969,
+      "count": 14110,
+      "text": " must"
+    },
+    {
+      "rank": 350,
+      "token_id": 2274,
+      "count": 14015,
+      "text": " US"
+    },
+    {
+      "rank": 351,
+      "token_id": 2055,
+      "count": 13991,
+      "text": " So"
+    },
+    {
+      "rank": 352,
+      "token_id": 3245,
+      "count": 13976,
+      "text": " least"
+    },
+    {
+      "rank": 353,
+      "token_id": 1177,
+      "count": 13847,
+      "text": " --"
+    },
+    {
+      "rank": 354,
+      "token_id": 288,
+      "count": 13827,
+      "text": "es"
+    },
+    {
+      "rank": 355,
+      "token_id": 3171,
+      "count": 13815,
+      "text": " doesn"
+    },
+    {
+      "rank": 356,
+      "token_id": 4249,
+      "count": 13759,
+      "text": "\u2019m"
+    },
+    {
+      "rank": 357,
+      "token_id": 263,
+      "count": 13727,
+      "text": "on"
+    },
+    {
+      "rank": 358,
+      "token_id": 3364,
+      "count": 13722,
+      "text": " story"
+    },
+    {
+      "rank": 359,
+      "token_id": 3498,
+      "count": 13639,
+      "text": " though"
+    },
+    {
+      "rank": 360,
+      "token_id": 3322,
+      "count": 13527,
+      "text": " enough"
+    },
+    {
+      "rank": 361,
+      "token_id": 3697,
+      "count": 13524,
+      "text": " came"
+    },
+    {
+      "rank": 362,
+      "token_id": 3080,
+      "count": 13504,
+      "text": " until"
+    },
+    {
+      "rank": 363,
+      "token_id": 2997,
+      "count": 13444,
+      "text": " family"
+    },
+    {
+      "rank": 364,
+      "token_id": 2293,
+      "count": 13441,
+      "text": "\u2014"
+    },
+    {
+      "rank": 365,
+      "token_id": 3259,
+      "count": 13438,
+      "text": " making"
+    },
+    {
+      "rank": 366,
+      "token_id": 4948,
+      "count": 13323,
+      "text": " political"
+    },
+    {
+      "rank": 367,
+      "token_id": 1931,
+      "count": 13292,
+      "text": " real"
+    },
+    {
+      "rank": 368,
+      "token_id": 3238,
+      "count": 13161,
+      "text": " working"
+    },
+    {
+      "rank": 369,
+      "token_id": 3520,
+      "count": 13137,
+      "text": " actually"
+    },
+    {
+      "rank": 370,
+      "token_id": 2989,
+      "count": 13136,
+      "text": " important"
+    },
+    {
+      "rank": 371,
+      "token_id": 3635,
+      "count": 13115,
+      "text": " become"
+    },
+    {
+      "rank": 372,
+      "token_id": 3867,
+      "count": 13027,
+      "text": " took"
+    },
+    {
+      "rank": 373,
+      "token_id": 3267,
+      "count": 12953,
+      "text": " past"
+    },
+    {
+      "rank": 374,
+      "token_id": 2765,
+      "count": 12823,
+      "text": " won"
+    },
+    {
+      "rank": 375,
+      "token_id": 1895,
+      "count": 12807,
+      "text": " report"
+    },
+    {
+      "rank": 376,
+      "token_id": 3545,
+      "count": 12773,
+      "text": " often"
+    },
+    {
+      "rank": 377,
+      "token_id": 33,
+      "count": 12754,
+      "text": "B"
+    },
+    {
+      "rank": 378,
+      "token_id": 3039,
+      "count": 12703,
+      "text": " times"
+    },
+    {
+      "rank": 379,
+      "token_id": 467,
+      "count": 12681,
+      "text": " W"
+    },
+    {
+      "rank": 380,
+      "token_id": 78,
+      "count": 12625,
+      "text": "o"
+    },
+    {
+      "rank": 381,
+      "token_id": 34,
+      "count": 12597,
+      "text": "C"
+    },
+    {
+      "rank": 382,
+      "token_id": 3512,
+      "count": 12597,
+      "text": " ever"
+    },
+    {
+      "rank": 383,
+      "token_id": 2480,
+      "count": 12596,
+      "text": " full"
+    },
+    {
+      "rank": 384,
+      "token_id": 285,
+      "count": 12442,
+      "text": "is"
+    },
+    {
+      "rank": 385,
+      "token_id": 1191,
+      "count": 12431,
+      "text": " start"
+    },
+    {
+      "rank": 386,
+      "token_id": 3868,
+      "count": 12383,
+      "text": " games"
+    },
+    {
+      "rank": 387,
+      "token_id": 2968,
+      "count": 12371,
+      "text": " give"
+    },
+    {
+      "rank": 388,
+      "token_id": 1598,
+      "count": 12369,
+      "text": " run"
+    },
+    {
+      "rank": 389,
+      "token_id": 1910,
+      "count": 12335,
+      "text": " free"
+    },
+    {
+      "rank": 390,
+      "token_id": 2613,
+      "count": 12331,
+      "text": " small"
+    },
+    {
+      "rank": 391,
+      "token_id": 829,
+      "count": 12298,
+      "text": " name"
+    },
+    {
+      "rank": 392,
+      "token_id": 269,
+      "count": 12273,
+      "text": "or"
+    },
+    {
+      "rank": 393,
+      "token_id": 4092,
+      "count": 12254,
+      "text": " according"
+    },
+    {
+      "rank": 394,
+      "token_id": 3432,
+      "count": 12154,
+      "text": " having"
+    },
+    {
+      "rank": 395,
+      "token_id": 2506,
+      "count": 12148,
+      "text": " keep"
+    },
+    {
+      "rank": 396,
+      "token_id": 3730,
+      "count": 12142,
+      "text": " doing"
+    },
+    {
+      "rank": 397,
+      "token_id": 4741,
+      "count": 12097,
+      "text": " former"
+    },
+    {
+      "rank": 398,
+      "token_id": 1973,
+      "count": 12072,
+      "text": " order"
+    },
+    {
+      "rank": 399,
+      "token_id": 2953,
+      "count": 12049,
+      "text": " men"
+    },
+    {
+      "rank": 400,
+      "token_id": 3884,
+      "count": 12046,
+      "text": " seen"
+    },
+    {
+      "rank": 401,
+      "token_id": 4363,
+      "count": 12029,
+      "text": " likely"
+    },
+    {
+      "rank": 402,
+      "token_id": 3351,
+      "count": 12027,
+      "text": " today"
+    },
+    {
+      "rank": 403,
+      "token_id": 7105,
+      "count": 12008,
+      "text": " Obama"
+    },
+    {
+      "rank": 404,
+      "token_id": 3937,
+      "count": 12006,
+      "text": " went"
+    },
+    {
+      "rank": 405,
+      "token_id": 3807,
+      "count": 12002,
+      "text": " several"
+    },
+    {
+      "rank": 406,
+      "token_id": 4124,
+      "count": 11953,
+      "text": " early"
+    },
+    {
+      "rank": 407,
+      "token_id": 4700,
+      "count": 11947,
+      "text": "\u2019ll"
+    },
+    {
+      "rank": 408,
+      "token_id": 3687,
+      "count": 11932,
+      "text": " media"
+    },
+    {
+      "rank": 409,
+      "token_id": 2932,
+      "count": 11904,
+      "text": " She"
+    },
+    {
+      "rank": 410,
+      "token_id": 50,
+      "count": 11899,
+      "text": "S"
+    },
+    {
+      "rank": 411,
+      "token_id": 1519,
+      "count": 11888,
+      "text": "He"
+    },
+    {
+      "rank": 412,
+      "token_id": 2906,
+      "count": 11860,
+      "text": " school"
+    },
+    {
+      "rank": 413,
+      "token_id": 2588,
+      "count": 11856,
+      "text": " hard"
+    },
+    {
+      "rank": 414,
+      "token_id": 4666,
+      "count": 11841,
+      "text": "-year"
+    },
+    {
+      "rank": 415,
+      "token_id": 3425,
+      "count": 11818,
+      "text": " whether"
+    },
+    {
+      "rank": 416,
+      "token_id": 4236,
+      "count": 11734,
+      "text": " five"
+    },
+    {
+      "rank": 417,
+      "token_id": 1515,
+      "count": 11728,
+      "text": "man"
+    },
+    {
+      "rank": 418,
+      "token_id": 4217,
+      "count": 11713,
+      "text": " players"
+    },
+    {
+      "rank": 419,
+      "token_id": 2841,
+      "count": 11703,
+      "text": " children"
+    },
+    {
+      "rank": 420,
+      "token_id": 4796,
+      "count": 11680,
+      "text": " campaign"
+    },
+    {
+      "rank": 421,
+      "token_id": 3055,
+      "count": 11654,
+      "text": " once"
+    },
+    {
+      "rank": 422,
+      "token_id": 1968,
+      "count": 11642,
+      "text": " head"
+    },
+    {
+      "rank": 423,
+      "token_id": 619,
+      "count": 11628,
+      "text": " J"
+    },
+    {
+      "rank": 424,
+      "token_id": 4261,
+      "count": 11579,
+      "text": " York"
+    },
+    {
+      "rank": 425,
+      "token_id": 1787,
+      "count": 11546,
+      "text": " open"
+    },
+    {
+      "rank": 426,
+      "token_id": 3110,
+      "count": 11524,
+      "text": " example"
+    },
+    {
+      "rank": 427,
+      "token_id": 3951,
+      "count": 11518,
+      "text": " months"
+    },
+    {
+      "rank": 428,
+      "token_id": 3204,
+      "count": 11435,
+      "text": " possible"
+    },
+    {
+      "rank": 429,
+      "token_id": 1079,
+      "count": 11434,
+      "text": " am"
+    },
+    {
+      "rank": 430,
+      "token_id": 4180,
+      "count": 11424,
+      "text": " States"
+    },
+    {
+      "rank": 431,
+      "token_id": 1882,
+      "count": 11404,
+      "text": " process"
+    },
+    {
+      "rank": 432,
+      "token_id": 2666,
+      "count": 11394,
+      "text": " feel"
+    },
+    {
+      "rank": 433,
+      "token_id": 650,
+      "count": 11380,
+      "text": " un"
+    },
+    {
+      "rank": 434,
+      "token_id": 3881,
+      "count": 11355,
+      "text": " known"
+    },
+    {
+      "rank": 435,
+      "token_id": 2878,
+      "count": 11338,
+      "text": " within"
+    },
+    {
+      "rank": 436,
+      "token_id": 3308,
+      "count": 11319,
+      "text": " course"
+    },
+    {
+      "rank": 437,
+      "token_id": 3669,
+      "count": 11299,
+      "text": " news"
+    },
+    {
+      "rank": 438,
+      "token_id": 3108,
+      "count": 11298,
+      "text": " side"
+    },
+    {
+      "rank": 439,
+      "token_id": 3015,
+      "count": 11294,
+      "text": " water"
+    },
+    {
+      "rank": 440,
+      "token_id": 268,
+      "count": 11276,
+      "text": "en"
+    },
+    {
+      "rank": 441,
+      "token_id": 1555,
+      "count": 11267,
+      "text": " line"
+    },
+    {
+      "rank": 442,
+      "token_id": 2562,
+      "count": 11252,
+      "text": " business"
+    },
+    {
+      "rank": 443,
+      "token_id": 2814,
+      "count": 11251,
+      "text": " done"
+    },
+    {
+      "rank": 444,
+      "token_id": 3363,
+      "count": 11245,
+      "text": " means"
+    },
+    {
+      "rank": 445,
+      "token_id": 3460,
+      "count": 11173,
+      "text": " large"
+    },
+    {
+      "rank": 446,
+      "token_id": 468,
+      "count": 11167,
+      "text": " E"
+    },
+    {
+      "rank": 447,
+      "token_id": 3822,
+      "count": 11151,
+      "text": " University"
+    },
+    {
+      "rank": 448,
+      "token_id": 4795,
+      "count": 11141,
+      "text": " President"
+    },
+    {
+      "rank": 449,
+      "token_id": 4588,
+      "count": 11097,
+      "text": " asked"
+    },
+    {
+      "rank": 450,
+      "token_id": 1697,
+      "count": 11096,
+      "text": " person"
+    },
+    {
+      "rank": 451,
+      "token_id": 312,
+      "count": 11080,
+      "text": " re"
+    },
+    {
+      "rank": 452,
+      "token_id": 284,
+      "count": 11052,
+      "text": " ="
+    },
+    {
+      "rank": 453,
+      "token_id": 2121,
+      "count": 11051,
+      "text": "As"
+    },
+    {
+      "rank": 454,
+      "token_id": 3853,
+      "count": 11002,
+      "text": " future"
+    },
+    {
+      "rank": 455,
+      "token_id": 2205,
+      "count": 10984,
+      "text": " local"
+    },
+    {
+      "rank": 456,
+      "token_id": 4767,
+      "count": 10983,
+      "text": " president"
+    },
+    {
+      "rank": 457,
+      "token_id": 3197,
+      "count": 10979,
+      "text": " When"
+    },
+    {
+      "rank": 458,
+      "token_id": 2661,
+      "count": 10978,
+      "text": " given"
+    },
+    {
+      "rank": 459,
+      "token_id": 68,
+      "count": 10965,
+      "text": "e"
+    },
+    {
+      "rank": 460,
+      "token_id": 380,
+      "count": 10965,
+      "text": "ist"
+    },
+    {
+      "rank": 461,
+      "token_id": 44,
+      "count": 10942,
+      "text": "M"
+    },
+    {
+      "rank": 462,
+      "token_id": 2679,
+      "count": 10934,
+      "text": "If"
+    },
+    {
+      "rank": 463,
+      "token_id": 1782,
+      "count": 10918,
+      "text": "the"
+    },
+    {
+      "rank": 464,
+      "token_id": 2766,
+      "count": 10862,
+      "text": " video"
+    },
+    {
+      "rank": 465,
+      "token_id": 3093,
+      "count": 10847,
+      "text": " kind"
+    },
+    {
+      "rank": 466,
+      "token_id": 506,
+      "count": 10840,
+      "text": " O"
+    },
+    {
+      "rank": 467,
+      "token_id": 3942,
+      "count": 10836,
+      "text": " community"
+    },
+    {
+      "rank": 468,
+      "token_id": 3738,
+      "count": 10817,
+      "text": " human"
+    },
+    {
+      "rank": 469,
+      "token_id": 3941,
+      "count": 10814,
+      "text": " across"
+    },
+    {
+      "rank": 470,
+      "token_id": 4411,
+      "count": 10799,
+      "text": " believe"
+    },
+    {
+      "rank": 471,
+      "token_id": 3590,
+      "count": 10791,
+      "text": " social"
+    },
+    {
+      "rank": 472,
+      "token_id": 3381,
+      "count": 10786,
+      "text": " thought"
+    },
+    {
+      "rank": 473,
+      "token_id": 3613,
+      "count": 10762,
+      "text": " members"
+    },
+    {
+      "rank": 474,
+      "token_id": 2704,
+      "count": 10715,
+      "text": " sure"
+    },
+    {
+      "rank": 475,
+      "token_id": 3602,
+      "count": 10715,
+      "text": " yet"
+    },
+    {
+      "rank": 476,
+      "token_id": 3491,
+      "count": 10693,
+      "text": " problem"
+    },
+    {
+      "rank": 477,
+      "token_id": 609,
+      "count": 10668,
+      "text": " &"
+    },
+    {
+      "rank": 478,
+      "token_id": 300,
+      "count": 10649,
+      "text": "as"
+    },
+    {
+      "rank": 479,
+      "token_id": 4392,
+      "count": 10630,
+      "text": " Mr"
+    },
+    {
+      "rank": 480,
+      "token_id": 37,
+      "count": 10609,
+      "text": "F"
+    },
+    {
+      "rank": 481,
+      "token_id": 3800,
+      "count": 10606,
+      "text": " others"
+    },
+    {
+      "rank": 482,
+      "token_id": 2820,
+      "count": 10586,
+      "text": " health"
+    },
+    {
+      "rank": 483,
+      "token_id": 4221,
+      "count": 10573,
+      "text": " among"
+    },
+    {
+      "rank": 484,
+      "token_id": 2188,
+      "count": 10569,
+      "text": " level"
+    },
+    {
+      "rank": 485,
+      "token_id": 3643,
+      "count": 10567,
+      "text": " makes"
+    },
+    {
+      "rank": 486,
+      "token_id": 4678,
+      "count": 10537,
+      "text": " House"
+    },
+    {
+      "rank": 487,
+      "token_id": 3234,
+      "count": 10519,
+      "text": " State"
+    },
+    {
+      "rank": 488,
+      "token_id": 3709,
+      "count": 10512,
+      "text": " getting"
+    },
+    {
+      "rank": 489,
+      "token_id": 1077,
+      "count": 10449,
+      "text": " let"
+    },
+    {
+      "rank": 490,
+      "token_id": 3729,
+      "count": 10415,
+      "text": " night"
+    },
+    {
+      "rank": 491,
+      "token_id": 2142,
+      "count": 10403,
+      "text": "ism"
+    },
+    {
+      "rank": 492,
+      "token_id": 2219,
+      "count": 10388,
+      "text": "!\n\n"
+    },
+    {
+      "rank": 493,
+      "token_id": 4265,
+      "count": 10375,
+      "text": " issue"
+    },
+    {
+      "rank": 494,
+      "token_id": 2310,
+      "count": 10374,
+      "text": " old"
+    },
+    {
+      "rank": 495,
+      "token_id": 3855,
+      "count": 10358,
+      "text": " started"
+    },
+    {
+      "rank": 496,
+      "token_id": 38,
+      "count": 10321,
+      "text": "G"
+    },
+    {
+      "rank": 497,
+      "token_id": 4499,
+      "count": 10312,
+      "text": " edit"
+    },
+    {
+      "rank": 498,
+      "token_id": 301,
+      "count": 10304,
+      "text": "el"
+    },
+    {
+      "rank": 499,
+      "token_id": 1618,
+      "count": 10303,
+      "text": " call"
+    },
+    {
+      "rank": 500,
+      "token_id": 4116,
+      "count": 10299,
+      "text": " war"
+    },
+    {
+      "rank": 501,
+      "token_id": 647,
+      "count": 10266,
+      "text": " V"
+    },
+    {
+      "rank": 502,
+      "token_id": 2524,
+      "count": 10248,
+      "text": " control"
+    },
+    {
+      "rank": 503,
+      "token_id": 3118,
+      "count": 10220,
+      "text": " based"
+    },
+    {
+      "rank": 504,
+      "token_id": 437,
+      "count": 10190,
+      "text": "and"
+    },
+    {
+      "rank": 505,
+      "token_id": 1154,
+      "count": 10174,
+      "text": " ,"
+    },
+    {
+      "rank": 506,
+      "token_id": 65,
+      "count": 10105,
+      "text": "b"
+    },
+    {
+      "rank": 507,
+      "token_id": 4134,
+      "count": 10101,
+      "text": " ago"
+    },
+    {
+      "rank": 508,
+      "token_id": 409,
+      "count": 10084,
+      "text": " de"
+    },
+    {
+      "rank": 509,
+      "token_id": 4558,
+      "count": 10070,
+      "text": " almost"
+    },
+    {
+      "rank": 510,
+      "token_id": 281,
+      "count": 10063,
+      "text": " p"
+    },
+    {
+      "rank": 511,
+      "token_id": 4013,
+      "count": 10063,
+      "text": " series"
+    },
+    {
+      "rank": 512,
+      "token_id": 4142,
+      "count": 10055,
+      "text": "\u2013"
+    },
+    {
+      "rank": 513,
+      "token_id": 2477,
+      "count": 10044,
+      "text": " non"
+    },
+    {
+      "rank": 514,
+      "token_id": 2500,
+      "count": 10034,
+      "text": " available"
+    },
+    {
+      "rank": 515,
+      "token_id": 3555,
+      "count": 10022,
+      "text": " What"
+    },
+    {
+      "rank": 516,
+      "token_id": 3213,
+      "count": 9981,
+      "text": " recent"
+    },
+    {
+      "rank": 517,
+      "token_id": 4041,
+      "count": 9977,
+      "text": " comes"
+    },
+    {
+      "rank": 518,
+      "token_id": 4460,
+      "count": 9973,
+      "text": " trying"
+    },
+    {
+      "rank": 519,
+      "token_id": 3003,
+      "count": 9972,
+      "text": "'ve"
+    },
+    {
+      "rank": 520,
+      "token_id": 4614,
+      "count": 9971,
+      "text": " party"
+    },
+    {
+      "rank": 521,
+      "token_id": 1736,
+      "count": 9963,
+      "text": " post"
+    },
+    {
+      "rank": 522,
+      "token_id": 2311,
+      "count": 9960,
+      "text": " book"
+    },
+    {
+      "rank": 523,
+      "token_id": 2701,
+      "count": 9949,
+      "text": " following"
+    },
+    {
+      "rank": 524,
+      "token_id": 3139,
+      "count": 9926,
+      "text": " experience"
+    },
+    {
+      "rank": 525,
+      "token_id": 71,
+      "count": 9921,
+      "text": "h"
+    },
+    {
+      "rank": 526,
+      "token_id": 2308,
+      "count": 9853,
+      "text": " No"
+    },
+    {
+      "rank": 527,
+      "token_id": 2254,
+      "count": 9835,
+      "text": " month"
+    },
+    {
+      "rank": 528,
+      "token_id": 3786,
+      "count": 9823,
+      "text": " together"
+    },
+    {
+      "rank": 529,
+      "token_id": 2572,
+      "count": 9817,
+      "text": ".,"
+    },
+    {
+      "rank": 530,
+      "token_id": 3598,
+      "count": 9760,
+      "text": " major"
+    },
+    {
+      "rank": 531,
+      "token_id": 3694,
+      "count": 9752,
+      "text": " added"
+    },
+    {
+      "rank": 532,
+      "token_id": 3156,
+      "count": 9750,
+      "text": " along"
+    },
+    {
+      "rank": 533,
+      "token_id": 4522,
+      "count": 9748,
+      "text": " idea"
+    },
+    {
+      "rank": 534,
+      "token_id": 4436,
+      "count": 9746,
+      "text": " isn"
+    },
+    {
+      "rank": 535,
+      "token_id": 3593,
+      "count": 9743,
+      "text": ").\n\n"
+    },
+    {
+      "rank": 536,
+      "token_id": 4429,
+      "count": 9728,
+      "text": " taken"
+    },
+    {
+      "rank": 537,
+      "token_id": 76,
+      "count": 9699,
+      "text": "m"
+    },
+    {
+      "rank": 538,
+      "token_id": 3862,
+      "count": 9696,
+      "text": "There"
+    },
+    {
+      "rank": 539,
+      "token_id": 49,
+      "count": 9692,
+      "text": "R"
+    },
+    {
+      "rank": 540,
+      "token_id": 5159,
+      "count": 9686,
+      "text": " America"
+    },
+    {
+      "rank": 541,
+      "token_id": 2797,
+      "count": 9672,
+      "text": " clear"
+    },
+    {
+      "rank": 542,
+      "token_id": 3082,
+      "count": 9662,
+      "text": " area"
+    },
+    {
+      "rank": 543,
+      "token_id": 3036,
+      "count": 9659,
+      "text": "And"
+    },
+    {
+      "rank": 544,
+      "token_id": 671,
+      "count": 9648,
+      "text": " #"
+    },
+    {
+      "rank": 545,
+      "token_id": 3840,
+      "count": 9644,
+      "text": " history"
+    },
+    {
+      "rank": 546,
+      "token_id": 2948,
+      "count": 9626,
+      "text": " love"
+    },
+    {
+      "rank": 547,
+      "token_id": 58,
+      "count": 9600,
+      "text": "["
+    },
+    {
+      "rank": 548,
+      "token_id": 277,
+      "count": 9585,
+      "text": "ar"
+    },
+    {
+      "rank": 549,
+      "token_id": 480,
+      "count": 9580,
+      "text": "able"
+    },
+    {
+      "rank": 550,
+      "token_id": 3271,
+      "count": 9572,
+      "text": " move"
+    },
+    {
+      "rank": 551,
+      "token_id": 3776,
+      "count": 9570,
+      "text": " One"
+    },
+    {
+      "rank": 552,
+      "token_id": 355,
+      "count": 9567,
+      "text": "us"
+    },
+    {
+      "rank": 553,
+      "token_id": 2618,
+      "count": 9564,
+      "text": " job"
+    },
+    {
+      "rank": 554,
+      "token_id": 3484,
+      "count": 9549,
+      "text": " deal"
+    },
+    {
+      "rank": 555,
+      "token_id": 3081,
+      "count": 9543,
+      "text": " market"
+    },
+    {
+      "rank": 556,
+      "token_id": 3330,
+      "count": 9511,
+      "text": " looking"
+    },
+    {
+      "rank": 557,
+      "token_id": 39,
+      "count": 9510,
+      "text": "H"
+    },
+    {
+      "rank": 558,
+      "token_id": 5488,
+      "count": 9502,
+      "text": " saying"
+    },
+    {
+      "rank": 559,
+      "token_id": 4113,
+      "count": 9491,
+      "text": " anything"
+    },
+    {
+      "rank": 560,
+      "token_id": 3405,
+      "count": 9484,
+      "text": " question"
+    },
+    {
+      "rank": 561,
+      "token_id": 10444,
+      "count": 9452,
+      "text": " ]\n\n"
+    },
+    {
+      "rank": 562,
+      "token_id": 6277,
+      "count": 9408,
+      "text": " military"
+    },
+    {
+      "rank": 563,
+      "token_id": 292,
+      "count": 9383,
+      "text": "ic"
+    },
+    {
+      "rank": 564,
+      "token_id": 4815,
+      "count": 9378,
+      "text": " behind"
+    },
+    {
+      "rank": 565,
+      "token_id": 47,
+      "count": 9341,
+      "text": "P"
+    },
+    {
+      "rank": 566,
+      "token_id": 4751,
+      "count": 9329,
+      "text": " rather"
+    },
+    {
+      "rank": 567,
+      "token_id": 3908,
+      "count": 9319,
+      "text": " young"
+    },
+    {
+      "rank": 568,
+      "token_id": 4279,
+      "count": 9316,
+      "text": " half"
+    },
+    {
+      "rank": 569,
+      "token_id": 2776,
+      "count": 9256,
+      "text": "'m"
+    },
+    {
+      "rank": 570,
+      "token_id": 3175,
+      "count": 9255,
+      "text": " single"
+    },
+    {
+      "rank": 571,
+      "token_id": 3217,
+      "count": 9253,
+      "text": " May"
+    },
+    {
+      "rank": 572,
+      "token_id": 74,
+      "count": 9226,
+      "text": "k"
+    },
+    {
+      "rank": 573,
+      "token_id": 4763,
+      "count": 9213,
+      "text": " security"
+    },
+    {
+      "rank": 574,
+      "token_id": 2390,
+      "count": 9210,
+      "text": " project"
+    },
+    {
+      "rank": 575,
+      "token_id": 4829,
+      "count": 9204,
+      "text": " wanted"
+    },
+    {
+      "rank": 576,
+      "token_id": 5473,
+      "count": 9192,
+      "text": " court"
+    },
+    {
+      "rank": 577,
+      "token_id": 2291,
+      "count": 9180,
+      "text": " pay"
+    },
+    {
+      "rank": 578,
+      "token_id": 1430,
+      "count": 9167,
+      "text": " try"
+    },
+    {
+      "rank": 579,
+      "token_id": 3579,
+      "count": 9128,
+      "text": " face"
+    },
+    {
+      "rank": 580,
+      "token_id": 3920,
+      "count": 9095,
+      "text": " study"
+    },
+    {
+      "rank": 581,
+      "token_id": 794,
+      "count": 9083,
+      "text": " St"
+    },
+    {
+      "rank": 582,
+      "token_id": 1482,
+      "count": 9080,
+      "text": " current"
+    },
+    {
+      "rank": 583,
+      "token_id": 3887,
+      "count": 9069,
+      "text": " live"
+    },
+    {
+      "rank": 584,
+      "token_id": 760,
+      "count": 9057,
+      "text": " |"
+    },
+    {
+      "rank": 585,
+      "token_id": 67,
+      "count": 9041,
+      "text": "d"
+    },
+    {
+      "rank": 586,
+      "token_id": 1424,
+      "count": 9006,
+      "text": " hand"
+    },
+    {
+      "rank": 587,
+      "token_id": 2009,
+      "count": 8980,
+      "text": " All"
+    },
+    {
+      "rank": 588,
+      "token_id": 3757,
+      "count": 8958,
+      "text": " John"
+    },
+    {
+      "rank": 589,
+      "token_id": 4325,
+      "count": 8942,
+      "text": " someone"
+    },
+    {
+      "rank": 590,
+      "token_id": 1352,
+      "count": 8934,
+      "text": " form"
+    },
+    {
+      "rank": 591,
+      "token_id": 2699,
+      "count": 8860,
+      "text": " bit"
+    },
+    {
+      "rank": 592,
+      "token_id": 89,
+      "count": 8848,
+      "text": "z"
+    },
+    {
+      "rank": 593,
+      "token_id": 4787,
+      "count": 8845,
+      "text": " North"
+    },
+    {
+      "rank": 594,
+      "token_id": 4311,
+      "count": 8815,
+      "text": " City"
+    },
+    {
+      "rank": 595,
+      "token_id": 2453,
+      "count": 8798,
+      "text": " care"
+    },
+    {
+      "rank": 596,
+      "token_id": 4633,
+      "count": 8749,
+      "text": " taking"
+    },
+    {
+      "rank": 597,
+      "token_id": 4961,
+      "count": 8745,
+      "text": " reported"
+    },
+    {
+      "rank": 598,
+      "token_id": 4545,
+      "count": 8740,
+      "text": " death"
+    },
+    {
+      "rank": 599,
+      "token_id": 4842,
+      "count": 8740,
+      "text": " policy"
+    },
+    {
+      "rank": 600,
+      "token_id": 2025,
+      "count": 8730,
+      "text": " program"
+    },
+    {
+      "rank": 601,
+      "token_id": 5313,
+      "count": 8728,
+      "text": " national"
+    },
+    {
+      "rank": 602,
+      "token_id": 2014,
+      "count": 8717,
+      "text": " To"
+    },
+    {
+      "rank": 603,
+      "token_id": 43,
+      "count": 8713,
+      "text": "L"
+    },
+    {
+      "rank": 604,
+      "token_id": 309,
+      "count": 8706,
+      "text": "am"
+    },
+    {
+      "rank": 605,
+      "token_id": 5480,
+      "count": 8703,
+      "text": " decision"
+    },
+    {
+      "rank": 606,
+      "token_id": 3164,
+      "count": 8701,
+      "text": " win"
+    },
+    {
+      "rank": 607,
+      "token_id": 1803,
+      "count": 8690,
+      "text": " car"
+    },
+    {
+      "rank": 608,
+      "token_id": 1140,
+      "count": 8664,
+      "text": " list"
+    },
+    {
+      "rank": 609,
+      "token_id": 4658,
+      "count": 8662,
+      "text": " probably"
+    },
+    {
+      "rank": 610,
+      "token_id": 42,
+      "count": 8659,
+      "text": "K"
+    },
+    {
+      "rank": 611,
+      "token_id": 83,
+      "count": 8647,
+      "text": "t"
+    },
+    {
+      "rank": 612,
+      "token_id": 4302,
+      "count": 8645,
+      "text": " nothing"
+    },
+    {
+      "rank": 613,
+      "token_id": 3188,
+      "count": 8606,
+      "text": " rights"
+    },
+    {
+      "rank": 614,
+      "token_id": 3119,
+      "count": 8591,
+      "text": " plan"
+    },
+    {
+      "rank": 615,
+      "token_id": 5001,
+      "count": 8587,
+      "text": " coming"
+    },
+    {
+      "rank": 616,
+      "token_id": 2487,
+      "count": 8576,
+      "text": " body"
+    },
+    {
+      "rank": 617,
+      "token_id": 3347,
+      "count": 8568,
+      "text": " low"
+    },
+    {
+      "rank": 618,
+      "token_id": 84,
+      "count": 8563,
+      "text": "u"
+    },
+    {
+      "rank": 619,
+      "token_id": 6775,
+      "count": 8560,
+      "text": " federal"
+    },
+    {
+      "rank": 620,
+      "token_id": 275,
+      "count": 8553,
+      "text": "it"
+    },
+    {
+      "rank": 621,
+      "token_id": 3607,
+      "count": 8544,
+      "text": " food"
+    },
+    {
+      "rank": 622,
+      "token_id": 4743,
+      "count": 8540,
+      "text": " six"
+    },
+    {
+      "rank": 623,
+      "token_id": 2411,
+      "count": 8538,
+      "text": " At"
+    },
+    {
+      "rank": 624,
+      "token_id": 266,
+      "count": 8507,
+      "text": "at"
+    },
+    {
+      "rank": 625,
+      "token_id": 8120,
+      "count": 8504,
+      "text": " Clinton"
+    },
+    {
+      "rank": 626,
+      "token_id": 5055,
+      "count": 8501,
+      "text": " National"
+    },
+    {
+      "rank": 627,
+      "token_id": 2610,
+      "count": 8471,
+      "text": "You"
+    },
+    {
+      "rank": 628,
+      "token_id": 1102,
+      "count": 8468,
+      "text": " result"
+    },
+    {
+      "rank": 629,
+      "token_id": 3265,
+      "count": 8441,
+      "text": " close"
+    },
+    {
+      "rank": 630,
+      "token_id": 6139,
+      "count": 8437,
+      "text": " wrote"
+    },
+    {
+      "rank": 631,
+      "token_id": 2781,
+      "count": 8429,
+      "text": " player"
+    },
+    {
+      "rank": 632,
+      "token_id": 4764,
+      "count": 8429,
+      "text": " however"
+    },
+    {
+      "rank": 633,
+      "token_id": 4361,
+      "count": 8423,
+      "text": " whole"
+    },
+    {
+      "rank": 634,
+      "token_id": 4623,
+      "count": 8405,
+      "text": " further"
+    },
+    {
+      "rank": 635,
+      "token_id": 4531,
+      "count": 8403,
+      "text": " film"
+    },
+    {
+      "rank": 636,
+      "token_id": 6925,
+      "count": 8402,
+      "text": "\u2019d"
+    },
+    {
+      "rank": 637,
+      "token_id": 2987,
+      "count": 8397,
+      "text": " either"
+    },
+    {
+      "rank": 638,
+      "token_id": 645,
+      "count": 8384,
+      "text": "ie"
+    },
+    {
+      "rank": 639,
+      "token_id": 4354,
+      "count": 8383,
+      "text": " However"
+    },
+    {
+      "rank": 640,
+      "token_id": 2874,
+      "count": 8378,
+      "text": " reason"
+    },
+    {
+      "rank": 641,
+      "token_id": 3691,
+      "count": 8377,
+      "text": " black"
+    },
+    {
+      "rank": 642,
+      "token_id": 5110,
+      "count": 8370,
+      "text": " companies"
+    },
+    {
+      "rank": 643,
+      "token_id": 2805,
+      "count": 8367,
+      "text": " short"
+    },
+    {
+      "rank": 644,
+      "token_id": 3550,
+      "count": 8366,
+      "text": " space"
+    },
+    {
+      "rank": 645,
+      "token_id": 3742,
+      "count": 8366,
+      "text": " tax"
+    },
+    {
+      "rank": 646,
+      "token_id": 1349,
+      "count": 8364,
+      "text": " read"
+    },
+    {
+      "rank": 647,
+      "token_id": 4152,
+      "count": 8359,
+      "text": " due"
+    },
+    {
+      "rank": 648,
+      "token_id": 4714,
+      "count": 8356,
+      "text": " issues"
+    },
+    {
+      "rank": 649,
+      "token_id": 5302,
+      "count": 8349,
+      "text": " states"
+    },
+    {
+      "rank": 650,
+      "token_id": 4977,
+      "count": 8347,
+      "text": " seems"
+    },
+    {
+      "rank": 651,
+      "token_id": 4297,
+      "count": 8332,
+      "text": " everything"
+    },
+    {
+      "rank": 652,
+      "token_id": 4337,
+      "count": 8304,
+      "text": " World"
+    },
+    {
+      "rank": 653,
+      "token_id": 6515,
+      "count": 8276,
+      "text": " Washington"
+    },
+    {
+      "rank": 654,
+      "token_id": 3412,
+      "count": 8273,
+      "text": " research"
+    },
+    {
+      "rank": 655,
+      "token_id": 1103,
+      "count": 8270,
+      "text": "ian"
+    },
+    {
+      "rank": 656,
+      "token_id": 1855,
+      "count": 8270,
+      "text": " create"
+    },
+    {
+      "rank": 657,
+      "token_id": 7359,
+      "count": 8257,
+      "text": " officials"
+    },
+    {
+      "rank": 658,
+      "token_id": 87,
+      "count": 8250,
+      "text": "x"
+    },
+    {
+      "rank": 659,
+      "token_id": 45,
+      "count": 8247,
+      "text": "N"
+    },
+    {
+      "rank": 660,
+      "token_id": 3291,
+      "count": 8247,
+      "text": " tell"
+    },
+    {
+      "rank": 661,
+      "token_id": 4843,
+      "count": 8203,
+      "text": " third"
+    },
+    {
+      "rank": 662,
+      "token_id": 5114,
+      "count": 8189,
+      "text": " statement"
+    },
+    {
+      "rank": 663,
+      "token_id": 6116,
+      "count": 8187,
+      "text": " became"
+    },
+    {
+      "rank": 664,
+      "token_id": 3501,
+      "count": 8185,
+      "text": " points"
+    },
+    {
+      "rank": 665,
+      "token_id": 1913,
+      "count": 8182,
+      "text": " On"
+    },
+    {
+      "rank": 666,
+      "token_id": 6009,
+      "count": 8180,
+      "text": " began"
+    },
+    {
+      "rank": 667,
+      "token_id": 2473,
+      "count": 8154,
+      "text": " service"
+    },
+    {
+      "rank": 668,
+      "token_id": 69,
+      "count": 8140,
+      "text": "f"
+    },
+    {
+      "rank": 669,
+      "token_id": 5880,
+      "count": 8140,
+      "text": " released"
+    },
+    {
+      "rank": 670,
+      "token_id": 685,
+      "count": 8133,
+      "text": "ia"
+    },
+    {
+      "rank": 671,
+      "token_id": 5904,
+      "count": 8133,
+      "text": " evidence"
+    },
+    {
+      "rank": 672,
+      "token_id": 6284,
+      "count": 8113,
+      "text": "-old"
+    },
+    {
+      "rank": 673,
+      "token_id": 51,
+      "count": 8111,
+      "text": "T"
+    },
+    {
+      "rank": 674,
+      "token_id": 3476,
+      "count": 8073,
+      "text": " role"
+    },
+    {
+      "rank": 675,
+      "token_id": 4925,
+      "count": 8063,
+      "text": " matter"
+    },
+    {
+      "rank": 676,
+      "token_id": 5710,
+      "count": 8047,
+      "text": " wasn"
+    },
+    {
+      "rank": 677,
+      "token_id": 4802,
+      "count": 8046,
+      "text": " energy"
+    },
+    {
+      "rank": 678,
+      "token_id": 2461,
+      "count": 8012,
+      "text": "For"
+    },
+    {
+      "rank": 679,
+      "token_id": 3838,
+      "count": 8006,
+      "text": "What"
+    },
+    {
+      "rank": 680,
+      "token_id": 2783,
+      "count": 7999,
+      "text": " cost"
+    },
+    {
+      "rank": 681,
+      "token_id": 77,
+      "count": 7989,
+      "text": "n"
+    },
+    {
+      "rank": 682,
+      "token_id": 4401,
+      "count": 7969,
+      "text": " development"
+    },
+    {
+      "rank": 683,
+      "token_id": 5086,
+      "count": 7964,
+      "text": " itself"
+    },
+    {
+      "rank": 684,
+      "token_id": 5163,
+      "count": 7951,
+      "text": " office"
+    },
+    {
+      "rank": 685,
+      "token_id": 4115,
+      "count": 7942,
+      "text": " hours"
+    },
+    {
+      "rank": 686,
+      "token_id": 4586,
+      "count": 7942,
+      "text": " general"
+    },
+    {
+      "rank": 687,
+      "token_id": 830,
+      "count": 7925,
+      "text": " true"
+    },
+    {
+      "rank": 688,
+      "token_id": 5616,
+      "count": 7913,
+      "text": " China"
+    },
+    {
+      "rank": 689,
+      "token_id": 66,
+      "count": 7910,
+      "text": "c"
+    },
+    {
+      "rank": 690,
+      "token_id": 3060,
+      "count": 7900,
+      "text": " continue"
+    },
+    {
+      "rank": 691,
+      "token_id": 4143,
+      "count": 7897,
+      "text": " students"
+    },
+    {
+      "rank": 692,
+      "token_id": 5561,
+      "count": 7883,
+      "text": " himself"
+    },
+    {
+      "rank": 693,
+      "token_id": 4065,
+      "count": 7878,
+      "text": " front"
+    },
+    {
+      "rank": 694,
+      "token_id": 4889,
+      "count": 7871,
+      "text": " outside"
+    },
+    {
+      "rank": 695,
+      "token_id": 5837,
+      "count": 7866,
+      "text": " countries"
+    },
+    {
+      "rank": 696,
+      "token_id": 3873,
+      "count": 7851,
+      "text": " bad"
+    },
+    {
+      "rank": 697,
+      "token_id": 4158,
+      "count": 7846,
+      "text": " white"
+    },
+    {
+      "rank": 698,
+      "token_id": 657,
+      "count": 7845,
+      "text": "ated"
+    },
+    {
+      "rank": 699,
+      "token_id": 5577,
+      "count": 7821,
+      "text": " themselves"
+    },
+    {
+      "rank": 700,
+      "token_id": 1590,
+      "count": 7818,
+      "text": " final"
+    },
+    {
+      "rank": 701,
+      "token_id": 436,
+      "count": 7816,
+      "text": "os"
+    },
+    {
+      "rank": 702,
+      "token_id": 2990,
+      "count": 7814,
+      "text": " lead"
+    },
+    {
+      "rank": 703,
+      "token_id": 3076,
+      "count": 7783,
+      "text": " mean"
+    },
+    {
+      "rank": 704,
+      "token_id": 1917,
+      "count": 7779,
+      "text": " action"
+    },
+    {
+      "rank": 705,
+      "token_id": 3410,
+      "count": 7778,
+      "text": " provide"
+    },
+    {
+      "rank": 706,
+      "token_id": 3359,
+      "count": 7771,
+      "text": " attack"
+    },
+    {
+      "rank": 707,
+      "token_id": 4752,
+      "count": 7764,
+      "text": " building"
+    },
+    {
+      "rank": 708,
+      "token_id": 1887,
+      "count": 7758,
+      "text": " main"
+    },
+    {
+      "rank": 709,
+      "token_id": 4882,
+      "count": 7757,
+      "text": " South"
+    },
+    {
+      "rank": 710,
+      "token_id": 5203,
+      "count": 7754,
+      "text": " groups"
+    },
+    {
+      "rank": 711,
+      "token_id": 4936,
+      "count": 7750,
+      "text": " simply"
+    },
+    {
+      "rank": 712,
+      "token_id": 3278,
+      "count": 7747,
+      "text": "'ll"
+    },
+    {
+      "rank": 713,
+      "token_id": 4362,
+      "count": 7738,
+      "text": " needed"
+    },
+    {
+      "rank": 714,
+      "token_id": 3403,
+      "count": 7729,
+      "text": " above"
+    },
+    {
+      "rank": 715,
+      "token_id": 4428,
+      "count": 7712,
+      "text": " similar"
+    },
+    {
+      "rank": 716,
+      "token_id": 5485,
+      "count": 7690,
+      "text": " saw"
+    },
+    {
+      "rank": 717,
+      "token_id": 3255,
+      "count": 7685,
+      "text": " record"
+    },
+    {
+      "rank": 718,
+      "token_id": 1110,
+      "count": 7664,
+      "text": "://"
+    },
+    {
+      "rank": 719,
+      "token_id": 1925,
+      "count": 7660,
+      "text": "On"
+    },
+    {
+      "rank": 720,
+      "token_id": 4201,
+      "count": 7643,
+      "text": " hit"
+    },
+    {
+      "rank": 721,
+      "token_id": 656,
+      "count": 7603,
+      "text": " self"
+    },
+    {
+      "rank": 722,
+      "token_id": 2319,
+      "count": 7587,
+      "text": " version"
+    },
+    {
+      "rank": 723,
+      "token_id": 3880,
+      "count": 7584,
+      "text": " needs"
+    },
+    {
+      "rank": 724,
+      "token_id": 4303,
+      "count": 7579,
+      "text": " running"
+    },
+    {
+      "rank": 725,
+      "token_id": 4879,
+      "count": 7577,
+      "text": " release"
+    },
+    {
+      "rank": 726,
+      "token_id": 5220,
+      "count": 7576,
+      "text": " woman"
+    },
+    {
+      "rank": 727,
+      "token_id": 2924,
+      "count": 7564,
+      "text": " include"
+    },
+    {
+      "rank": 728,
+      "token_id": 2936,
+      "count": 7559,
+      "text": " stop"
+    },
+    {
+      "rank": 729,
+      "token_id": 2484,
+      "count": 7558,
+      "text": " turn"
+    },
+    {
+      "rank": 730,
+      "token_id": 4498,
+      "count": 7549,
+      "text": "When"
+    },
+    {
+      "rank": 731,
+      "token_id": 2309,
+      "count": 7526,
+      "text": " position"
+    },
+    {
+      "rank": 732,
+      "token_id": 1940,
+      "count": 7498,
+      "text": "\u2026"
+    },
+    {
+      "rank": 733,
+      "token_id": 3685,
+      "count": 7496,
+      "text": " below"
+    },
+    {
+      "rank": 734,
+      "token_id": 6342,
+      "count": 7489,
+      "text": " played"
+    },
+    {
+      "rank": 735,
+      "token_id": 5019,
+      "count": 7488,
+      "text": " everyone"
+    },
+    {
+      "rank": 736,
+      "token_id": 4958,
+      "count": 7475,
+      "text": " industry"
+    },
+    {
+      "rank": 737,
+      "token_id": 3143,
+      "count": 7460,
+      "text": " near"
+    },
+    {
+      "rank": 738,
+      "token_id": 3100,
+      "count": 7458,
+      "text": " light"
+    },
+    {
+      "rank": 739,
+      "token_id": 536,
+      "count": 7444,
+      "text": " class"
+    },
+    {
+      "rank": 740,
+      "token_id": 608,
+      "count": 7442,
+      "text": " /"
+    },
+    {
+      "rank": 741,
+      "token_id": 470,
+      "count": 7428,
+      "text": " return"
+    },
+    {
+      "rank": 742,
+      "token_id": 4518,
+      "count": 7412,
+      "text": " instead"
+    },
+    {
+      "rank": 743,
+      "token_id": 1538,
+      "count": 7411,
+      "text": " event"
+    },
+    {
+      "rank": 744,
+      "token_id": 3309,
+      "count": 7386,
+      "text": " late"
+    },
+    {
+      "rank": 745,
+      "token_id": 5558,
+      "count": 7380,
+      "text": " lost"
+    },
+    {
+      "rank": 746,
+      "token_id": 3720,
+      "count": 7378,
+      "text": " air"
+    },
+    {
+      "rank": 747,
+      "token_id": 5310,
+      "count": 7370,
+      "text": " especially"
+    },
+    {
+      "rank": 748,
+      "token_id": 4933,
+      "count": 7363,
+      "text": " shows"
+    },
+    {
+      "rank": 749,
+      "token_id": 2615,
+      "count": 7353,
+      "text": " access"
+    },
+    {
+      "rank": 750,
+      "token_id": 349,
+      "count": 7348,
+      "text": "ate"
+    },
+    {
+      "rank": 751,
+      "token_id": 4416,
+      "count": 7348,
+      "text": "So"
+    },
+    {
+      "rank": 752,
+      "token_id": 6223,
+      "count": 7340,
+      "text": " election"
+    },
+    {
+      "rank": 753,
+      "token_id": 4792,
+      "count": 7327,
+      "text": "That"
+    },
+    {
+      "rank": 754,
+      "token_id": 4636,
+      "count": 7322,
+      "text": " After"
+    },
+    {
+      "rank": 755,
+      "token_id": 5020,
+      "count": 7320,
+      "text": " pretty"
+    },
+    {
+      "rank": 756,
+      "token_id": 5530,
+      "count": 7306,
+      "text": " sense"
+    },
+    {
+      "rank": 757,
+      "token_id": 5619,
+      "count": 7296,
+      "text": " playing"
+    },
+    {
+      "rank": 758,
+      "token_id": 4344,
+      "count": 7295,
+      "text": " changes"
+    },
+    {
+      "rank": 759,
+      "token_id": 2747,
+      "count": 7279,
+      "text": " site"
+    },
+    {
+      "rank": 760,
+      "token_id": 5008,
+      "count": 7279,
+      "text": " quite"
+    },
+    {
+      "rank": 761,
+      "token_id": 3061,
+      "count": 7255,
+      "text": " talk"
+    },
+    {
+      "rank": 762,
+      "token_id": 5807,
+      "count": 7237,
+      "text": " White"
+    },
+    {
+      "rank": 763,
+      "token_id": 3971,
+      "count": 7223,
+      "text": " mind"
+    },
+    {
+      "rank": 764,
+      "token_id": 5926,
+      "count": 7198,
+      "text": " recently"
+    },
+    {
+      "rank": 765,
+      "token_id": 550,
+      "count": 7186,
+      "text": "ies"
+    },
+    {
+      "rank": 766,
+      "token_id": 5080,
+      "count": 7178,
+      "text": " higher"
+    },
+    {
+      "rank": 767,
+      "token_id": 1376,
+      "count": 7173,
+      "text": " key"
+    },
+    {
+      "rank": 768,
+      "token_id": 5555,
+      "count": 7164,
+      "text": " weeks"
+    },
+    {
+      "rank": 769,
+      "token_id": 54,
+      "count": 7155,
+      "text": "W"
+    },
+    {
+      "rank": 770,
+      "token_id": 3054,
+      "count": 7153,
+      "text": " room"
+    },
+    {
+      "rank": 771,
+      "token_id": 4244,
+      "count": 7133,
+      "text": " words"
+    },
+    {
+      "rank": 772,
+      "token_id": 770,
+      "count": 7103,
+      "text": " else"
+    },
+    {
+      "rank": 773,
+      "token_id": 897,
+      "count": 7092,
+      "text": " value"
+    },
+    {
+      "rank": 774,
+      "token_id": 1671,
+      "count": 7081,
+      "text": "ists"
+    },
+    {
+      "rank": 775,
+      "token_id": 329,
+      "count": 7079,
+      "text": "ad"
+    },
+    {
+      "rank": 776,
+      "token_id": 6955,
+      "count": 7079,
+      "text": " economic"
+    },
+    {
+      "rank": 777,
+      "token_id": 282,
+      "count": 7060,
+      "text": " f"
+    },
+    {
+      "rank": 778,
+      "token_id": 3746,
+      "count": 7045,
+      "text": " strong"
+    },
+    {
+      "rank": 779,
+      "token_id": 5644,
+      "count": 7034,
+      "text": " held"
+    },
+    {
+      "rank": 780,
+      "token_id": 6910,
+      "count": 7025,
+      "text": " vote"
+    },
+    {
+      "rank": 781,
+      "token_id": 5301,
+      "count": 6998,
+      "text": " His"
+    },
+    {
+      "rank": 782,
+      "token_id": 1651,
+      "count": 6985,
+      "text": " view"
+    },
+    {
+      "rank": 783,
+      "token_id": 3753,
+      "count": 6969,
+      "text": " house"
+    },
+    {
+      "rank": 784,
+      "token_id": 6271,
+      "count": 6963,
+      "text": " Twitter"
+    },
+    {
+      "rank": 785,
+      "token_id": 5470,
+      "count": 6957,
+      "text": " March"
+    },
+    {
+      "rank": 786,
+      "token_id": 75,
+      "count": 6951,
+      "text": "l"
+    },
+    {
+      "rank": 787,
+      "token_id": 517,
+      "count": 6951,
+      "text": "ant"
+    },
+    {
+      "rank": 788,
+      "token_id": 452,
+      "count": 6950,
+      "text": " al"
+    },
+    {
+      "rank": 789,
+      "token_id": 2860,
+      "count": 6950,
+      "text": " online"
+    },
+    {
+      "rank": 790,
+      "token_id": 4220,
+      "count": 6949,
+      "text": " These"
+    },
+    {
+      "rank": 791,
+      "token_id": 4312,
+      "count": 6939,
+      "text": " West"
+    },
+    {
+      "rank": 792,
+      "token_id": 5887,
+      "count": 6913,
+      "text": " Department"
+    },
+    {
+      "rank": 793,
+      "token_id": 4367,
+      "count": 6890,
+      "text": " fight"
+    },
+    {
+      "rank": 794,
+      "token_id": 3535,
+      "count": 6886,
+      "text": " understand"
+    },
+    {
+      "rank": 795,
+      "token_id": 293,
+      "count": 6885,
+      "text": " b"
+    },
+    {
+      "rank": 796,
+      "token_id": 5777,
+      "count": 6882,
+      "text": " legal"
+    },
+    {
+      "rank": 797,
+      "token_id": 5021,
+      "count": 6876,
+      "text": " longer"
+    },
+    {
+      "rank": 798,
+      "token_id": 9356,
+      "count": 6861,
+      "text": " Republican"
+    },
+    {
+      "rank": 799,
+      "token_id": 1095,
+      "count": 6827,
+      "text": "ating"
+    },
+    {
+      "rank": 800,
+      "token_id": 367,
+      "count": 6824,
+      "text": "ation"
+    },
+    {
+      "rank": 801,
+      "token_id": 4446,
+      "count": 6819,
+      "text": " bring"
+    },
+    {
+      "rank": 802,
+      "token_id": 3281,
+      "count": 6807,
+      "text": " special"
+    },
+    {
+      "rank": 803,
+      "token_id": 4637,
+      "count": 6797,
+      "text": " forward"
+    },
+    {
+      "rank": 804,
+      "token_id": 4231,
+      "count": 6766,
+      "text": " age"
+    },
+    {
+      "rank": 805,
+      "token_id": 3059,
+      "count": 6762,
+      "text": " results"
+    },
+    {
+      "rank": 806,
+      "token_id": 5440,
+      "count": 6761,
+      "text": " technology"
+    },
+    {
+      "rank": 807,
+      "token_id": 3946,
+      "count": 6760,
+      "text": " official"
+    },
+    {
+      "rank": 808,
+      "token_id": 4650,
+      "count": 6756,
+      "text": " potential"
+    },
+    {
+      "rank": 809,
+      "token_id": 1936,
+      "count": 6744,
+      "text": " build"
+    },
+    {
+      "rank": 810,
+      "token_id": 1863,
+      "count": 6732,
+      "text": " Z"
+    },
+    {
+      "rank": 811,
+      "token_id": 5322,
+      "count": 6728,
+      "text": " problems"
+    },
+    {
+      "rank": 812,
+      "token_id": 53,
+      "count": 6724,
+      "text": "V"
+    },
+    {
+      "rank": 813,
+      "token_id": 7228,
+      "count": 6722,
+      "text": " announced"
+    },
+    {
+      "rank": 814,
+      "token_id": 273,
+      "count": 6720,
+      "text": "le"
+    },
+    {
+      "rank": 815,
+      "token_id": 4780,
+      "count": 6713,
+      "text": " friends"
+    },
+    {
+      "rank": 816,
+      "token_id": 4627,
+      "count": 6711,
+      "text": " music"
+    },
+    {
+      "rank": 817,
+      "token_id": 4755,
+      "count": 6694,
+      "text": " questions"
+    },
+    {
+      "rank": 818,
+      "token_id": 5489,
+      "count": 6682,
+      "text": " anyone"
+    },
+    {
+      "rank": 819,
+      "token_id": 4420,
+      "count": 6677,
+      "text": " minutes"
+    },
+    {
+      "rank": 820,
+      "token_id": 70,
+      "count": 6673,
+      "text": "g"
+    },
+    {
+      "rank": 821,
+      "token_id": 6069,
+      "count": 6665,
+      "text": " led"
+    },
+    {
+      "rank": 822,
+      "token_id": 2038,
+      "count": 6664,
+      "text": " code"
+    },
+    {
+      "rank": 823,
+      "token_id": 3654,
+      "count": 6663,
+      "text": " certain"
+    },
+    {
+      "rank": 824,
+      "token_id": 3949,
+      "count": 6660,
+      "text": " received"
+    },
+    {
+      "rank": 825,
+      "token_id": 6788,
+      "count": 6652,
+      "text": " earlier"
+    },
+    {
+      "rank": 826,
+      "token_id": 5510,
+      "count": 6645,
+      "text": " ways"
+    },
+    {
+      "rank": 827,
+      "token_id": 5398,
+      "count": 6640,
+      "text": " News"
+    },
+    {
+      "rank": 828,
+      "token_id": 3085,
+      "count": 6636,
+      "text": " With"
+    },
+    {
+      "rank": 829,
+      "token_id": 3516,
+      "count": 6628,
+      "text": " services"
+    },
+    {
+      "rank": 830,
+      "token_id": 5048,
+      "count": 6610,
+      "text": " cases"
+    },
+    {
+      "rank": 831,
+      "token_id": 5534,
+      "count": 6610,
+      "text": " June"
+    },
+    {
+      "rank": 832,
+      "token_id": 549,
+      "count": 6606,
+      "text": " :"
+    },
+    {
+      "rank": 833,
+      "token_id": 4379,
+      "count": 6605,
+      "text": " rate"
+    },
+    {
+      "rank": 834,
+      "token_id": 1273,
+      "count": 6602,
+      "text": " test"
+    },
+    {
+      "rank": 835,
+      "token_id": 5263,
+      "count": 6585,
+      "text": " increase"
+    },
+    {
+      "rank": 836,
+      "token_id": 2070,
+      "count": 6564,
+      "text": " field"
+    },
+    {
+      "rank": 837,
+      "token_id": 2790,
+      "count": 6556,
+      "text": " total"
+    },
+    {
+      "rank": 838,
+      "token_id": 5768,
+      "count": 6551,
+      "text": " July"
+    },
+    {
+      "rank": 839,
+      "token_id": 3900,
+      "count": 6550,
+      "text": " hope"
+    },
+    {
+      "rank": 840,
+      "token_id": 2884,
+      "count": 6548,
+      "text": " design"
+    },
+    {
+      "rank": 841,
+      "token_id": 4024,
+      "count": 6547,
+      "text": " original"
+    },
+    {
+      "rank": 842,
+      "token_id": 3601,
+      "count": 6546,
+      "text": " expected"
+    },
+    {
+      "rank": 843,
+      "token_id": 4031,
+      "count": 6541,
+      "text": " bill"
+    },
+    {
+      "rank": 844,
+      "token_id": 4332,
+      "count": 6535,
+      "text": " share"
+    },
+    {
+      "rank": 845,
+      "token_id": 6552,
+      "count": 6520,
+      "text": " shot"
+    },
+    {
+      "rank": 846,
+      "token_id": 482,
+      "count": 6516,
+      "text": "ine"
+    },
+    {
+      "rank": 847,
+      "token_id": 3465,
+      "count": 6515,
+      "text": " created"
+    },
+    {
+      "rank": 848,
+      "token_id": 4549,
+      "count": 6503,
+      "text": " article"
+    },
+    {
+      "rank": 849,
+      "token_id": 6489,
+      "count": 6493,
+      "text": " international"
+    },
+    {
+      "rank": 850,
+      "token_id": 79,
+      "count": 6483,
+      "text": "p"
+    },
+    {
+      "rank": 851,
+      "token_id": 7147,
+      "count": 6472,
+      "text": " anti"
+    },
+    {
+      "rank": 852,
+      "token_id": 3349,
+      "count": 6467,
+      "text": " price"
+    },
+    {
+      "rank": 853,
+      "token_id": 4278,
+      "count": 6462,
+      "text": " works"
+    },
+    {
+      "rank": 854,
+      "token_id": 4135,
+      "count": 6456,
+      "text": " easy"
+    },
+    {
+      "rank": 855,
+      "token_id": 869,
+      "count": 6449,
+      "text": " private"
+    },
+    {
+      "rank": 856,
+      "token_id": 10168,
+      "count": 6447,
+      "text": "\u201cI"
+    },
+    {
+      "rank": 857,
+      "token_id": 3311,
+      "count": 6444,
+      "text": " amount"
+    },
+    {
+      "rank": 858,
+      "token_id": 5135,
+      "count": 6444,
+      "text": " soon"
+    },
+    {
+      "rank": 859,
+      "token_id": 7094,
+      "count": 6440,
+      "text": " billion"
+    },
+    {
+      "rank": 860,
+      "token_id": 5461,
+      "count": 6439,
+      "text": " average"
+    },
+    {
+      "rank": 861,
+      "token_id": 2138,
+      "count": 6432,
+      "text": " allow"
+    },
+    {
+      "rank": 862,
+      "token_id": 81,
+      "count": 6427,
+      "text": "r"
+    },
+    {
+      "rank": 863,
+      "token_id": 267,
+      "count": 6426,
+      "text": "st"
+    },
+    {
+      "rank": 864,
+      "token_id": 4185,
+      "count": 6425,
+      "text": " common"
+    },
+    {
+      "rank": 865,
+      "token_id": 6682,
+      "count": 6412,
+      "text": " reports"
+    },
+    {
+      "rank": 866,
+      "token_id": 296,
+      "count": 6411,
+      "text": " m"
+    },
+    {
+      "rank": 867,
+      "token_id": 5573,
+      "count": 6406,
+      "text": " Facebook"
+    },
+    {
+      "rank": 868,
+      "token_id": 1112,
+      "count": 6403,
+      "text": "..."
+    },
+    {
+      "rank": 869,
+      "token_id": 6398,
+      "count": 6403,
+      "text": " involved"
+    },
+    {
+      "rank": 870,
+      "token_id": 5274,
+      "count": 6394,
+      "text": " leave"
+    },
+    {
+      "rank": 871,
+      "token_id": 5382,
+      "count": 6386,
+      "text": " living"
+    },
+    {
+      "rank": 872,
+      "token_id": 4157,
+      "count": 6379,
+      "text": " cannot"
+    },
+    {
+      "rank": 873,
+      "token_id": 3847,
+      "count": 6377,
+      "text": " users"
+    },
+    {
+      "rank": 874,
+      "token_id": 1417,
+      "count": 6375,
+      "text": " Sh"
+    },
+    {
+      "rank": 875,
+      "token_id": 7009,
+      "count": 6367,
+      "text": " nearly"
+    },
+    {
+      "rank": 876,
+      "token_id": 1527,
+      "count": 6354,
+      "text": " An"
+    },
+    {
+      "rank": 877,
+      "token_id": 85,
+      "count": 6353,
+      "text": "v"
+    },
+    {
+      "rank": 878,
+      "token_id": 5813,
+      "count": 6346,
+      "text": " April"
+    },
+    {
+      "rank": 879,
+      "token_id": 2734,
+      "count": 6340,
+      "text": " interest"
+    },
+    {
+      "rank": 880,
+      "token_id": 832,
+      "count": 6324,
+      "text": "led"
+    },
+    {
+      "rank": 881,
+      "token_id": 4969,
+      "count": 6323,
+      "text": " wrong"
+    },
+    {
+      "rank": 882,
+      "token_id": 6602,
+      "count": 6320,
+      "text": " Friday"
+    },
+    {
+      "rank": 883,
+      "token_id": 910,
+      "count": 6319,
+      "text": " Ch"
+    },
+    {
+      "rank": 884,
+      "token_id": 809,
+      "count": 6308,
+      "text": " Y"
+    },
+    {
+      "rank": 885,
+      "token_id": 7425,
+      "count": 6287,
+      "text": " killed"
+    },
+    {
+      "rank": 886,
+      "token_id": 8877,
+      "count": 6273,
+      "text": " Americans"
+    },
+    {
+      "rank": 887,
+      "token_id": 52,
+      "count": 6256,
+      "text": "U"
+    },
+    {
+      "rank": 888,
+      "token_id": 6932,
+      "count": 6250,
+      "text": " happened"
+    },
+    {
+      "rank": 889,
+      "token_id": 5795,
+      "count": 6240,
+      "text": " goal"
+    },
+    {
+      "rank": 890,
+      "token_id": 5000,
+      "count": 6226,
+      "text": " difficult"
+    },
+    {
+      "rank": 891,
+      "token_id": 3931,
+      "count": 6222,
+      "text": " cut"
+    },
+    {
+      "rank": 892,
+      "token_id": 4268,
+      "count": 6214,
+      "text": " land"
+    },
+    {
+      "rank": 893,
+      "token_id": 4766,
+      "count": 6213,
+      "text": " inside"
+    },
+    {
+      "rank": 894,
+      "token_id": 6551,
+      "count": 6207,
+      "text": " gave"
+    },
+    {
+      "rank": 895,
+      "token_id": 7014,
+      "count": 6199,
+      "text": " Monday"
+    },
+    {
+      "rank": 896,
+      "token_id": 3940,
+      "count": 6198,
+      "text": " fire"
+    },
+    {
+      "rank": 897,
+      "token_id": 1682,
+      "count": 6192,
+      "text": " child"
+    },
+    {
+      "rank": 898,
+      "token_id": 6439,
+      "count": 6180,
+      "text": " worked"
+    },
+    {
+      "rank": 899,
+      "token_id": 2033,
+      "count": 6177,
+      "text": " response"
+    },
+    {
+      "rank": 900,
+      "token_id": 4453,
+      "count": 6172,
+      "text": " entire"
+    },
+    {
+      "rank": 901,
+      "token_id": 7538,
+      "count": 6166,
+      "text": " director"
+    },
+    {
+      "rank": 902,
+      "token_id": 5344,
+      "count": 6158,
+      "text": " force"
+    },
+    {
+      "rank": 903,
+      "token_id": 4540,
+      "count": 6152,
+      "text": " phone"
+    },
+    {
+      "rank": 904,
+      "token_id": 2456,
+      "count": 6142,
+      "text": " effect"
+    },
+    {
+      "rank": 905,
+      "token_id": 2732,
+      "count": 6142,
+      "text": " rest"
+    },
+    {
+      "rank": 906,
+      "token_id": 1674,
+      "count": 6141,
+      "text": " Al"
+    },
+    {
+      "rank": 907,
+      "token_id": 4652,
+      "count": 6141,
+      "text": " published"
+    },
+    {
+      "rank": 908,
+      "token_id": 4345,
+      "count": 6132,
+      "text": " personal"
+    },
+    {
+      "rank": 909,
+      "token_id": 1457,
+      "count": 6111,
+      "text": "]["
+    },
+    {
+      "rank": 910,
+      "token_id": 5085,
+      "count": 6111,
+      "text": " Google"
+    },
+    {
+      "rank": 911,
+      "token_id": 4695,
+      "count": 6108,
+      "text": " Now"
+    },
+    {
+      "rank": 912,
+      "token_id": 1506,
+      "count": 6107,
+      "text": "ized"
+    },
+    {
+      "rank": 913,
+      "token_id": 5214,
+      "count": 6102,
+      "text": " risk"
+    },
+    {
+      "rank": 914,
+      "token_id": 4910,
+      "count": 6094,
+      "text": " ground"
+    },
+    {
+      "rank": 915,
+      "token_id": 3793,
+      "count": 6092,
+      "text": " terms"
+    },
+    {
+      "rank": 916,
+      "token_id": 3179,
+      "count": 6089,
+      "text": "ley"
+    },
+    {
+      "rank": 917,
+      "token_id": 6693,
+      "count": 6045,
+      "text": " whose"
+    },
+    {
+      "rank": 918,
+      "token_id": 4445,
+      "count": 6041,
+      "text": " moment"
+    },
+    {
+      "rank": 919,
+      "token_id": 7589,
+      "count": 6039,
+      "text": " Tuesday"
+    },
+    {
+      "rank": 920,
+      "token_id": 4264,
+      "count": 6032,
+      "text": " God"
+    },
+    {
+      "rank": 921,
+      "token_id": 943,
+      "count": 6023,
+      "text": " type"
+    },
+    {
+      "rank": 922,
+      "token_id": 5976,
+      "count": 6023,
+      "text": " While"
+    },
+    {
+      "rank": 923,
+      "token_id": 3644,
+      "count": 6014,
+      "text": " global"
+    },
+    {
+      "rank": 924,
+      "token_id": 5726,
+      "count": 6011,
+      "text": " ability"
+    },
+    {
+      "rank": 925,
+      "token_id": 569,
+      "count": 6003,
+      "text": " @"
+    },
+    {
+      "rank": 926,
+      "token_id": 6534,
+      "count": 6001,
+      "text": " situation"
+    },
+    {
+      "rank": 927,
+      "token_id": 4990,
+      "count": 5991,
+      "text": " takes"
+    },
+    {
+      "rank": 928,
+      "token_id": 5671,
+      "count": 5987,
+      "text": " areas"
+    },
+    {
+      "rank": 929,
+      "token_id": 7211,
+      "count": 5980,
+      "text": " fans"
+    },
+    {
+      "rank": 930,
+      "token_id": 7337,
+      "count": 5969,
+      "text": " workers"
+    },
+    {
+      "rank": 931,
+      "token_id": 6519,
+      "count": 5965,
+      "text": " turned"
+    },
+    {
+      "rank": 932,
+      "token_id": 6649,
+      "count": 5960,
+      "text": " plans"
+    },
+    {
+      "rank": 933,
+      "token_id": 86,
+      "count": 5939,
+      "text": "w"
+    },
+    {
+      "rank": 934,
+      "token_id": 6635,
+      "count": 5938,
+      "text": " decided"
+    },
+    {
+      "rank": 935,
+      "token_id": 4462,
+      "count": 5930,
+      "text": " member"
+    },
+    {
+      "rank": 936,
+      "token_id": 8567,
+      "count": 5911,
+      "text": " administration"
+    },
+    {
+      "rank": 937,
+      "token_id": 6058,
+      "count": 5904,
+      "text": " January"
+    },
+    {
+      "rank": 938,
+      "token_id": 5023,
+      "count": 5902,
+      "text": " currently"
+    },
+    {
+      "rank": 939,
+      "token_id": 4168,
+      "count": 5900,
+      "text": " period"
+    },
+    {
+      "rank": 940,
+      "token_id": 5625,
+      "count": 5899,
+      "text": " couple"
+    },
+    {
+      "rank": 941,
+      "token_id": 3017,
+      "count": 5896,
+      "text": " My"
+    },
+    {
+      "rank": 942,
+      "token_id": 307,
+      "count": 5888,
+      "text": "id"
+    },
+    {
+      "rank": 943,
+      "token_id": 4357,
+      "count": 5887,
+      "text": " events"
+    },
+    {
+      "rank": 944,
+      "token_id": 7855,
+      "count": 5883,
+      "text": " British"
+    },
+    {
+      "rank": 945,
+      "token_id": 331,
+      "count": 5882,
+      "text": "ch"
+    },
+    {
+      "rank": 946,
+      "token_id": 3668,
+      "count": 5867,
+      "text": " character"
+    },
+    {
+      "rank": 947,
+      "token_id": 6012,
+      "count": 5867,
+      "text": " chance"
+    },
+    {
+      "rank": 948,
+      "token_id": 855,
+      "count": 5857,
+      "text": " pre"
+    },
+    {
+      "rank": 949,
+      "token_id": 2530,
+      "count": 5856,
+      "text": " source"
+    },
+    {
+      "rank": 950,
+      "token_id": 6957,
+      "count": 5853,
+      "text": " race"
+    },
+    {
+      "rank": 951,
+      "token_id": 2213,
+      "count": 5850,
+      "text": " content"
+    },
+    {
+      "rank": 952,
+      "token_id": 5896,
+      "count": 5828,
+      "text": " financial"
+    },
+    {
+      "rank": 953,
+      "token_id": 4285,
+      "count": 5823,
+      "text": " simple"
+    },
+    {
+      "rank": 954,
+      "token_id": 41,
+      "count": 5812,
+      "text": "J"
+    },
+    {
+      "rank": 955,
+      "token_id": 6122,
+      "count": 5810,
+      "text": " September"
+    },
+    {
+      "rank": 956,
+      "token_id": 6305,
+      "count": 5809,
+      "text": " lives"
+    },
+    {
+      "rank": 957,
+      "token_id": 5411,
+      "count": 5806,
+      "text": " popular"
+    },
+    {
+      "rank": 958,
+      "token_id": 3208,
+      "count": 5799,
+      "text": " sent"
+    },
+    {
+      "rank": 959,
+      "token_id": 1614,
+      "count": 5797,
+      "text": " model"
+    },
+    {
+      "rank": 960,
+      "token_id": 6476,
+      "count": 5797,
+      "text": " felt"
+    },
+    {
+      "rank": 961,
+      "token_id": 7044,
+      "count": 5797,
+      "text": "\"I"
+    },
+    {
+      "rank": 962,
+      "token_id": 5780,
+      "count": 5790,
+      "text": " goes"
+    },
+    {
+      "rank": 963,
+      "token_id": 4566,
+      "count": 5789,
+      "text": " via"
+    },
+    {
+      "rank": 964,
+      "token_id": 6157,
+      "count": 5771,
+      "text": " quickly"
+    },
+    {
+      "rank": 965,
+      "token_id": 744,
+      "count": 5744,
+      "text": ".m"
+    },
+    {
+      "rank": 966,
+      "token_id": 912,
+      "count": 5730,
+      "text": " add"
+    },
+    {
+      "rank": 967,
+      "token_id": 6438,
+      "count": 5727,
+      "text": " meeting"
+    },
+    {
+      "rank": 968,
+      "token_id": 6864,
+      "count": 5726,
+      "text": " Canada"
+    },
+    {
+      "rank": 969,
+      "token_id": 7263,
+      "count": 5725,
+      "text": " teams"
+    },
+    {
+      "rank": 970,
+      "token_id": 7513,
+      "count": 5722,
+      "text": " European"
+    },
+    {
+      "rank": 971,
+      "token_id": 272,
+      "count": 5719,
+      "text": " c"
+    },
+    {
+      "rank": 972,
+      "token_id": 3019,
+      "count": 5713,
+      "text": " step"
+    },
+    {
+      "rank": 973,
+      "token_id": 5004,
+      "count": 5692,
+      "text": " War"
+    },
+    {
+      "rank": 974,
+      "token_id": 384,
+      "count": 5690,
+      "text": " e"
+    },
+    {
+      "rank": 975,
+      "token_id": 321,
+      "count": 5686,
+      "text": "il"
+    },
+    {
+      "rank": 976,
+      "token_id": 5570,
+      "count": 5685,
+      "text": " staff"
+    },
+    {
+      "rank": 977,
+      "token_id": 6617,
+      "count": 5684,
+      "text": " heard"
+    },
+    {
+      "rank": 978,
+      "token_id": 3493,
+      "count": 5664,
+      "text": " press"
+    },
+    {
+      "rank": 979,
+      "token_id": 6876,
+      "count": 5653,
+      "text": " knew"
+    },
+    {
+      "rank": 980,
+      "token_id": 7920,
+      "count": 5653,
+      "text": " Wednesday"
+    },
+    {
+      "rank": 981,
+      "token_id": 7391,
+      "count": 5646,
+      "text": " spent"
+    },
+    {
+      "rank": 982,
+      "token_id": 359,
+      "count": 5641,
+      "text": "un"
+    },
+    {
+      "rank": 983,
+      "token_id": 7794,
+      "count": 5633,
+      "text": " Thursday"
+    },
+    {
+      "rank": 984,
+      "token_id": 4172,
+      "count": 5629,
+      "text": "'d"
+    },
+    {
+      "rank": 985,
+      "token_id": 2150,
+      "count": 5628,
+      "text": " page"
+    },
+    {
+      "rank": 986,
+      "token_id": 3537,
+      "count": 5628,
+      "text": " happen"
+    },
+    {
+      "rank": 987,
+      "token_id": 3910,
+      "count": 5627,
+      "text": " website"
+    },
+    {
+      "rank": 988,
+      "token_id": 5590,
+      "count": 5623,
+      "text": " oil"
+    },
+    {
+      "rank": 989,
+      "token_id": 6931,
+      "count": 5619,
+      "text": " career"
+    },
+    {
+      "rank": 990,
+      "token_id": 1466,
+      "count": 5618,
+      "text": "ah"
+    },
+    {
+      "rank": 991,
+      "token_id": 36,
+      "count": 5611,
+      "text": "E"
+    },
+    {
+      "rank": 992,
+      "token_id": 1062,
+      "count": 5605,
+      "text": " co"
+    },
+    {
+      "rank": 993,
+      "token_id": 5798,
+      "count": 5595,
+      "text": " built"
+    },
+    {
+      "rank": 994,
+      "token_id": 6702,
+      "count": 5593,
+      "text": " November"
+    },
+    {
+      "rank": 995,
+      "token_id": 487,
+      "count": 5577,
+      "text": "ity"
+    },
+    {
+      "rank": 996,
+      "token_id": 7214,
+      "count": 5568,
+      "text": " foreign"
+    },
+    {
+      "rank": 997,
+      "token_id": 5230,
+      "count": 5567,
+      "text": " included"
+    },
+    {
+      "rank": 998,
+      "token_id": 5980,
+      "count": 5564,
+      "text": "-based"
+    },
+    {
+      "rank": 999,
+      "token_id": 259,
+      "count": 5556,
+      "text": " t"
+    },
+    {
+      "rank": 1000,
+      "token_id": 1717,
+      "count": 5552,
+      "text": "less"
+    }
+  ]
+}

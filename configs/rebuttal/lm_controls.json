@@ -1,0 +1,205 @@
+{
+  "program_synth": "src/program_synth.py",
+  "programs": "src/curated_transformations.jsonl",
+  "default_output_root": "results_rebuttal/lm_controls",
+  "experiment": "ICLR rebuttal language controls: literal bitstring framing for Qwen3-14B, and a second language model (Mistral 7B v0.3 base, whose tokenizer splits digits one per token as Qwen3's does) on the paper's digit encoding. Seeds per shot match the published Qwen3 runs.",
+  "runs": {
+    "qwen3_literal_bits": {
+      "label": "Qwen3 14B, literal 0/1 with -> and newline",
+      "model_env": "QWEN3_14B_MODEL",
+      "default_model": "Qwen/Qwen3-14B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--batch-programs",
+        "--batch-size-prefill",
+        "32",
+        "--batch-size-completion",
+        "64"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "output_template": "qwen3_literal_bits/clean/ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3_literal_bits/deranged/ic{shot}.json"
+        }
+      }
+    },
+    "mistral7b_v03_digits": {
+      "label": "Mistral 7B v0.3 (base), paper digit encoding",
+      "model_env": "MISTRAL_7B_V03_MODEL",
+      "default_model": "mistralai/Mistral-7B-v0.3",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--lmshuffle",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--per-trial-random",
+        "--batch-programs",
+        "--batch-size-prefill",
+        "32",
+        "--batch-size-completion",
+        "64"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "output_template": "mistral7b_v03_digits/clean/ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "seeds": {
+            "1": 1327989894,
+            "2": 1604568574,
+            "4": 1891216790,
+            "8": 1909800047,
+            "16": 1813863336,
+            "32": 870204797,
+            "64": 1958817553
+          },
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "mistral7b_v03_digits/deranged/ic{shot}.json"
+        }
+      }
+    },
+    "qwen3_digits_reseed": {
+      "label": "Qwen3 14B, paper digit encoding, new seeds (noise ceiling per shot count; the 64-shot reseed is results_rebuttal/language/reference_reseed, seed 20261121)",
+      "model_env": "QWEN3_14B_MODEL",
+      "default_model": "Qwen/Qwen3-14B-Base",
+      "base_args": [
+        "--backend",
+        "mlx",
+        "--lmshuffle",
+        "--trials-per-program",
+        "128",
+        "--bit-length",
+        "8",
+        "--max-new-tokens",
+        "8",
+        "--per-trial-random",
+        "--batch-programs",
+        "--batch-size-prefill",
+        "32",
+        "--batch-size-completion",
+        "64"
+      ],
+      "conditions": {
+        "clean": {
+          "shots": [
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
+          "seeds": {
+            "2": 20261122,
+            "4": 20261124,
+            "8": 20261128,
+            "16": 20261136,
+            "32": 20261152
+          },
+          "output_template": "qwen3_digits_reseed/clean/ic{shot}.json"
+        },
+        "deranged": {
+          "shots": [
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
+          "seeds": {
+            "2": 20261122,
+            "4": 20261124,
+            "8": 20261128,
+            "16": 20261136,
+            "32": 20261152
+          },
+          "extra_args": [
+            "--ablate-labels"
+          ],
+          "output_template": "qwen3_digits_reseed/deranged/ic{shot}.json"
+        }
+      }
+    }
+  }
+}
